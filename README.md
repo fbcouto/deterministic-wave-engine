@@ -31,7 +31,7 @@ If we introduce vortex turbulence (a trembling medium) but remove the wave-field
 When the hydrodynamic pressure gradient of the slits is applied to a frozen, turbulence-free vacuum, tgithe mathematical skeleton of interference emerges.
 * **Result:** The pressure gradient forces particles into specific channels of least resistance, creating interference macro-fringes. However, due to the discrete nature of the particles and the rigid deterministic math, the pattern is broken and sterile—forming a sharp "comb" of impacts with empty gaps between them.
 
-![Rigid Interference](images/C_Interferencia_Rigida.png)
+![Rigid Interference](images/C_Rigid_Interference.png)
 
 ### Scenario D: Fluid Reality (Deflection ON | Turbulence ON)
 The complete hydrodynamic model. The structural geometry of the field provides the "traffic rules" (Scenario C), while the thermodynamic turbulence of the vortex wakes provides the organic fluidity (Scenario B).
