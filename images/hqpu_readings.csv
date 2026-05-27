@@ -1,4 +1,4 @@
-Tempo_Y,Sensor_Esquerdo,Sensor_Direito
+Time_Y,Left_Sensor,Right_Sensor
 0.20,0.0075,0.0075
 0.40,0.0150,0.0150
 0.60,0.0225,0.0225
