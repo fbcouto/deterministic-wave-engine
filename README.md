@@ -126,7 +126,10 @@ Standard quantum gates use microwave pulses to induce probability shifts. In an 
 ### 3. Non-Demolition Measurement: The Analytical Receiver
 The greatest bottleneck in modern quantum computing is the destructive nature of measurement (wavefunction collapse). The DWE model resolves this by separating the corpuscle from its wave. The particle travels forward, but its movement agitates the $\gamma$ medium, leaving behind a **Thermodynamic Vortex Wake**.
 * **The Vacuum Barometer:** Instead of intercepting the particle with a photoelectric detector, the HQPU utilizes *Analytical Receivers* aligned parallel to the propagation channel. These act as nanoscale barometers, performing **Weak Measurements**. They solely read the lateral pressure differential (the wake) left by the qubit. 
-* **Real-Time Feedback:** By reading the wake rather than the particle, the system extracts the computational result (the frequency/state) while the original vortex continues its trajectory physically intact. This enables continuous, real-time feedback loops during a computation without resetting the system. *(Note: The `hqpu.rs` binary in this repository provides the computational proof of this continuous, non-destructive reading).*
+* **Real-Time Feedback:** By reading the wake rather than the particle, the system extracts the computational result (the frequency/state) while the original vortex continues its trajectory physically intact. This enables continuous, real-time feedback loops during a computation without resetting the system. 
+
+![HQPU Continuous Measurement](images/HQPU_Measurement.png)
+*(Note: The `hqpu.rs` binary in this repository provides the computational proof of this continuous, non-destructive reading, as visualized in the graph above).*
 
 ### 4. Redefining Decoherence and Error Correction
 Currently, quantum processors require massive redundancy (thousands of physical qubits to sustain one logical qubit) to combat "decoherence." Standard physics views decoherence as inevitable quantum noise caused by the universe observing the system.
