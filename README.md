@@ -5,7 +5,7 @@
 The **Deterministic Wave Engine (DWE)** is a high-performance, GPU-accelerated computational platform designed to simulate **Hydrodynamic Quantum Analogs (HQAs)**. By framing the sub-spatial vacuum not as an empty void, but as a viscoelastic fluid medium possessing structural spatial tension ($\gamma$) and non-Markovian vortex memory, this engine demonstrates *in silico* that the statistical distributions of quantum mechanics can emerge from entirely deterministic, local-realist space-time trajectories.
 
 This framework expands upon the pilot-wave intuition of **De Broglie-Bohm mechanics** and the laboratory discoveries of **Yves Couder and Emmanuel Fort** regarding macroscopic walking droplets, scaling these principles into a massively parallelized field-theoretic simulation via WebGPU Compute Shaders.
-
+![HQPU Readingo](hqpu_leitura_qnd.png)
 ---
 
 ## 🔬 Theoretical Framework & Physical Mapping
@@ -17,7 +17,7 @@ For physicists evaluating this model, the engine translates the abstract probabi
 2. **Action/Phase Vector ($S$):** Governed by the localized hydrodynamic pressure gradients and phase velocity fields of the sub-spatial background medium.
 
 3. **The Wave-Particle Duality:** De-mystified by decoupling the particle (a localized, high-density corpuscular topological defect) from its pilot wave (a real acoustic/mechanical pressure wave propagating through the background viscoelastic ocean).
-
+![HQPU Readingo](hqpu_quadrantes_fotometricos.png)
 ---
 
 ### 1. Symmetrical Huygens-Fresnel Deflection Field
