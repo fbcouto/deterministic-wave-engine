@@ -4,4 +4,8 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-rayon = "1.8"
+wgpu = "0.19"
+bytemuck = { version = "1.15", features = ["derive"] }
+pollster = "0.3"
+flume = "0.11"
+
