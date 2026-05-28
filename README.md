@@ -114,6 +114,81 @@ Developed as an open-source, high-performance platform for the mathematical eval
 
 ---
 
+# 4.D. Derivation of the Base Tension Constant
+
+## 1. Dimensional Nature of $\gamma$
+
+Within the Dissipative Gravitation Model, the supercavitation threshold—approached as matter velocity $v$ tends toward $c$—is defined by the asymptotic behavior of the resistance force $F_{res}$:
+
+$$
+\lim_{v \to \infty} F_{res} = \gamma
+$$
+
+Dimensionally, the Base Tension $\gamma$ is identified not as energy or mass, but as a Force ($MLT^{-2}$), measured in Newtons. It represents the physical "rupture tension" of the spacetime fabric.
+
+---
+
+## 2. Relationship with $c$ and $G$
+
+The Einstein field equations define the coupling between geometry and matter through the Einstein coupling constant ($\kappa$):
+
+$$
+\kappa = \frac{8\pi G}{c^4}
+$$
+
+In the context of analog gravity and the fluid dynamics of spacetime, the inverse of this constant characterizes the intrinsic rigidity or "Base Tension" ($\gamma_0$) of the vacuum, quantifying the medium's resistance to deformation.
+
+Consequently, the Primordial Base Space Tension is derived as:
+
+$$
+\gamma_0 = \frac{c^4}{8\pi G}
+$$
+
+Using standard physical constants ($c \approx 2.997 \times 10^8 \text{ m/s}$ and $G \approx 6.674 \times 10^{-11} \text{ m}^3\text{/kg}\cdot\text{s}^2$), the calculated value is:
+
+$$
+\gamma_0 \approx 4.82 \times 10^{42} \text{ Newtons}
+$$
+
+Note: If the $8\pi$ factor is omitted, the value aligns with the Planck Force, $1.21 \times 10^{44} \text{ N}$. Both values serve as valid upper bounds for the supercavitation threshold depending on the model's geometric scaling.
+
+---
+---
+
+## 3. Thermodynamic Modulation and the Cosmic Microwave Background (CMB)
+
+The Cosmic Microwave Background (CMB) radiation (2.725 K) is interpreted as the thermodynamic signature of the continuous frictional interaction between baryonic matter and the spatial medium.
+
+According to classical fluid dynamics, the tension and viscosity of a fluid are temperature-dependent properties. Therefore, the Effective Base Space Tension ($\gamma_{eff}$) can be expressed as a function of the background thermodynamic state:
+
+$$
+\gamma_{eff} = \gamma_0 \left( 1 - f(T_{CMB}) \right)
+$$
+
+Where $f(T_{CMB})$ is a decay function dependent on the thermal energy density of the background.
+
+Given that the current CMB temperature is significantly lower than the Planck temperature ($10^{32}$ K) required for spatial phase transition, the universe currently exists in a state of high rigidity, such that:
+
+$$
+\gamma_{eff} \approx \gamma_0 \approx 4.82 \times 10^{42} \text{ N}
+$$
+
+---
+
+## 4. Physical Implications
+
+The quantification of $\gamma \approx 4.82 \times 10^{42} \text{ Newtons}$ provides critical predictive utility for the model:
+
+### Supercavitation and Black Hole Formation
+
+The model predicts that the formation of a Black Hole is a phase-transition event occurring when localized kinetic or rotational forces exceed the mechanical yield strength of the vacuum. This threshold represents the point where the spatial fabric ruptures, transitioning into a localized cavitation zone.
+
+### Reinterpretation of the Speed of Light ($c$)
+
+In this model, $c$ is no longer an axiomatic kinematic limit. It is redefined as the specific velocity at which the dynamic pressure of a massive body equals the Base Space Tension ($\gamma$). At this velocity, the body achieves supercavitation, effectively piercing the fluid medium and minimizing resistance.
+
+---
+
 ## Conclusion: Rehabilitating Einstein & The Industrial Paradigm Shift
 
 The Deterministic Wave Engine unifies Quantum Mechanics and Classical Fluid Dynamics into a single logical framework, directly rehabilitating Albert Einstein's local realism. In 1926, Einstein famously rejected intrinsic quantum randomness, stating that *"He does not throw dice"* (*Gott würfelt nicht*). For a century, Copenhagen hegemony treated this stance as an outdated rejection of experimental reality. 
