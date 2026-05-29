@@ -38,8 +38,8 @@ The simulation executes five distinct operational states by toggling specific lo
 | Quadrant / Dataset | `with_deflection` | `with_turbulence` | `measurement_sensor` | Physical Interpretation | Emergent Visual Pattern |
 | :--- | :---: | :---: | :---: | :--- | :--- |
 | **A: Newtonian World** | 0 | 0 | 0 | Inert particles in sterile vacuum. Boundary friction disabled. | Two razor-sharp geometric projections (Pinhole shadows). |
-| **B: Rigid Interference** | 1 | 0 | 0 | Pure deterministic spin-boundary collision + active vacuum gradient. | Hyper-sharp, crystalline diffraction grid (Fraunhofer lines). |
-| **C: Thermodynamic Dispersion**| 0 | 1 | 0 | Inactive vacuum field, particles subjected strictly to sub-spatial heat. | Diffuse Gaussian smooth blur (Fluid "sand" scatter). |
+| **B: Thermodynamic Dispersion**| 0 | 1 | 0 | Inactive vacuum field, particles subjected strictly to sub-spatial heat. | Diffuse Gaussian smooth blur (Fluid "sand" scatter). |
+| **C: Rigid Interference** | 1 | 0 | 0 | Pure deterministic spin-boundary collision + active vacuum gradient. | Hyper-sharp, crystalline diffraction grid (Fraunhofer lines). |git
 | **D: Fluid Reality (Feynman)** | 1 | 1 | 0 | Full DWE model: Conical laser, spin-wall friction, vacuum gradient, and background thermal bath. | Perfect, smooth wave-particle interference inside a Gaussian envelope. |
 | **E: Classical Collapse** | 1 | 1 | 1 | Open-system interaction. Active acoustic friction sensor inside the right slit. | Erasure of the right-side phase info; pattern collapses into a chaotic bulk dispersion. |
 
@@ -197,6 +197,9 @@ The defining feature of HQPU architecture is the ability to read the computation
 ---
 
 ### Conclusion: Rehabilitating Einstein & The Industrial Paradigm Shift
+![Fig E - mechanical collapse](hqpu_colapso.png)
+
+Fig. E: Deterministic Decoherence (Matrix E). Direct observation of mechanical collapse. The interference pattern observed in Matrix D (Feynman) vanishes when a friction-based sensor is activated in the right slit. Unlike the Copenhagen interpretation, there is no "wave-function collapse" here; there is only Ballistic Mortality and the mechanical destruction of the vortex's Helicity ($\omega \to 0$) due to thermodynamic friction, resulting in a corpuscular (bulk) distribution rather than a wave-like one.
 
 The Deterministic Wave Engine unifies Quantum Mechanics and Classical Fluid Dynamics into a single logical framework, directly rehabilitating Albert Einstein's local realism. In 1926, Einstein famously rejected intrinsic quantum randomness, stating that *"He does not throw dice"* (Gott würfelt nicht). For a century, Copenhagen hegemony treated this stance as an outdated rejection of experimental reality.
 
