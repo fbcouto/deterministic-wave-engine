@@ -18,6 +18,10 @@ struct Params {
     center_x: f32,
     slits_distance: f32,
     slit_width: f32,
+    base_tension: f32, // Tensão do tecido de vácuo (γ)
+    pad1: u32,         // Alinhamento de memória exigido pela GPU (blocos de 16 bytes)
+    pad2: u32,
+    pad3: u32,
 }
 
 #[repr(C)]
@@ -54,6 +58,7 @@ async fn run() {
         entry_point: "main",
     });
 
+    // Matriz de Experimentos
     let quadrant_matrix = [
         QuadrantProfile { name: "A: Newtonian World", filename: "result_A_newton_gpu.csv", with_deflection: 0, with_turbulence: 0, measurement_sensor: 0 },
         QuadrantProfile { name: "B: Thermodynamic Dispersion", filename: "result_B_sand_gpu.csv", with_deflection: 1, with_turbulence: 0, measurement_sensor: 0 },
@@ -75,6 +80,10 @@ async fn run() {
             center_x: 1000.0,
             slits_distance: 120.0,
             slit_width: 5.0,
+            base_tension: 5.0, // Escala local de laboratório para a Tensão Primordial
+            pad1: 0,
+            pad2: 0,
+            pad3: 0,
         };
 
         let params_buffer = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
@@ -134,6 +143,9 @@ async fn run() {
             drop(data);
             staging_buffer.unmap();
         }
+        
+        // Na V3, como implementamos o muro balístico em Y=200, a maioria dos fótons é destruída.
+        // O tempo de processamento deve cair vertiginosamente.
         println!("OK ({:.2?})", start.elapsed());
     }
 }
