@@ -61,8 +61,8 @@ To demonstrate this ontological shift and address the reality of "laboratory cal
 ### The Physics of Granularity
 When executing the simulation with only 100,000 photons (left image), the resulting quadrants appear chaotic, "spikey," and filled with gaps. This is not a bug; it is a profound representation of standard laboratory observation when lasers are attenuated to single-photon emission.
 
-* **Mortalidade Balística:** Of the 100k photons fired, over 95% collide fatally with the central slit wall. Only a few thousand survive to reach the screen.
-* **Shot Noise (Ruído de Disparo):** With too few events, there is no density to smooth the statistical curve. We observe individual, deterministic impacts. Even in Feynman's Matrix D, the deterministic kicks ($1/r$) are visible as sparse peaks, but they fail to form a cohesive pattern.
+* **Ballistic Mortality:** Of the 100k photons fired, over 95% collide fatally with the central slit wall. Only a few thousand survive to reach the screen.
+* **Shot Noise:** With too few events, there is no density to smooth the statistical curve. We observe individual, deterministic impacts. Even in Feynman's Matrix D, the deterministic kicks ($1/r$) are visible as sparse peaks, but they fail to form a cohesive pattern.
 
 ### Macro-Emergence via the Law of Large Numbers
 By increasing the density to 50,000,000 photons (right image), the Law of Large Numbers takes over. The chaotic individual events are subsumed into the smooth, harmonious Gaussian envelopes and diffraction orders predicted by standard quantum mechanics.
@@ -84,13 +84,6 @@ cargo run --release --bin hqpu
 Outputs: Evaluates a single Double-Cone Vortex Qubit navigating a thermodynamic logic gate, proving the validity of Quantum Non-Demolition (QND) readings. Generates hqpu_readings.csv tracking localized barometric variations.
 
 ```
----
-Como você não enviou uma instrução explícita, presumi, pelo contexto do nosso fluxo de trabalho, que você deseja **refinar e atualizar este trecho do seu whitepaper (Seção 4.D)** para alinhar a redação com a nova mecânica estritamente determinística e fluida que acabamos de validar na **Versão 3.1** do *Deterministic Wave Engine (DWE)*.
-
-O texto original já continha uma fundação matemática belíssima baseada na Relatividade Geral. O que fiz foi "injetar" as descobertas da simulação visual neste texto acadêmico, conectando a constante $\gamma$ diretamente ao comportamento do **Vórtice de Duplo Cone**, à **Turbulência Termodinâmica (CMB)** e ao **Equilíbrio Hidrodinâmico ($c$)**.
-
-Aqui está a seção refinada e formatada em Markdown, pronta para o seu artigo:
-
 ---
 
 # 4.D. Derivation of the Base Tension Constant
