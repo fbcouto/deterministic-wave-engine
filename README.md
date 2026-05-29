@@ -14,13 +14,13 @@ Version 3.1 removes all black-box probabilistic shortcuts (such as random edge-s
 
 Standard quantum mechanics relies on abstract probability waves ($\Psi$). DWE V3.1 replaces this mysticism with strict macro-and-micro fluid mechanics:
 
-1. **The Double-Cone (Spindle) Vortex:** Photons are modeled as physical topological defects—two cones joined at their circular base. The photon's momentum is forward, but its equator possesses intense rotational kinetic energy (Spin/Helicity, $\pm\omega$).
+1. **The Double-Cone (Spindle) Vortex (Invariant Spin):** Photons are modeled as physical topological defects—two cones joined at their circular base. The photon's momentum is forward, while its equator possesses an intrinsic, invariant angular momentum (Spin/Helicity, $\pm\omega$). To maintain strict experimental alignment with quantum selection rules, *all* photons share the exact same spin magnitude ($1\hbar$), regardless of their energy scale.
 2. **Conical Laser Emission (Box-Muller Transformation):** Real-world laboratory lasers do not emit rectangular blocks of light. DWE implements a true point-source conical beam using the *Box-Muller Transform* over a PCG cryptographic hash, delivering a perfect Gaussian intensity envelope.
 3. **Deterministic Boundary Collision ($1/r$ Mechanics):** When a rotating vortex-photon passes through a narrow slit ($5\text{px}$ width), it experiences extreme localized hydrodynamic friction against the solid slit walls. The engine calculates the precise nanometric distance to the closest edge ($r$):
    * **Elastic Bounce:** A geometric repulsive pressure inversely proportional to distance ($1/r$).
    * **Spin Traction (Quantum Magnus Effect):** The rotating equator of the vortex literally "bites" the boundary layer of the solid wall, converting rotational energy into a deterministic lateral velocity kick proportional to $\omega/r$.
-4. **Emergent Diffraction (Fraunhofer Orders):** Photons passing through the exact center of the slit fly straight (Order 0). Photons passing close to the quinas are catapulted at sharp angles. As they enter the open field, the vacuum's structural tension gradient ($\nabla P = \sin\phi_1 + \sin\phi_2$) herds these scattered particles into discrete, rhythmic fringe lines (Orders $\pm1, \pm2, \pm3$).
-
+4. **Topological Compression & Emergent Frequency:** Instead of mapping frequency to a faster equatorial spin rate (which would cause torque divergence and break atomic absorption limits), DWE V3.1 implements **Topological Compression**. Higher-energy particles (like Gamma rays) are ultra-compacted, ultra-rigid vortex cores. As this super-cavitating bubble travels at $c$, it creates a rhythmic trailing wave-train of pressure ripples in the Base Space Tension ($\gamma_0$). The **frequency ($\nu$)** is the spatial periodicity of this acoustic shockwave wake, naturally reconstructing Planck's relation $E=h\nu$.
+5. **Emergent Diffraction (Fraunhofer Orders):** Photons passing through the exact center of the slit fly straight (Order 0). Photons passing close to the quinas are catapulted at sharp angles due to spin traction. As they enter the open field, the vacuum's structural tension gradient ($\nabla P = \sin\phi_1 + \sin\phi_2$) herds these scattered particles into discrete, rhythmic fringe lines (Orders $\pm1, \pm2, \pm3$).
 ---
 
 ## 💻 Architecture & High-Performance Matrix Dispatch
@@ -57,6 +57,18 @@ To demonstrate this ontological shift and address the reality of "laboratory cal
 | 100,000 Photons (Granular Reality / Shot Noise) | 50,000,000 Photons (Emergent Statistics / Born Distribution) |
 | :---: | :---: |
 | ![Low Density 100k](hqpu_low_density_100k.png) | ![High Density 50M](hqpu_quadrantes_fotometricos.png) |
+
+## 📊 Experimental Results: Emergence of Wave Patterns
+
+The DWE demonstrates that wave-like interference patterns are not intrinsic to "quantum probabilities" but emerge from the statistical accumulation of millions of deterministic, local-realist trajectories.
+
+### The Scale of Emergence
+Our simulations show a stark difference in behavior based on particle density:
+
+* **Low-Density Regime (100,000 Particles):** At this scale, the corpuscular nature of the photon dominates. Impacts appear stochastic and noisy, masking the underlying deterministic structure.
+* **Fluid Regime (50,000,000 Particles):** As the density increases, the "Law of Large Numbers" reveals the emergent wave pattern. The interference fringes (previously hidden by sparsity) stabilize into the smooth density distributions predicted by Born's Law.
+
+This observation validates our central hypothesis: the "probability wave" (Ψ) is a macro-statistical representation of the underlying viscoelastic vacuum fluid dynamics, not a fundamental property of the particle itself.
 
 ### The Physics of Granularity
 When executing the simulation with only 100,000 photons (left image), the resulting quadrants appear chaotic, "spikey," and filled with gaps. This is not a bug; it is a profound representation of standard laboratory observation when lasers are attenuated to single-photon emission.
@@ -138,9 +150,15 @@ $$\gamma_{eff} \approx \gamma_0 \approx 4.82 \times 10^{42} \text{ N}$$
 
 The precise quantification of $\gamma \approx 4.82 \times 10^{42} \text{ Newtons}$ grounds quantum mechanics in classical fluid dynamics and provides critical predictive utility for the model:
 
-### The Photon as a Stable Topological Defect
+### The Photon as a Stable Topological Defect & The Mechanics of Frequency
 
-The model reveals that massless particles (such as photons) are actually tangile **Double-Cone (Spindle) Vortices**. They achieve structural stability because their extreme equatorial rotational kinetic energy (Helicity/Spin) perfectly balances the local crushing pressure of $\gamma_{eff}$, preventing the void from collapsing.
+The model reveals that massless particles (such as photons) are tangible **Double-Cone (Spindle) Vortices**. They achieve structural stability because their equatorial rotational kinetic energy (Helicity/Spin) perfectly balances the local crushing pressure of $\gamma_{eff}$, preventing the void from collapsing.
+
+To reconcile this fluid architecture with state-of-the-art Experimental Quantum Electrodynamics (QED), the DWE strictly decouples the photon’s frequency from its internal rotational velocity magnitude:
+
+* **Invariant Spin Magnitude ($1\hbar$):** The equator of every photon vortex rotates with a fixed angular momentum magnitude. From an ELF radio wave to an ultra-hard Gamma ray, the particle carries exactly $\pm 1\hbar$. This preserves the strict bosonic nature of light required by atomic state transitions and Compton scattering.
+* **Inertia via Topological Compression:** To harbor immense energy without spinning faster or expanding its physical cross-section macroscopically (which would contradict nuclear scattering data), a high-energy photon undergoes severe *topological compression*. A Gamma-ray photon is an ultra-miniaturized, ultra-dense, and highly rigid vortex core operating at sub-picometric scales.
+* **Frequency as a Tension Perturbation Wake:** As this rigid bubble of supercavitation pierces the viscoelastic vacuum at velocity $c$, it generates an acoustic trailing wake—a series of shockwave ripples in the Base Space Tension ($\gamma_0$). The **frequency ($\nu$)** is defined strictly as the *spatial periodicity of these pressure crests* left behind in the medium. Extreme topological compression generates shorter, more aggressive, and highly penetrating shockwave spacing (high energy), while broad, relaxed cores produce massive, multi-kilometer macroscopic ripples (Radio waves).
 
 ### Supercavitation and Black Hole Formation
 
@@ -151,7 +169,6 @@ The model predicts that the formation of a macroscopic Black Hole is a fluidic p
 In this model, $c$ is no longer an axiomatic, mystical kinematic limit. It is redefined strictly as the **hydrodynamic equilibrium velocity**. It is the specific velocity at which the dynamic piercing pressure of a body equals the Base Space Tension ($\gamma$).
 
 For a photon traversing the fluid vacuum, $c$ is the exact speed where the structural breaking of the fluid at the front apex of the spindle is perfectly compensated by the smooth, elastic closure of the fluid at the rear apex, resulting in zero net aerodynamic drag ($\Sigma F \approx 0$).
-
 ---
 
 ### 5. The Hydro-Quantum Processing Unit (HQPU)
@@ -209,7 +226,8 @@ This engine demonstrates that what modern physics interprets as intrinsic quantu
 
 By transitioning from probabilistically unstable Qubits to stable, deterministic **Hydro-Quantum Processing Units (HQPUs)**, the industry can bypass the multi-billion-dollar bottlenecks of extreme cryogenic isolation, destructive measurements, and massive algorithmic redundancy. The future of computational supremacy does not lie in taming probability, but in engineering the deterministic fluid of space itself.
 ---
-
+A rigorous review of the mathematical model has led me to readjust the previous statement. Initially, I had postulated that the photon's frequency corresponded to the angular velocity (magnitude) of its equatorial spin. However, to align the model with the state-of-the-art experimental physics—specifically with atomic selection rules and the invariance of bosonic spin ($1\hbar$)—I refined the fluid-mechanical mechanism.In the updated model, the spin remains fixed and invariable for all photons, while energy and frequency are described through the topological compression of the vortex core. Thus, frequency ceases to be a variable internal rotation and becomes the spatial periodicity of the shockwave (barometric wake) generated in the fabric of the Base Space Tension ($\gamma_0$) as the super-cavitating bubble advances at the speed of light ($c$).
+---
 ## Intellectual Property & License
 
 This theoretical model, its mathematical formulation, and the accompanying source code are the original intellectual property of Fernando B Couto. To foster scientific collaboration and open-source development, this project is released under the GNU General Public License v3.0 (GPL-3.0). You are free to run, study, share, and modify the code and the theoretical concepts. However, any derivative work, academic publication, or software incorporating this algorithm must remain open-source under the same license and must explicitly credit the original author. Commercial enclosure of this algorithm is strictly prohibited under this license.
