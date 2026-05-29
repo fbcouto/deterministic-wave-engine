@@ -19,7 +19,6 @@ struct Params {
     pad3: u32,
 };
 
-// A ESTRUTURA DO VÓRTICE (Fóton)
 struct VortexPhoton {
     pos: vec2<f32>,
     vel: vec2<f32>,
@@ -31,19 +30,33 @@ struct VortexPhoton {
 @group(0) @binding(0) var<storage, read_write> screen: array<SpectralBucket>;
 @group(0) @binding(1) var<uniform> params: Params;
 
+// DISTÂNCIAS DO LABORATÓRIO
 const SLITS_Y_POS: f32 = 200.0;
 const SCREEN_Y_POS: f32 = 800.0;
 const DT: f32 = 2.0;
-const FLUID_C: f32 = 300.0; // Velocidade inercial de cruzeiro no fluido
+const FLUID_C: f32 = 300.0;
+
+// Motor Criptográfico para Nascimento Cônico (O Laser)
+fn pcg_hash(seed: u32) -> u32 {
+    var state = seed * 747796405u + 2891336453u;
+    var word = ((state >> ((state >> 28u) + 4u)) ^ state) * 277803737u;
+    return (word >> 22u) ^ word;
+}
+
+fn rand_f32(h: u32) -> f32 {
+    return f32(h) * (1.0 / 4294967295.0); 
+}
 
 fn hash2(p: vec2<f32>) -> f32 {
     return fract(sin(dot(p, vec2<f32>(12.9898, 78.233))) * 43758.5453);
 }
 
-fn curl_noise(pos: vec2<f32>) -> f32 {
-    let n1 = hash2(pos + vec2<f32>(0.1, 0.0));
-    let n2 = hash2(pos - vec2<f32>(0.1, 0.0));
-    return (n1 - n2) * 15.0;
+// Turbulência de Fundo (Vácuo)
+fn curl_noise(pos: vec2<f32>, photon_seed: f32) -> f32 {
+    let p = pos + vec2<f32>(photon_seed, -photon_seed);
+    let n1 = hash2(p + vec2<f32>(0.1, 0.0));
+    let n2 = hash2(p - vec2<f32>(0.1, 0.0));
+    return (n1 - n2) * 1.5; 
 }
 
 fn calculate_gradient(x: f32, y: f32, wavelength: f32, sensor_active: u32) -> f32 {
@@ -57,44 +70,40 @@ fn calculate_gradient(x: f32, y: f32, wavelength: f32, sensor_active: u32) -> f3
     let phase1 = k * d1;
     let phase2 = k * d2;
     
-    var pressure_gradient = 0.0;
-    
     if (sensor_active == 1u) {
-        pressure_gradient = sin(phase1); // Colapso simétrico
+        return sin(phase1);
     } else {
-        pressure_gradient = sin(phase1) + sin(phase2); // Superposição
+        return sin(phase1) + sin(phase2);
     }
-    
-    return pressure_gradient; 
 }
 
 @compute @workgroup_size(256)
 fn main(@builtin(global_invocation_id) id: vec3<u32>) {
-    let photon_idx = id.x;
+    let photon_idx = id.y * 16640000u + id.x;
     if (photon_idx >= params.total_photons) { return; }
 
-    let seed = f32(photon_idx) * 0.12345;
-    let left_slit_x = params.center_x - (params.slits_distance / 2.0);
-    let right_slit_x = params.center_x + (params.slits_distance / 2.0);
-
-    let is_left_slit = hash2(vec2<f32>(seed, 1.0)) > 0.5;
-    var pos_x: f32;
+    let base_hash = pcg_hash(photon_idx);
+    let p_seed = rand_f32(base_hash); 
     
-    if (is_left_slit) {
-        pos_x = left_slit_x + (hash2(vec2<f32>(seed, 2.0)) - 0.5) * params.slit_width;
-    } else {
-        pos_x = right_slit_x + (hash2(vec2<f32>(seed, 3.0)) - 0.5) * params.slit_width;
-    }
+    // 1. CANHÃO EMISSOR: Laser Cónico (Box-Muller)
+    let u1 = rand_f32(pcg_hash(base_hash + 1u));
+    let u2 = rand_f32(pcg_hash(base_hash + 2u));
+    
+    let radius = sqrt(-2.0 * log(max(u1, 0.000001)));
+    let theta = 6.2831853 * u2;
+    let gaussian_vx = radius * cos(theta);
+    
+    let divergence = 1.5;
     
     var photon = VortexPhoton(
-        vec2<f32>(pos_x, SLITS_Y_POS),
-        vec2<f32>(0.0, 5.0),
+        vec2<f32>(params.center_x, 0.0),                     
+        vec2<f32>(gaussian_vx * divergence, 5.0),      
         0.0,
         10.0, 
         1u
     );
     
-    let color_rand = hash2(vec2<f32>(seed, 4.0));
+    let color_rand = rand_f32(pcg_hash(base_hash + 3u));
     if (color_rand < 0.1) {
         photon.wavelength = 8.0; 
         photon.color_channel = 0u;
@@ -103,51 +112,99 @@ fn main(@builtin(global_invocation_id) id: vec3<u32>) {
         photon.color_channel = 2u;
     }
 
-    // Frequência angular é diretamente proporcional à energia de rotação
-    photon.spin_omega = FLUID_C / photon.wavelength;
+    let spin_rand = rand_f32(pcg_hash(base_hash + 4u));
+    let spin_direction = sign(spin_rand - 0.5); 
+    photon.spin_omega = spin_direction * (FLUID_C / photon.wavelength);
 
-    if (params.measurement_sensor == 1u && !is_left_slit) {
-        photon.vel.x += (hash2(vec2<f32>(seed, 8.5)) - 0.5) * 15.0;
-        photon.spin_omega *= 0.5; 
-    }
+    var is_active = true;
 
-    // CICLO DE PROPAGAÇÃO DO VÓRTICE
-    while (photon.pos.y < SCREEN_Y_POS) {
+    // 3. O CICLO DE VOO
+    while (photon.pos.y < SCREEN_Y_POS && is_active) {
         var force_x = 0.0;
         
-        if (params.with_deflection == 1u) {
-            let grad = calculate_gradient(photon.pos.x, photon.pos.y, photon.wavelength, params.measurement_sensor);
+        if (photon.pos.y < SLITS_Y_POS) {
+            // Zona de Voo Livre
+        } 
+        // ZONA B: A COLISÃO MECÂNICA (Fricção e Efeito Magnus de Borda)
+        else if (photon.pos.y >= SLITS_Y_POS && photon.pos.y - photon.vel.y * DT < SLITS_Y_POS) {
+            let half_width = params.slit_width / 2.0;
+            let left_center = params.center_x - (params.slits_distance / 2.0);
+            let right_center = params.center_x + (params.slits_distance / 2.0);
+
+            let left_slit_min = left_center - half_width;
+            let left_slit_max = left_center + half_width;
+            let right_slit_min = right_center - half_width;
+            let right_slit_max = right_center + half_width;
             
-            // Fótons mais rápidos (UV) sofrem maior fricção angular com a topologia de grade do fluido
-            force_x += grad * (photon.spin_omega * params.base_tension * 0.01);
+            let in_left = photon.pos.x >= left_slit_min && photon.pos.x <= left_slit_max;
+            let in_right = photon.pos.x >= right_slit_min && photon.pos.x <= right_slit_max;
+            
+            // Mortalidade (Colisão fatal com a parede cega)
+            if (!in_left && !in_right) {
+                is_active = false; 
+                break; 
+            }
+            
+            // =========================================================
+            // FÍSICA ESTRITA: O CHOQUE COM AS BORDAS
+            // O espalhamento aqui agora é 100% determinístico e calculado
+            // pela interação geométrica entre a parede e o spin.
+            // =========================================================
+            if (params.with_deflection == 1u && params.measurement_sensor == 0u) {
+                var dist_to_edge = 0.0;
+                var normal_vetor = 0.0; 
+                
+                // Mede a que distância o pacote de spin passou da quina viva
+                if (in_left) {
+                    let d_min = photon.pos.x - left_slit_min;
+                    let d_max = left_slit_max - photon.pos.x;
+                    if (d_min < d_max) { dist_to_edge = d_min; normal_vetor = 1.0; } // Parede na esquerda empurra p/ direita
+                    else { dist_to_edge = d_max; normal_vetor = -1.0; } // Parede na direita empurra p/ esquerda
+                } else {
+                    let d_min = photon.pos.x - right_slit_min;
+                    let d_max = right_slit_max - photon.pos.x;
+                    if (d_min < d_max) { dist_to_edge = d_min; normal_vetor = 1.0; }
+                    else { dist_to_edge = d_max; normal_vetor = -1.0; }
+                }
+
+                // Capping para evitar explosões de divisão por zero. 
+                // 0.2 é o "raio físico" duro da nossa partícula.
+                let safe_dist = max(dist_to_edge, 0.2);
+                
+                // 1. O Ricochete Geométrico (Cresce muito se passar raspando)
+                let elastic_bounce = normal_vetor * (1.5 / safe_dist);
+                
+                // 2. A Fricção Magnética (O equador do pacote morde a parede)
+                let spin_traction = (photon.spin_omega * 0.05) / safe_dist;
+                
+                // O Desvio final é a soma do ricochete com a mordida mecânica
+                photon.vel.x += (elastic_bounce + spin_traction) * 2.5; 
+            }
+            
+            // O Sensor atua como um prego mecânico inserido na fenda
+            if (params.measurement_sensor == 1u && in_right) {
+                let kick_rand = rand_f32(pcg_hash(base_hash + 5u));
+                photon.vel.x += (kick_rand - 0.5) * 12.0; 
+                photon.spin_omega *= 0.05; 
+            }
         }
-        
-        if (params.with_turbulence == 1u) {
-            force_x += curl_noise(photon.pos * 0.05);
+        // ZONA C: O GRADIENTE DE INTERFERÊNCIA (Feynman)
+        else {
+            if (params.with_deflection == 1u) {
+                let grad = calculate_gradient(photon.pos.x, photon.pos.y, photon.wavelength, params.measurement_sensor);
+                force_x += grad * (abs(photon.spin_omega) * params.base_tension * 0.015);
+            }
+            if (params.with_turbulence == 1u) {
+                force_x += curl_noise(photon.pos * 0.05, p_seed);
+            }
         }
         
         photon.vel.x += force_x * 0.1;
-
-        /* ====================================================================
-        CONCEITO: Efeito Luz Cansada (Redshift / Fricção Residual)
-        TEORIA: A supercavitação elimina quase todo o atrito, mas a rotação 
-        gera um micro-arrasto contínuo, fazendo o fóton transferir energia.
-        COMPUTAÇÃO: Para fins de performance nesta simulação em GPU da Fenda Dupla, 
-        este decaimento está comentado. A distância percorrida pelo vórtice (600px) 
-        é insignificante e não provoca deformação de trajetória ou perda de energia 
-        visível nestas dimensões geométricas locais.
-        ====================================================================
-        let residual_friction = 1.0 - (0.000002 * params.base_tension * photon.spin_omega);
-        photon.vel.x *= residual_friction;
-        photon.vel.y *= residual_friction;
-        ==================================================================== 
-        */
-
         photon.pos.x += photon.vel.x * DT;
         photon.pos.y += photon.vel.y * DT;
     }
 
-    if (photon.pos.x >= 0.0 && photon.pos.x < f32(params.screen_width)) {
+    if (is_active && photon.pos.x >= 0.0 && photon.pos.x < f32(params.screen_width)) {
         let screen_idx = u32(photon.pos.x);
         if (photon.color_channel == 0u) {
             atomicAdd(&screen[screen_idx].uv, 1u);

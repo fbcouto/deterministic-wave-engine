@@ -3,12 +3,13 @@ struct VortexQubit {
     y: f32,
     vx: f32,
     vy: f32,
-    spin_omega: f32,
-    wake_amplitude: f32,
+    spin_omega: f32,     // V3: Carrega a Helicidade (sinal + ou -)
+    wake_amplitude: f32, // Força da esteira termodinâmica
     padding1: f32,
     padding2: f32,
 };
 
+// V3: Estrutura alinhada com o main.rs e hqpu.rs (incluindo a base_tension)
 struct Params {
     with_deflection: u32,
     with_turbulence: u32,
@@ -18,6 +19,10 @@ struct Params {
     center_x: f32,
     slits_distance: f32,
     slit_width: f32,
+    base_tension: f32,
+    pad1: u32,
+    pad2: u32,
+    pad3: u32,
 };
 
 @group(0) @binding(0) var<storage, read_write> qubits: array<VortexQubit>;
@@ -47,21 +52,28 @@ fn main(@builtin(global_invocation_id) id: vec3<u32>) {
 
     var q = qubits[idx];
 
-    // 1. Aplicação do Portão Lógico (Obstáculo Termodinâmico)
+    // 1. Aplicação do Portão Lógico (Obstáculo Termodinâmico V3)
     if (q.y > 100.0 && q.y < 150.0) {
         let grad = calculate_vacuum_gradient(vec2<f32>(q.x, q.y));
-        let base_tension = 5.0;
-        let gradient_pressure = sin(q.y * 0.2) * base_tension;
         
+        // A pressão do gradiente agora escala com a Tensão Base do Universo
+        let gradient_pressure = sin(q.y * 0.2) * params.base_tension;
+        
+        // Alteração determinística do spin
         q.spin_omega += gradient_pressure * 0.05;
-        q.vx += gradient_pressure * 0.02 + grad.x * 0.1;
+        
+        // V3 (Helicidade): O deslize lateral depende do sentido de rotação do equador do fuso
+        // sign(q.spin_omega) retorna 1.0 (Horário) ou -1.0 (Anti-horário)
+        q.vx += gradient_pressure * 0.02 * sign(q.spin_omega) + grad.x * 0.1;
     }
 
-    // 2. Evolução Dinâmica
+    // 2. Evolução Dinâmica do Fuso no Fluido
     q.x += q.vx * 0.1;
     q.y += q.vy * 0.1;
-    q.spin_omega += 0.15 * 0.1; 
+    
+    // V3: A inércia em meio livre acelera ligeiramente o giro respeitando o sentido original
+    q.spin_omega += 0.15 * 0.1 * sign(q.spin_omega); 
 
-    // Atualiza o estado na GPU
+    // Atualiza o estado na memória da GPU
     qubits[idx] = q;
 }

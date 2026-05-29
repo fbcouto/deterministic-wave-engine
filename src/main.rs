@@ -5,7 +5,8 @@ use std::time::Instant;
 use wgpu::util::DeviceExt;
 use wgpu::{BufferUsages, CommandEncoderDescriptor, ComputePassDescriptor, ComputePipelineDescriptor};
 
-const TOTAL_PHOTONS: u32 = 6_000_000;
+// O MOTOR INFINITO: 50 Milhões de partículas
+const TOTAL_PHOTONS: u32 = 50_000_000;
 
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Pod, Zeroable)]
@@ -18,8 +19,8 @@ struct Params {
     center_x: f32,
     slits_distance: f32,
     slit_width: f32,
-    base_tension: f32, // Tensão do tecido de vácuo (γ)
-    pad1: u32,         // Alinhamento de memória exigido pela GPU (blocos de 16 bytes)
+    base_tension: f32,
+    pad1: u32,
     pad2: u32,
     pad3: u32,
 }
@@ -58,7 +59,6 @@ async fn run() {
         entry_point: "main",
     });
 
-    // Matriz de Experimentos
     let quadrant_matrix = [
         QuadrantProfile { name: "A: Newtonian World", filename: "result_A_newton_gpu.csv", with_deflection: 0, with_turbulence: 0, measurement_sensor: 0 },
         QuadrantProfile { name: "B: Thermodynamic Dispersion", filename: "result_B_sand_gpu.csv", with_deflection: 1, with_turbulence: 0, measurement_sensor: 0 },
@@ -80,7 +80,7 @@ async fn run() {
             center_x: 1000.0,
             slits_distance: 120.0,
             slit_width: 5.0,
-            base_tension: 5.0, // Escala local de laboratório para a Tensão Primordial
+            base_tension: 5.0, 
             pad1: 0,
             pad2: 0,
             pad3: 0,
@@ -122,8 +122,19 @@ async fn run() {
             let mut cpass = encoder.begin_compute_pass(&ComputePassDescriptor { label: None, timestamp_writes: None });
             cpass.set_pipeline(&compute_pipeline);
             cpass.set_bind_group(0, &bind_group, &[]);
-            cpass.dispatch_workgroups((TOTAL_PHOTONS + 255) / 256, 1, 1);
+            
+            // ========================================================
+            // ESTRATÉGIA DE DESPACHO 2D (Contorna o limite de 65.535)
+            // ========================================================
+            let max_groups_x = 65000;
+            let total_groups = (TOTAL_PHOTONS + 255) / 256;
+            
+            let dispatch_x = total_groups.min(max_groups_x);
+            let dispatch_y = (total_groups + max_groups_x - 1) / max_groups_x;
+
+            cpass.dispatch_workgroups(dispatch_x, dispatch_y, 1);
         }
+        
         encoder.copy_buffer_to_buffer(&screen_buffer, 0, &staging_buffer, 0, screen_buffer_size);
         queue.submit(Some(encoder.finish()));
 
@@ -143,9 +154,6 @@ async fn run() {
             drop(data);
             staging_buffer.unmap();
         }
-        
-        // Na V3, como implementamos o muro balístico em Y=200, a maioria dos fótons é destruída.
-        // O tempo de processamento deve cair vertiginosamente.
         println!("OK ({:.2?})", start.elapsed());
     }
 }
