@@ -1,6 +1,4 @@
 /target
 
 # Ignorar Datasets Massivos da GPU
-*.csv
 datasets/
-hqpu_*.png
