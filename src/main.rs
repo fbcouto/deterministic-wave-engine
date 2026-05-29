@@ -6,7 +6,7 @@ use wgpu::util::DeviceExt;
 use wgpu::{BufferUsages, CommandEncoderDescriptor, ComputePassDescriptor, ComputePipelineDescriptor};
 
 // O MOTOR INFINITO: 50 Milhões de partículas
-const TOTAL_PHOTONS: u32 = 50_000_000;
+const TOTAL_PHOTONS: u32 = 100_000;
 
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Pod, Zeroable)]

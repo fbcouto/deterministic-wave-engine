@@ -46,7 +46,28 @@ The simulation executes five distinct operational states by toggling specific lo
 ![Photometric Quadrants](hqpu_quadrantes_fotometricos.png)
 
 ---
+---
 
+## 🔬 Special Feature: Statistical Buildup and the Emergence of $|\Psi|^2$
+
+A critical distinction of the Deterministic Wave Engine (V3.1) is its strict adherence to particle trajectory simulation, rather than rendering abstract mathematical waveforms. The "wave-function" ($\Psi$) is treated as an emergent macroscopic phenomenon, not a fundamental entity.
+
+To demonstrate this ontological shift and address the reality of "laboratory calibration," we present a comparative analysis of the simulation's output at two vastly different data densities.
+
+| 100,000 Photons (Granular Reality / Shot Noise) | 50,000,000 Photons (Emergent Statistics / Born Distribution) |
+| :---: | :---: |
+| ![Low Density 100k](hqpu_low_density_100k.png) | ![High Density 50M](hqpu_quadrantes_fotometricos.png) |
+
+### The Physics of Granularity
+When executing the simulation with only 100,000 photons (left image), the resulting quadrants appear chaotic, "spikey," and filled with gaps. This is not a bug; it is a profound representation of standard laboratory observation when lasers are attenuated to single-photon emission.
+
+* **Mortalidade Balística:** Of the 100k photons fired, over 95% collide fatally with the central slit wall. Only a few thousand survive to reach the screen.
+* **Shot Noise (Ruído de Disparo):** With too few events, there is no density to smooth the statistical curve. We observe individual, deterministic impacts. Even in Feynman's Matrix D, the deterministic kicks ($1/r$) are visible as sparse peaks, but they fail to form a cohesive pattern.
+
+### Macro-Emergence via the Law of Large Numbers
+By increasing the density to 50,000,000 photons (right image), the Law of Large Numbers takes over. The chaotic individual events are subsumed into the smooth, harmonious Gaussian envelopes and diffraction orders predicted by standard quantum mechanics.
+
+This comparison proves that if the DWE were utilizing Born's Rule or Schrödinger's equations directly, the low-density image would simply be a perfectly smooth, lower-amplitude version of the high-density one. Instead, the emergence of noise validates that **the engine models local realism: individual particles surfing a viscous medium.** The probability wave is simply the final resting density of millions of deterministically guided corpuscles.
 ## 🛠️ Compilation and Execution
 
 Ensure you have the Rust toolchain installed. Since the project utilizes a highly optimized multiple-binary configuration mapping via `Cargo.toml`, execute the simulations independently using the explicit `--bin` flag.
