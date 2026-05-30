@@ -233,6 +233,11 @@ A rigorous review of the mathematical model has led me to readjust the previous 
 This theoretical model, its mathematical formulation, and the accompanying source code are the original intellectual property of Fernando B Couto. To foster scientific collaboration and open-source development, this project is released under the GNU General Public License v3.0 (GPL-3.0). You are free to run, study, share, and modify the code and the theoretical concepts. However, any derivative work, academic publication, or software incorporating this algorithm must remain open-source under the same license and must explicitly credit the original author. Commercial enclosure of this algorithm is strictly prohibited under this license.
 
 ---
+## 🌊 Grounded in Practical Hydrodynamics
+The theoretical and computational foundations of the Deterministic Wave Engine (DWE) are deeply informed by applied fluid mechanics and real-world hardware engineering. The principles of vortex generation, kinetic energy accumulation, and fluid-structural interaction that drive our deterministic quantum models have been practically explored and validated in macroscopic hydraulic systems. 
+
+For an overview of the applied physical research that precedes this simulation engine, please refer to the official intellectual property documentation for the **[Vortex Rotor (INPI Patent BR 10 2018 005831 2)](https://github.com/fbcouto/vortex-rotor-hardware)**, a high-efficiency hardware device designed to manipulate concentric fluid vortices and transform radial momentum into axial thrust.
+---
 
 ## How to Cite This Work
 
