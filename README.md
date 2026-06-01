@@ -127,7 +127,8 @@ Using standard physical constants ($c \approx 2.997 \times 10^8 \text{ m/s}$ and
 
 $$\gamma_0 \approx 4.82 \times 10^{42} \text{ Newtons}$$
 
-*Note: If the geometric $8\pi$ scalar is omitted, the value aligns perfectly with the Planck Force ($1.21 \times 10^{44} \text{ N}$). Both values serve as valid upper bounds for the supercavitation threshold, depending on whether the topological stress is modeled as a spherical distribution or a linear vector.*
+
+* Note: If the geometric ($8\pi$) scalar is omitted, the value aligns perfectly with the Planck Force ($1.21 \times 10^{44} \text{ N}$). Both values serve as valid upper bounds for the supercavitation threshold, depending on whether the topological stress is modeled as a spherical distribution or a linear vector.*
 
 ---
 
