@@ -125,7 +125,18 @@ Consequently, the Primordial Base Space Tension is distributed as:
 
 $$\gamma_0 \propto \frac{c^4}{8\pi G} \approx 4.82 \times 10^{42} \text{ Pa}$$
 
+<<<<<<< HEAD
 *Note: To scale this immense micro-scale pressure to macroscopic observable deformations (like celestial orbits), this framework works in tandem with the **Vacuum Shear Modulus** ($N_{VAC} \approx 2.79 \times 10^{31} \text{ Pa}$). The dimensionless ratio between them ($\gamma_0 / N_{VAC}$) acts as the refractive index of spacetime drag.*
+=======
+$$\gamma_0 = \frac{c^4}{8\pi G}$$
+
+Using standard physical constants ($c \approx 2.997 \times 10^8 \text{ m/s}$ and $G \approx 6.674 \times 10^{-11} \text{ m}^3\text{/kg}\cdot\text{s}^2$), the calculated value is:
+
+$$\gamma_0 \approx 4.82 \times 10^{42} \text{ Newtons}$$
+
+
+* Note: If the geometric ($8\pi$) scalar is omitted, the value aligns perfectly with the Planck Force ($1.21 \times 10^{44} \text{ N}$). Both values serve as valid upper bounds for the supercavitation threshold, depending on whether the topological stress is modeled as a spherical distribution or a linear vector.*
+>>>>>>> ed41426796f1167e504482c77d8098449993e5c8
 
 ---
 
