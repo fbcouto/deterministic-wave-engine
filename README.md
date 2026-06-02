@@ -129,7 +129,7 @@ Consequently, the Primordial Base Space Tension is distributed as:
 
 $$\gamma_0 \propto \frac{c^4}{8\pi G} \approx 4.82 \times 10^{42} \text{ Pa}$$
 
-*Note: To scale this immense micro-scale pressure to macroscopic observable deformations (like celestial orbits), this framework works in tandem with the **Vacuum Shear Modulus** ($N_{VAC} \approx 2.79 \times 10^{31} \text{ Pa}$). The dimensionless ratio between them ($\gamma_0 / N_{VAC}$) acts as the refractive index of spacetime drag.*
+* Note: To scale this immense micro-scale pressure to macroscopic observable deformations (like celestial orbits), this framework works in tandem with the **Vacuum Shear Modulus** ($N_{VAC} \approx 2.79 \times 10^{31} \text{ Pa}$). The dimensionless ratio between them ($\gamma_0 / N_{VAC}$) acts as the refractive index of spacetime drag.*
 ---
 
 ## 3. Thermodynamic Modulation and the Cosmic Microwave Background (CMB)
