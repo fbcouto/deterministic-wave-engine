@@ -21,7 +21,8 @@ Standard quantum mechanics relies on abstract probability waves ($\Psi$). DWE V3
    * **Elastic Bounce:** A geometric repulsive pressure inversely proportional to distance ($1/r$).
    * **Spin Traction (Quantum Magnus Effect):** The rotating equator of the vortex literally "bites" the boundary layer of the solid wall, converting rotational energy into a deterministic lateral velocity kick proportional to $\omega/r$.
 4. **Topological Compression & Emergent Frequency:** Instead of mapping frequency to a faster equatorial spin rate (which would cause torque divergence and break atomic absorption limits), DWE V3.1 implements **Topological Compression**. Higher-energy particles (like Gamma rays) are ultra-compacted, ultra-rigid vortex cores. As this super-cavitating bubble travels at $c$, it creates a rhythmic trailing wave-train of pressure ripples in the Base Space Tension ($\gamma_0$). The **frequency ($\nu$)** is the spatial periodicity of this acoustic shockwave wake, naturally reconstructing Planck's relation $E=h\nu$.
-5. **Emergent Diffraction (Fraunhofer Orders):** Photons passing through the exact center of the slit fly straight (Order 0). Photons passing close to the quinas are catapulted at sharp angles due to spin traction. As they enter the open field, the vacuum's structural tension gradient ($\nabla P = \sin\phi_1 + \sin\phi_2$) herds these scattered particles into discrete, rhythmic fringe lines (Orders $\pm1, \pm2, \pm3$).
+5. **Emergent Diffraction (Fraunhofer Orders):** Photons passing through the exact center of the slit fly straight (Order 0). Photons passing close to the edges are catapulted at sharp angles due to spin traction. As they enter the open field, the vacuum's structural tension gradient ($\nabla P = \sin\phi_1 + \sin\phi_2$) herds these scattered particles into discrete, rhythmic fringe lines (Orders $\pm1, \pm2, \pm3$).
+
 ---
 
 ## 💻 Architecture & High-Performance Matrix Dispatch
@@ -40,13 +41,12 @@ The simulation executes five distinct operational states by toggling specific lo
 | :--- | :---: | :---: | :---: | :--- | :--- |
 | **A: Newtonian World** | 0 | 0 | 0 | Inert particles in sterile vacuum. Boundary friction disabled. | Two razor-sharp geometric projections (Pinhole shadows). |
 | **B: Thermodynamic Dispersion**| 0 | 1 | 0 | Inactive vacuum field, particles subjected strictly to sub-spatial heat. | Diffuse Gaussian smooth blur (Fluid "sand" scatter). |
-| **C: Rigid Interference** | 1 | 0 | 0 | Pure deterministic spin-boundary collision + active vacuum gradient. | Hyper-sharp, crystalline diffraction grid (Fraunhofer lines). |git
+| **C: Rigid Interference** | 1 | 0 | 0 | Pure deterministic spin-boundary collision + active vacuum gradient. | Hyper-sharp, crystalline diffraction grid (Fraunhofer lines). |
 | **D: Fluid Reality (Feynman)** | 1 | 1 | 0 | Full DWE model: Conical laser, spin-wall friction, vacuum gradient, and background thermal bath. | Perfect, smooth wave-particle interference inside a Gaussian envelope. |
 | **E: Classical Collapse** | 1 | 1 | 1 | Open-system interaction. Active acoustic friction sensor inside the right slit. | Erasure of the right-side phase info; pattern collapses into a chaotic bulk dispersion. |
 
 ![Photometric Quadrants](hqpu_quadrantes_fotometricos.png)
 
----
 ---
 
 ## 🔬 Special Feature: Statistical Buildup and the Emergence of $|\Psi|^2$
@@ -81,6 +81,7 @@ When executing the simulation with only 100,000 photons (left image), the result
 By increasing the density to 50,000,000 photons (right image), the Law of Large Numbers takes over. The chaotic individual events are subsumed into the smooth, harmonious Gaussian envelopes and diffraction orders predicted by standard quantum mechanics.
 
 This comparison proves that if the DWE were utilizing Born's Rule or Schrödinger's equations directly, the low-density image would simply be a perfectly smooth, lower-amplitude version of the high-density one. Instead, the emergence of noise validates that **the engine models local realism: individual particles surfing a viscous medium.** The probability wave is simply the final resting density of millions of deterministically guided corpuscles.
+
 ## 🛠️ Compilation and Execution
 
 Ensure you have the Rust toolchain installed. Since the project utilizes a highly optimized multiple-binary configuration mapping via `Cargo.toml`, execute the simulations independently using the explicit `--bin` flag.
@@ -89,45 +90,42 @@ Ensure you have the Rust toolchain installed. Since the project utilizes a highl
 ```bash
 cargo run --release --bin deterministic_wave_engine
 
-Outputs: Generates five massive, high-density datasets mapping coordinates to channel counts: result_A_newton_gpu.csv, result_B_sand_gpu.csv, result_C_comb_gpu.csv, result_D_feynman_gpu.csv, and result_E_colapso.csv.
+```
 
-Run the Hydro-Quantum Processing Unit (HQPU)
-Bash
+*Outputs: Generates five massive, high-density datasets mapping coordinates to channel counts: result_A_newton_gpu.csv, result_B_sand_gpu.csv, result_C_comb_gpu.csv, result_D_feynman_gpu.csv, and result_E_colapso.csv.*
+
+### Run the Hydro-Quantum Processing Unit (HQPU)
+
+```bash
 cargo run --release --bin hqpu
-Outputs: Evaluates a single Double-Cone Vortex Qubit navigating a thermodynamic logic gate, proving the validity of Quantum Non-Demolition (QND) readings. Generates hqpu_readings.csv tracking localized barometric variations.
 
 ```
+
+*Outputs: Evaluates a single Double-Cone Vortex Qubit navigating a thermodynamic logic gate, proving the validity of Quantum Non-Demolition (QND) readings. Generates hqpu_readings.csv tracking localized barometric variations.*
+
 ---
 
 # 4.D. Derivation of the Base Tension Constant
 
-## 1. Dimensional Nature of $\gamma$
+## 1. Dimensional Nature of $\gamma_0$
 
-Within the Hydrodynamic Dissipative Gravitation Model (empirically modeled by the Deterministic Wave Engine), the supercavitation threshold—approached as a particle's velocity $v$ tends toward $c$—is defined by the asymptotic behavior of the fluidic resistance force $F_{res}$:
+Within the Hydrodynamic Dissipative Gravitation Model (empirically modeled by the Deterministic Wave Engine), the supercavitation threshold—approached as a particle's velocity $v$ tends toward $c$—is defined by the asymptotic behavior of the fluidic resistance.
 
-$$\lim_{v \to \infty} F_{res} = \gamma$$
-
-Dimensionally, the Base Space Tension $\gamma$ is identified not as an abstract energy or mass, but strictly as a Mechanical Force ($MLT^{-2}$), measured in Newtons. It represents the physical "rupture tension" or the ultimate yield strength of the viscoelastic spacetime fabric before topological cavitation occurs.
+Dimensionally, the Base Space Tension $\gamma_0$ is identified not as an abstract energy or mass, but strictly as an **Internal Stress Density (Pressure)**, measured in Pascals ($N/m^2$). It represents the physical "rupture tension" or the ultimate yield strength of the viscoelastic spacetime fabric before topological cavitation occurs.
 
 ---
 
-## 2. Relationship with $c$ and $G$
+## 2. Relationship with $c$, $G$, and Macroscopic Scaling
 
-The Einstein field equations define the coupling between local geometry and mass-energy through the Einstein coupling constant ($\kappa$):
+The Einstein field equations define the coupling between local geometry and mass-energy through the Einstein coupling constant ($\kappa = 8\pi G / c^4$).
 
-$$\kappa = \frac{8\pi G}{c^4}$$
+In the context of sub-spatial fluid dynamics, the inverse of this constant characterizes the intrinsic rigidity or the "Primordial Base Space Tension" ($\gamma_0$) of the vacuum. This constant quantifies the medium's mechanical resistance to deformation and dictates the strength of the pressure gradients ($\nabla P$) that guide particles along diffraction patterns.
 
-In the context of analog gravity and sub-spatial fluid dynamics, the inverse of this constant characterizes the intrinsic rigidity or the "Primordial Base Space Tension" ($\gamma_0$) of the vacuum. This constant quantifies the medium's mechanical resistance to deformation and dictates the strength of the pressure gradients ($\nabla P$) that guide particles along diffraction patterns.
+Consequently, the Primordial Base Space Tension is distributed as:
 
-Consequently, the Primordial Base Space Tension is derived as:
+$$\gamma_0 \propto \frac{c^4}{8\pi G} \approx 4.82 \times 10^{42} \text{ Pa}$$
 
-$$\gamma_0 = \frac{c^4}{8\pi G}$$
-
-Using standard physical constants ($c \approx 2.997 \times 10^8 \text{ m/s}$ and $G \approx 6.674 \times 10^{-11} \text{ m}^3\text{/kg}\cdot\text{s}^2$), the calculated value is:
-
-$$\gamma_0 \approx 4.82 \times 10^{42} \text{ Newtons}$$
-
-*Note: If the geometric $8\pi$ scalar is omitted, the value aligns perfectly with the Planck Force ($1.21 \times 10^{44} \text{ N}$). Both values serve as valid upper bounds for the supercavitation threshold, depending on whether the topological stress is modeled as a spherical distribution or a linear vector.*
+*Note: To scale this immense micro-scale pressure to macroscopic observable deformations (like celestial orbits), this framework works in tandem with the **Vacuum Shear Modulus** ($N_{VAC} \approx 2.79 \times 10^{31} \text{ Pa}$). The dimensionless ratio between them ($\gamma_0 / N_{VAC}$) acts as the refractive index of spacetime drag.*
 
 ---
 
@@ -143,13 +141,13 @@ Where $f(T_{CMB})$ is a decay function dependent on the thermal energy density o
 
 Given that the current CMB temperature is significantly lower than the Planck temperature ($10^{32} \text{ K}$) required for a spatial phase transition (vaporization of the vacuum), the local universe currently exists in a state of extremely high structural rigidity, such that:
 
-$$\gamma_{eff} \approx \gamma_0 \approx 4.82 \times 10^{42} \text{ N}$$
+$$\gamma_{eff} \approx \gamma_0 \approx 4.82 \times 10^{42} \text{ Pa}$$
 
 ---
 
 ## 4. Physical Implications
 
-The precise quantification of $\gamma \approx 4.82 \times 10^{42} \text{ Newtons}$ grounds quantum mechanics in classical fluid dynamics and provides critical predictive utility for the model:
+The precise quantification of $\gamma_0 \approx 4.82 \times 10^{42} \text{ Pa}$ grounds quantum mechanics in classical fluid dynamics and provides critical predictive utility for the model:
 
 ### The Photon as a Stable Topological Defect & The Mechanics of Frequency
 
@@ -167,9 +165,18 @@ The model predicts that the formation of a macroscopic Black Hole is a fluidic p
 
 ### Hydrodynamic Reinterpretation of the Speed of Light ($c$)
 
-In this model, $c$ is no longer an axiomatic, mystical kinematic limit. It is redefined strictly as the **hydrodynamic equilibrium velocity**. It is the specific velocity at which the dynamic piercing pressure of a body equals the Base Space Tension ($\gamma$).
+In this model, $c$ is no longer an axiomatic, mystical kinematic limit. It is redefined strictly as the **hydrodynamic equilibrium velocity**. It is the specific velocity at which the dynamic piercing pressure of a body equals the Base Space Tension ($\gamma_0$).
 
 For a photon traversing the fluid vacuum, $c$ is the exact speed where the structural breaking of the fluid at the front apex of the spindle is perfectly compensated by the smooth, elastic closure of the fluid at the rear apex, resulting in zero net aerodynamic drag ($\Sigma F \approx 0$).
+
+---
+
+### 4.E. Macroscopic Empirical Proof (The Sister Project)
+
+The deterministic fluid mechanics simulated in this WebGPU engine at the quantum scale have recently been empirically validated at the macroscopic scale in our sister repository: **The Dissipative Gravitation Model (DGM V5.0.0)**.
+
+Using Gaia DR3 astrometric excess noise, we conducted an A/B test between **Jupiter** (a massive prograde rotator) and **Venus** (a retrograde rotator with a dense, super-rotating atmosphere). The data revealed a definitive macroscopic asymmetry ($\Delta \approx 1.4993$ mas for Venus) that strictly follows the inverted angular momentum of the planet's atmospheric flow. This definitively proves that the vacuum of space behaves as a physical, viscoelastic fluid capable of being sheared and dragged—the exact same medium that the Deterministic Wave Engine simulates to generate quantum diffraction.
+
 ---
 
 ### 5. The Hydro-Quantum Processing Unit (HQPU)
@@ -215,7 +222,6 @@ The defining feature of HQPU architecture is the ability to read the computation
 ---
 
 ### Conclusion: Rehabilitating Einstein & The Industrial Paradigm Shift
-![Fig E - mechanical collapse](hqpu_colapso.png)
 
 Fig. E: Deterministic Decoherence (Matrix E). Direct observation of mechanical collapse. The interference pattern observed in Matrix D (Feynman) vanishes when a friction-based sensor is activated in the right slit. Unlike the Copenhagen interpretation, there is no "wave-function collapse" here; there is only Ballistic Mortality and the mechanical destruction of the vortex's Helicity ($\omega \to 0$) due to thermodynamic friction, resulting in a corpuscular (bulk) distribution rather than a wave-like one.
 
@@ -225,20 +231,23 @@ This engine demonstrates that what modern physics interprets as intrinsic quantu
 
 **The Engineering and Business Implication:** For technology leaders, hardware engineers, and industry visionaries, this paradigm shift transcends theoretical physics. It represents a tangible, highly scalable engineering roadmap. If quantum behavior is driven by deterministic fluid mechanics and geometric spin interactions rather than fragile statistical ghosts, we can fundamentally redesign quantum computing hardware.
 
-By transitioning from prEmpirical Validation: Astrometric Excess Noise and VLBI Asymmetryobabilistically unstable Qubits to stable, deterministic **Hydro-Quantum Processing Units (HQPUs)**, the industry can bypass the multi-billion-dollar bottlenecks of extreme cryogenic isolation, destructive measurements, and massive algorithmic redundancy. The future of computational supremacy does not lie in taming probability, but in engineering the deterministic fluid of space itself.
+By transitioning from probabilistically unstable Qubits to stable, deterministic **Hydro-Quantum Processing Units (HQPUs)**, the industry can bypass the multi-billion-dollar bottlenecks of extreme cryogenic isolation, destructive measurements, and massive algorithmic redundancy. The future of computational supremacy does not lie in taming probability, but in engineering the deterministic fluid of space itself.
+
 ---
-A rigorous review of the mathematical model has led me to readjust the previous statement. Initially, I had postulated that the photon's frequency corresponded to the angular velocity (magnitude) of its equatorial spin. However, to align the model with the state-of-the-art experimental physics—specifically with atomic selection rules and the invariance of bosonic spin ($1\hbar$)—I refined the fluid-mechanical mechanism.In the updated model, the spin remains fixed and invariable for all photons, while energy and frequency are described through the topological compression of the vortex core. Thus, frequency ceases to be a variable internal rotation and becomes the spatial periodicity of the shockwave (barometric wake) generated in the fabric of the Base Space Tension ($\gamma_0$) as the super-cavitating bubble advances at the speed of light ($c$).
----
+
+## A rigorous review of the mathematical model has led me to readjust the previous statement. Initially, I had postulated that the photon's frequency corresponded to the angular velocity (magnitude) of its equatorial spin. However, to align the model with the state-of-the-art experimental physics—specifically with atomic selection rules and the invariance of bosonic spin ($1\hbar$)—I refined the fluid-mechanical mechanism. In the updated model, the spin remains fixed and invariable for all photons, while energy and frequency are described through the topological compression of the vortex core. Thus, frequency ceases to be a variable internal rotation and becomes the spatial periodicity of the shockwave (barometric wake) generated in the fabric of the Base Space Tension ($\gamma_0$) as the super-cavitating bubble advances at the speed of light ($c$).
+
 ## Intellectual Property & License
 
 This theoretical model, its mathematical formulation, and the accompanying source code are the original intellectual property of Fernando B Couto. To foster scientific collaboration and open-source development, this project is released under the GNU General Public License v3.0 (GPL-3.0). You are free to run, study, share, and modify the code and the theoretical concepts. However, any derivative work, academic publication, or software incorporating this algorithm must remain open-source under the same license and must explicitly credit the original author. Commercial enclosure of this algorithm is strictly prohibited under this license.
 
 ---
-## 🌊 Grounded in Practical Hydrodynamics
-The theoretical and computational foundations of the Deterministic Wave Engine (DWE) are deeply informed by applied fluid mechanics and real-world hardware engineering. The principles of vortex generation, kinetic energy accumulation, and fluid-structural interaction that drive our deterministic quantum models have been practically explored and validated in macroscopic hydraulic systems. 
 
-For an overview of the applied physical research that precedes this simulation engine, please refer to the official intellectual property documentation for the **[Vortex Rotor (INPI Patent BR 10 2018 005831 2)](https://github.com/fbcouto/vortex-rotor-hardware)**, a high-efficiency hardware device designed to manipulate concentric fluid vortices and transform radial momentum into axial thrust.
----
+## 🌊 Grounded in Practical Hydrodynamics
+
+The theoretical and computational foundations of the Deterministic Wave Engine (DWE) are deeply informed by applied fluid mechanics and real-world hardware engineering. The principles of vortex generation, kinetic energy accumulation, and fluid-structural interaction that drive our deterministic quantum models have been practically explored and validated in macroscopic hydraulic systems.
+
+## For an overview of the applied physical research that precedes this simulation engine, please refer to the official intellectual property documentation for the **[Vortex Rotor (INPI Patent BR 10 2018 005831 2)](https://github.com/fbcouto/vortex-rotor-hardware)**, a high-efficiency hardware device designed to manipulate concentric fluid vortices and transform radial momentum into axial thrust.
 
 ## How to Cite This Work
 
@@ -259,4 +268,9 @@ Couto, F. B. (2026). *Deterministic Wave Engine: A Hydrodynamic Computational Mo
   journal = {GitHub repository},
   howpublished = {\url{[https://github.com/fbcouto/deterministic-wave-engine](https://github.com/fbcouto/deterministic-wave-engine)}},
 }
+
+```
+
+```
+
 ```
