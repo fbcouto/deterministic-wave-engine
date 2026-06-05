@@ -1,6 +1,9 @@
 # Deterministic Wave Engine (DWE) - Version 3.1
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20417434.svg)](https://doi.org/10.5281/zenodo.20417434)
 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Built with Rust](https://img.shields.io/badge/Built%20with-Rust-orange.svg)](https://www.rust-lang.org/)
+
 ## A Purely Local-Realist, GPU-Accelerated Hydrodynamic Wave Simulator
 
 The **Deterministic Wave Engine (DWE)** is a high-performance computational platform written in Rust and powered by WGSL Compute Shaders (WebGPU). It is dedicated to simulating **Hydrodynamic Quantum Analogs (HQAs)**. By framing the sub-spatial vacuum not as an empty void, but as a viscoelastic fluid medium with structural spatial tension ($\gamma_0$), this engine demonstrates *in silico* that quantum statistical distributions (Born's Law) emerge entirely from **deterministic, local-realist space-time trajectories**.
