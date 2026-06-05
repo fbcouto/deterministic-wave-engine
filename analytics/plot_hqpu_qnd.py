@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import os
 
 def plot_qnd_measurement():
-    file_path = "../hqpu_readings.csv" 
+    file_path = "../analytics/hqpu_readings.csv" 
 
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(14, 7))

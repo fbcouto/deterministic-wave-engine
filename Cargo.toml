@@ -9,11 +9,12 @@ wgpu = "0.19"
 bytemuck = { version = "1.15", features = ["derive"] }
 pollster = "0.3"
 flume = "0.11"
+rand = { version = "0.8", features = ["std", "std_rng"] }
 
 [[bin]]
 name = "deterministic_wave_engine"
-path = "src/main.rs"
+path = "src/bin/main.rs"
 
 [[bin]]
 name = "hqpu"
-path = "src/hqpu.rs"
+path = "src/bin/hqpu.rs"

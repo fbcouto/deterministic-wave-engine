@@ -59,8 +59,8 @@ fn main() {
         wake_amplitude: 25.0, 
         padding1: 0.0
     };
-
-    let mut file = File::create("hqpu_readings.csv").expect("Failed to create CSV");
+    // Isso força o Rust a salvar o CSV dentro da subpasta analytics
+    let mut file = File::create("analytics/hqpu_readings.csv").expect("Failed to create CSV");
     writeln!(file, "Time_Y,Left_Sensor,Right_Sensor").unwrap();
 
     let dt = 0.1;

@@ -5,8 +5,29 @@ use std::time::Instant;
 use wgpu::util::DeviceExt;
 use wgpu::{BufferUsages, CommandEncoderDescriptor, ComputePassDescriptor, ComputePipelineDescriptor};
 
+
 // O MOTOR INFINITO: 50 Milhões de partículas
 const TOTAL_PHOTONS: u32 = 50_000_000;
+
+// Parâmetros CHSH clássicos
+const ANGLES_ALICE: [f32; 2] = [0.0, 45.0]; // a, a' (em graus)
+const ANGLES_BOB: [f32; 2] = [22.5, 67.5];  // b, b' (em graus)
+
+#[repr(C)]
+pub struct BellParticle {
+    pub pos: [f32; 2],
+    pub vel: [f32; 2],
+    pub spin: f32,          // +1.0 ou -1.0 (Helicidade)
+    pub is_measured: u32,   // 0 = não, 1 = sim
+}
+
+#[repr(C)]
+pub struct BellUniforms {
+    pub polarizer_angle_a: f32,
+    pub polarizer_angle_b: f32,
+    pub vacuum_mesh_tension: f32, // Representando \gamma_0
+    pub time_step: f32,
+}
 
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Pod, Zeroable)]
@@ -41,6 +62,45 @@ struct QuadrantProfile {
     measurement_sensor: u32,
 }
 
+use std::f32::consts::PI;
+
+// 1. Definição explícita da estrutura Particle para o pacote de Airy
+#[repr(C)]
+pub struct Particle {
+    pub pos: [f32; 2],
+    pub vel: [f32; 2],
+    pub spin: f32,
+    pub mass: f32,
+}
+
+// 2. Função aproximada para a distribuição espacial do envelope de Airy
+fn airy_distribution(x: f32) -> f32 {
+    // Aproximação do lóbulo principal e cauda oscilatória
+    if x < -2.0 {
+        return f32::exp(x); // Decaimento exponencial rápido no lado "escuro"
+    }
+    f32::sin(PI * x) / (PI * x + 0.0001) // Aproximação simplificada do lóbulo para WebGPU
+}
+
+// 3. Gerador do pacote com a indexação de array corrigida (center)
+pub fn spawn_airy_packet(num_particles: usize, center: [f32; 2], width: f32) -> Vec<Particle> {
+    let mut packet = Vec::with_capacity(num_particles);
+    for i in 0..num_particles {
+        let normalized_x = (i as f32 / num_particles as f32) * width - (width / 2.0);
+        let probability_density = airy_distribution(normalized_x);
+        
+        if rand::random::<f32>() < probability_density.abs() {
+            packet.push(Particle {
+                // CORRIGIDO: center é o componente X (f32) e center[1] é o componente Y (f32)
+                pos: [center[0] + normalized_x, center[1]], 
+                vel: [1.0, 0.0], // Movimento linear para a direita
+                spin: 1.0,       // Conservação de helicidade do vórtice
+                mass: 1.0, 
+            });
+        }
+    }
+    packet
+}
 fn main() {
     pollster::block_on(run());
 }
