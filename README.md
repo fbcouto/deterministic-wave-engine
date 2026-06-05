@@ -1,5 +1,6 @@
 # Deterministic Wave Engine (DWE) - Version 3.1
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20467006.svg)](https://doi.org/10.5281/zenodo.20467006)
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20417434.svg)](https://doi.org/10.5281/zenodo.20417434)
 
 ## A Purely Local-Realist, GPU-Accelerated Hydrodynamic Wave Simulator
 
@@ -161,6 +162,14 @@ To reconcile this fluid architecture with state-of-the-art Experimental Quantum 
 * **Invariant Spin Magnitude ($1\hbar$):** The equator of every photon vortex rotates with a fixed angular momentum magnitude. From an ELF radio wave to an ultra-hard Gamma ray, the particle carries exactly $\pm 1\hbar$. This preserves the strict bosonic nature of light required by atomic state transitions and Compton scattering.
 * **Inertia via Topological Compression:** To harbor immense energy without spinning faster or expanding its physical cross-section macroscopically (which would contradict nuclear scattering data), a high-energy photon undergoes severe *topological compression*. A Gamma-ray photon is an ultra-miniaturized, ultra-dense, and highly rigid vortex core operating at sub-picometric scales.
 * **Frequency as a Tension Perturbation Wake:** As this rigid bubble of supercavitation pierces the viscoelastic vacuum at velocity $c$, it generates an acoustic trailing wake—a series of shockwave ripples in the Base Space Tension ($\gamma_0$). The **frequency ($\nu$)** is defined strictly as the *spatial periodicity of these pressure crests* left behind in the medium. Extreme topological compression generates shorter, more aggressive, and highly penetrating shockwave spacing (high energy), while broad, relaxed cores produce massive, multi-kilometer macroscopic ripples (Radio waves).
+
+### Quantum Entanglement and the EPR Paradox
+
+In this framework, quantum entanglement does not rely on superluminal communication. It is the natural mechanical result of a particle (such as a photon) splitting into two fragments that acquire strictly inverse spins due to mechanical inertia.
+
+This resolves the famous EPR Paradox through pure Einsteinian Local Realism by relying on the conservation of angular momentum at the subatomic scale. If an unstable system has a total angular momentum of zero and divides, Newton's third law necessitates that one fragment rotates clockwise and the other counter-clockwise. The state variables of both particles are defined locally and causally at the exact moment of separation.
+
+Consequently, when an observer on the other side of the universe measures a particle's spin and finds it to be counter-clockwise, they merely deduce the state of the entangled partner logically and retrospectively. No "Spooky Action at a Distance" is required to traverse the galaxy, thus strictly preserving the universal speed limit $c$ imposed by the Base Space Tension ($\gamma_0$).
 
 ### Supercavitation and Black Hole Formation
 
