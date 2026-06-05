@@ -55,8 +55,5 @@ def plot_packet_dispersion():
                     ha='center', va='center', color='red', fontsize=12)
         plt.tight_layout(rect=[0, 0, 1, 0.95])
 
-    # Se você quiser que a imagem também abra na tela além de salvar, descomente a linha abaixo:
-    # plt.show()
-
 if __name__ == "__main__":
     plot_packet_dispersion()

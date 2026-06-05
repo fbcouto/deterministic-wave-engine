@@ -35,11 +35,8 @@ def plot_collapse_comparison():
             
             ax.set_title(titulo, fontsize=14, fontweight='bold', color='white')
             
-            # --- A CORREÇÃO DE ZOOM AQUI ---
-            # Focando exatamente no centro do anteparo (onde a interferência ocorre)
             ax.set_xlim(600, 1400)
-            # -------------------------------
-            
+                       
             ax.set_xlabel('Screen Coordinate X (px)', color='gray')
             ax.set_ylabel('Relative Luminous Intensity', color='gray')
             ax.grid(True, linestyle='--', alpha=0.15)

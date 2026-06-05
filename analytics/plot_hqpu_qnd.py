@@ -19,7 +19,6 @@ def plot_qnd_measurement():
         ax.plot(y_time, df['Left_Sensor'], color='#00aaff', alpha=0.8, linewidth=2.0, label='Left Sensor (Vacuum Barometer)')
         ax.plot(y_time, df['Right_Sensor'], color='#ff0055', alpha=0.8, linewidth=2.0, label='Right Sensor (Vacuum Barometer)')
         
-        # Área do Portão Lógico
         ax.axvspan(100, 150, color='#ffffff', alpha=0.1, label='Logic Operation (HQPU Gate)')
         
         ax.set_title('Quantum Non-Demolition (QND) Measurement:\nAnalytical Thermodynamic Wake Reading', 
@@ -27,7 +26,6 @@ def plot_qnd_measurement():
         ax.set_xlabel('Time / Advance on HQPU Chip (Y-Axis)', fontsize=12, color='gray')
         ax.set_ylabel('Pressure Amplitude (Medium Tension γ)', fontsize=12, color='gray')
         
-        # Travando a escala X exata do trajeto da partícula
         ax.set_xlim(0, 300)
         ax.grid(True, linestyle='--', alpha=0.2)
         ax.tick_params(colors='gray')
@@ -39,7 +37,6 @@ def plot_qnd_measurement():
         
         ax.legend(loc='upper right', facecolor='#121212', edgecolor='gray', labelcolor='white')
         
-        # Caixa de Verificação de Sucesso
         ax.text(250, max(df['Left_Sensor']) * 0.75, 
                 "✓ Intact Frequency\n✓ No Collapse", 
                 color='#00ff00', fontsize=12, fontweight='bold', 

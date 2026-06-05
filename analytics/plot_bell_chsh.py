@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import os
 
 def plot_bell_test_fluid():
-    # Ajustando o caminho: como o Python está na pasta analytics e o CSV na raiz
     file_path = "../analytics/result_bell_test.csv"
     
     plt.style.use('dark_background')
@@ -40,20 +39,15 @@ def plot_bell_test_fluid():
         ax.grid(True, linestyle=':', alpha=0.3)
         ax.legend(facecolor='#1a1a1a', edgecolor='gray')
         
-        # --- AQUI ESTÁ A ALTERAÇÃO ---
-        # Salvando a imagem na mesma pasta de onde o script está sendo rodado
         output_file = 'bell_test_violation.png'
         plt.tight_layout()
-        plt.savefig(output_file, dpi=300) # dpi=300 garante alta qualidade
+        plt.savefig(output_file, dpi=300) 
         print(f"Gráfico salvo com sucesso: {output_file}")
         
     else:
         ax.text(0.5, 0.5, f"File {file_path} not found.\nRun the Bell Test in Rust first.", 
                 ha='center', va='center', color='red', fontsize=12)
         plt.tight_layout()
-
-    # Se você quiser que a imagem também abra na tela além de salvar, descomente a linha abaixo:
-    # plt.show()
 
 if __name__ == "__main__":
     plot_bell_test_fluid()
