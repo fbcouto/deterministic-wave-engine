@@ -5,27 +5,26 @@ use std::time::Instant;
 use wgpu::util::DeviceExt;
 use wgpu::{BufferUsages, CommandEncoderDescriptor, ComputePassDescriptor, ComputePipelineDescriptor};
 
-
-// O MOTOR: 50 Milhões de partículas
+// O MOTOR: Retornado para 50 Milhões para garantir resolução visual contínua
 const TOTAL_PHOTONS: u32 = 50_000_000;
 
 // Parâmetros CHSH clássicos
-const ANGLES_ALICE: [f32; 2] = [0.0, 45.0]; // a, a' (em graus)
-const ANGLES_BOB: [f32; 2] = [22.5, 67.5];  // b, b' (em graus)
+const ANGLES_ALICE: [f32; 2] = [0.0, 45.0]; 
+const ANGLES_BOB: [f32; 2] = [22.5, 67.5];  
 
 #[repr(C)]
 pub struct BellParticle {
     pub pos: [f32; 2],
     pub vel: [f32; 2],
-    pub spin: f32,          // +1.0 ou -1.0 (Helicidade)
-    pub is_measured: u32,   // 0 = não, 1 = sim
+    pub spin: f32,          
+    pub is_measured: u32,   
 }
 
 #[repr(C)]
 pub struct BellUniforms {
     pub polarizer_angle_a: f32,
     pub polarizer_angle_b: f32,
-    pub vacuum_mesh_tension: f32, // Representando \gamma_0
+    pub vacuum_mesh_tension: f32, 
     pub time_step: f32,
 }
 
@@ -41,7 +40,7 @@ struct Params {
     slits_distance: f32,
     slit_width: f32,
     base_tension: f32,
-    pad1: u32,
+    with_vortices: u32, // Substituiu pad1 para controlar a física de fluidos determinista
     pad2: u32,
     pad3: u32,
 }
@@ -59,12 +58,12 @@ struct QuadrantProfile {
     filename: &'static str,
     with_deflection: u32,
     with_turbulence: u32,
+    with_vortices: u32,
     measurement_sensor: u32,
 }
 
 use std::f32::consts::PI;
 
-// 1. Definição explícita da estrutura Particle para o pacote de Airy
 #[repr(C)]
 pub struct Particle {
     pub pos: [f32; 2],
@@ -73,16 +72,13 @@ pub struct Particle {
     pub mass: f32,
 }
 
-// 2. Função aproximada para a distribuição espacial do envelope de Airy
 fn airy_distribution(x: f32) -> f32 {
-    // Aproximação do lóbulo principal e cauda oscilatória
     if x < -2.0 {
-        return f32::exp(x); // Decaimento exponencial rápido no lado "escuro"
+        return f32::exp(x); 
     }
-    f32::sin(PI * x) / (PI * x + 0.0001) // Aproximação simplificada do lóbulo para WebGPU
+    f32::sin(PI * x) / (PI * x + 0.0001) 
 }
 
-// 3. Gerador do pacote com a indexação de array corrigida (center)
 pub fn spawn_airy_packet(num_particles: usize, center: [f32; 2], width: f32) -> Vec<Particle> {
     let mut packet = Vec::with_capacity(num_particles);
     for i in 0..num_particles {
@@ -91,16 +87,16 @@ pub fn spawn_airy_packet(num_particles: usize, center: [f32; 2], width: f32) -> 
         
         if rand::random::<f32>() < probability_density.abs() {
             packet.push(Particle {
-                // CORRIGIDO: center é o componente X (f32) e center[1] é o componente Y (f32)
                 pos: [center[0] + normalized_x, center[1]], 
-                vel: [1.0, 0.0], // Movimento linear para a direita
-                spin: 1.0,       // Conservação de helicidade do vórtice
+                vel: [1.0, 0.0], 
+                spin: 1.0,       
                 mass: 1.0, 
             });
         }
     }
     packet
 }
+
 fn main() {
     pollster::block_on(run());
 }
@@ -120,11 +116,11 @@ async fn run() {
     });
 
     let quadrant_matrix = [
-        QuadrantProfile { name: "A: Newtonian World", filename: "result_A_newton_gpu.csv", with_deflection: 0, with_turbulence: 0, measurement_sensor: 0 },
-        QuadrantProfile { name: "B: Thermodynamic Dispersion", filename: "result_B_sand_gpu.csv", with_deflection: 1, with_turbulence: 0, measurement_sensor: 0 },
-        QuadrantProfile { name: "C: Rigid Interference", filename: "result_C_comb_gpu.csv", with_deflection: 0, with_turbulence: 1, measurement_sensor: 0 },
-        QuadrantProfile { name: "D: Fluid Reality (Feynman)", filename: "result_D_feynman_gpu.csv", with_deflection: 1, with_turbulence: 1, measurement_sensor: 0 },
-        QuadrantProfile { name: "E: Classical Collapse", filename: "result_E_colapso.csv", with_deflection: 1, with_turbulence: 1, measurement_sensor: 1 },
+        QuadrantProfile { name: "A: Newtonian World", filename: "result_A_newton_gpu.csv", with_deflection: 0, with_turbulence: 0, with_vortices: 0, measurement_sensor: 0 },
+        QuadrantProfile { name: "B: Thermodynamic Dispersion", filename: "result_B_sand_gpu.csv", with_deflection: 1, with_turbulence: 0, with_vortices: 0, measurement_sensor: 0 },
+        QuadrantProfile { name: "C: Rigid Interference", filename: "result_C_comb_gpu.csv", with_deflection: 0, with_turbulence: 1, with_vortices: 0, measurement_sensor: 0 },
+        QuadrantProfile { name: "D: Fluid Reality (Feynman)", filename: "result_D_feynman_gpu.csv", with_deflection: 1, with_turbulence: 0, with_vortices: 1, measurement_sensor: 0 },
+        QuadrantProfile { name: "E: Classical Collapse", filename: "result_E_colapso.csv", with_deflection: 1, with_turbulence: 0, with_vortices: 1, measurement_sensor: 1 },
     ];
 
     for profile in quadrant_matrix.iter() {
@@ -140,8 +136,8 @@ async fn run() {
             center_x: 1000.0,
             slits_distance: 120.0,
             slit_width: 5.0,
-            base_tension: 5.0, 
-            pad1: 0,
+            base_tension: 15.0, // AJUSTE: Ampliado de 5.0 para 15.0 para dar mais força à onda guia
+            with_vortices: profile.with_vortices,
             pad2: 0,
             pad3: 0,
         };
@@ -183,9 +179,6 @@ async fn run() {
             cpass.set_pipeline(&compute_pipeline);
             cpass.set_bind_group(0, &bind_group, &[]);
             
-            // ========================================================
-            // ESTRATÉGIA DE DESPACHO 2D (Contorna o limite de 65.535)
-            // ========================================================
             let max_groups_x = 65000;
             let total_groups = (TOTAL_PHOTONS + 255) / 256;
             
