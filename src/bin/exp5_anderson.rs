@@ -2,7 +2,7 @@
 use wgpu::util::DeviceExt;
 
 #[repr(C)]
-// Adicionando os derives necessários para o bytemuck funcionar
+// Adding the necessary derives for bytemuck to work
 #[derive(Copy, Clone, Debug, bytemuck::Pod, bytemuck::Zeroable)]
 struct Particle {
     position: [f32; 4],
@@ -74,15 +74,15 @@ async fn run() {
     let pipeline_layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
         label: None,
         bind_group_layouts: &[&bind_group_layout],
-        push_constant_ranges: &[], // Corrigido de &, para &[]
+        push_constant_ranges: &[], // Fixed from &, to &[]
     });
 
     let compute_pipeline = device.create_compute_pipeline(&wgpu::ComputePipelineDescriptor {
         label: None,
         layout: Some(&pipeline_layout),
         module: &shader,
-        entry_point: "compute_anderson_localization", // Removido o Some()
-        // compilation_options foi removido para ser compatível com sua versão do wgpu
+        entry_point: "compute_anderson_localization", // Removed the Some()
+        // compilation_options was removed to be compatible with your wgpu version
     });
 
     let mut encoder = device.create_command_encoder(&wgpu::CommandEncoderDescriptor { label: None });
@@ -105,9 +105,9 @@ async fn run() {
         let data = buffer_slice.get_mapped_range();
         let result: &[Particle] = bytemuck::cast_slice(&data);
         
-        // Corrigida a comparação escalar de velocidade acessando o índice [0] do vetor
+        // Fixed scalar velocity comparison by accessing the [0] index of the vector
         let localized = result.iter().filter(|p| p.velocity[0] == 0.0 && p.velocity[1] == 0.0).count();
-        println!("[*] Experimento 5 concluído. Partículas em estado localizado: {} / 256", localized);
+        println!("[*] Experiment 5 completed. Particles in localized state: {} / 256", localized);
         use std::io::Write;
         let mut file = std::fs::File::create("analytics/result_exp5_anderson.csv").unwrap();
         writeln!(file, "id,pos_x,pos_y").unwrap();

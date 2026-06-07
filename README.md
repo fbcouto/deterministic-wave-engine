@@ -183,6 +183,7 @@ python plot_airy_dispersion.py
 python plot_hqpu_qnd.py
 python plot_quadrants.py
 python plot_dgm_experiment3.py
+python plot_dwe_experiments.py
 
 ```
 

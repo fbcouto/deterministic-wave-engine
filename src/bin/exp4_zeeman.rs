@@ -16,7 +16,7 @@ async fn run() {
     let adapter = instance.request_adapter(&wgpu::RequestAdapterOptions::default()).await.unwrap();
     let (device, queue) = adapter.request_device(&wgpu::DeviceDescriptor::default(), None).await.unwrap();
 
-    // Inicializa órbitas circulares com helicidades opostas (+1 e -1) 
+    // Initialize circular orbits with opposite helicities (+1 and -1) 
     let mut input_particles = Vec::new();
     for i in 0..256 {
         let helicity = if i % 2 == 0 { 1.0 } else { -1.0 };
@@ -117,9 +117,9 @@ async fn run() {
                 retrograde_energy += p.orbital_energy;
             }
         }
-        println!("[*] Experimento 4 concluído. Separação de Níveis de Energia (Zeeman):");
-        println!("  -> Energia Média Prógrada (Spin +1): {:.2}", prograde_energy / 128.0);
-        println!("  -> Energia Média Retrógrada (Spin -1): {:.2}", retrograde_energy / 128.0);
+        println!("[*] Experiment 4 completed. Energy Level Splitting (Zeeman):");
+        println!("  -> Average Prograde Energy (Spin +1): {:.2}", prograde_energy / 128.0);
+        println!("  -> Average Retrograde Energy (Spin -1): {:.2}", retrograde_energy / 128.0);
         use std::io::Write;
         let mut file = std::fs::File::create("analytics/result_exp4_zeeman.csv").unwrap();
         writeln!(file, "id,helicity,orbital_energy").unwrap();

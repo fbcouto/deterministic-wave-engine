@@ -21,12 +21,12 @@ def plot_quadrants_visual_calibrated():
     weight_uv = 0.10
 
     # ==============================================================
-    # Parâmetros Físicos extraídos do main.rs e fenda_shader.wgsl
+    # Physical Parameters extracted from main.rs and fenda_shader.wgsl
     # ==============================================================
-    slit_width = 5.0         # (a) Largura de cada fenda
-    slits_distance = 120.0   # (d) Distância entre os centros das fendas
-    screen_dist = 600.0      # (L) Distância de voo (SCREEN_Y 800 - SLITS_Y 200)
-    wave_len = 10.0          # (λ) Comprimento de onda do fóton verde (channel 1)
+    slit_width = 5.0         # (a) Width of each slit
+    slits_distance = 120.0   # (d) Distance between the centers of the slits
+    screen_dist = 600.0      # (L) Flight distance (SCREEN_Y 800 - SLITS_Y 200)
+    wave_len = 10.0          # (λ) Wavelength of the green photon (channel 1)
 
     for i, (file_path, title) in enumerate(quadrants):
         ax = axes[i]
@@ -36,33 +36,33 @@ def plot_quadrants_visual_calibrated():
             x = df['X']
             green_visual = df['Green'] * weight_green
 
-            # Plotagem dos dados da GPU (A mecânica dos fluidos gerando o padrão)
+            # Plotting GPU data (Fluid mechanics generating the pattern)
             ax.fill_between(x, df['UV']*weight_uv, color='purple', alpha=0.3)
             ax.fill_between(x, df['Red']*weight_red, color='red', alpha=0.3)
             ax.fill_between(x, green_visual, color='green', alpha=0.35)
             ax.plot(x, green_visual, color='#00ff00', alpha=0.9, linewidth=2.0, label='Green (100%)')
             
-            # --- CURVA TEÓRICA COMPLETA DE FRAUNHOFER (Quadrante D) ---
+            # --- FULL THEORETICAL FRAUNHOFER CURVE (Quadrant D) ---
             if i == 3:
-                # 1. Distância a partir do centro do sistema (X = 1000)
+                # 1. Distance from the center of the system (X = 1000)
                 delta_x = x - 1000.0
                 
-                # 2. Cálculo do Seno(theta) real via geometria de triângulo
+                # 2. Calculation of real Sin(theta) via triangle geometry
                 sin_theta = delta_x / np.sqrt(delta_x**2 + screen_dist**2)
                 
-                # 3. O Envelope de Difração (A restrição criada pela largura da fenda 'a')
-                # Atenção: np.sinc(y) no numpy já executa sin(pi*y)/(pi*y), por isso o pi foi omitido da conta
+                # 3. The Diffraction Envelope (The restriction created by the slit width 'a')
+                # Note: np.sinc(y) in numpy already computes sin(pi*y)/(pi*y), so pi was omitted from the calculation
                 difracao_envelope = np.sinc((slit_width * sin_theta) / wave_len)**2
                 
-                # 4. As Franjas de Interferência (A sobreposição entre as fendas 'd')
-                # O numpy.cos é o cosseno normal, então precisamos incluir o pi explicitamente
+                # 4. The Interference Fringes (The overlap between the slits 'd')
+                # numpy.cos is the standard cosine, so we need to include pi explicitly
                 fase_interferencia = (np.pi * slits_distance * sin_theta) / wave_len
                 interferencia_franjas = np.cos(fase_interferencia)**2
                 
-                # 5. Combinar as ondas (Intensidade Total = Envelope * Interferência)
+                # 5. Combine the waves (Total Intensity = Envelope * Interference)
                 intensidade_teorica = difracao_envelope * interferencia_franjas
                 
-                # Escalar para a altura real atingida pelos fótons no seu modelo de fluidos
+                # Scale to the real height reached by the photons in the fluid model
                 intensidade_escalada = intensidade_teorica * green_visual.max()
                 
                 ax.plot(x, intensidade_escalada, color='#ffcc00', 

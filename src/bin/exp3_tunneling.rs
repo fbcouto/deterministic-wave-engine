@@ -23,7 +23,7 @@ async fn run() {
     let adapter = instance.request_adapter(&wgpu::RequestAdapterOptions::default()).await.unwrap();
     let (device, queue) = adapter.request_device(&wgpu::DeviceDescriptor::default(), None).await.unwrap();
 
-    // Inicializa 256 partículas antes da barreira (x = 10.0, barreira em x = 50.0)
+    // Initializes 256 particles before the barrier (x = 10.0, barrier at x = 50.0)
     let input_particles = vec![
         Particle {
             position: [10.0, 0.0, 0.0, 1.0],
@@ -57,7 +57,7 @@ async fn run() {
 
     let read_buffer = device.create_buffer(&wgpu::BufferDescriptor {
         label: Some("Read Buffer"),
-        size: (input_particles.len() * std::mem::size_of::<Particle>()) as u64, // CORRIGIDO
+        size: (input_particles.len() * std::mem::size_of::<Particle>()) as u64, // FIXED
         usage: wgpu::BufferUsages::COPY_DST | wgpu::BufferUsages::MAP_READ,
         mapped_at_creation: false,
     });
@@ -130,7 +130,7 @@ async fn run() {
         compute_pass.dispatch_workgroups(1, 1, 1);
     }
 
-    encoder.copy_buffer_to_buffer(&particle_buffer, 0, &read_buffer, 0, (input_particles.len() * std::mem::size_of::<Particle>()) as u64); // CORRIGIDO
+    encoder.copy_buffer_to_buffer(&particle_buffer, 0, &read_buffer, 0, (input_particles.len() * std::mem::size_of::<Particle>()) as u64); // FIXED
     queue.submit(Some(encoder.finish()));
 
     let buffer_slice = read_buffer.slice(..);
@@ -142,9 +142,9 @@ async fn run() {
         let data = buffer_slice.get_mapped_range();
         let result: &[Particle] = bytemuck::cast_slice(&data);
         
-        // Corrigido: Avaliando explicitamente a posição no eixo X
+        // Fixed: Explicitly evaluating the position on the X-axis
         let tunneled = result.iter().filter(|p| p.position[0] > 55.0).count();
-        println!("[*] Experimento 3 concluído. Partículas que tunelaram a barreira: {} / 256", tunneled);
+        println!("[*] Experiment 3 completed. Particles that tunneled through the barrier: {} / 256", tunneled);
        
         use std::io::Write;
         let mut file = std::fs::File::create("analytics/result_exp3_tunneling.csv").unwrap();
