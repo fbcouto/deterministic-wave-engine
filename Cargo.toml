@@ -10,6 +10,8 @@ bytemuck = { version = "1.15", features = ["derive"] }
 pollster = "0.3"
 flume = "0.11"
 rand = { version = "0.8", features = ["std", "std_rng"] }
+futures-intrusive = "0.5"
+
 
 [[bin]]
 name = "deterministic_wave_engine"
@@ -18,3 +20,15 @@ path = "src/bin/main.rs"
 [[bin]]
 name = "hqpu"
 path = "src/bin/hqpu.rs"
+
+[[bin]]
+name = "exp3_tunneling"
+path = "src/bin/exp3_tunneling.rs"
+
+[[bin]]
+name = "exp4_zeeman"
+path = "src/bin/exp4_zeeman.rs"
+
+[[bin]]
+name = "exp5_anderson"
+path = "src/bin/exp5_anderson.rs"
