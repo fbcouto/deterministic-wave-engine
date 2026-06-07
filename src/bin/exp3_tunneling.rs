@@ -145,6 +145,13 @@ async fn run() {
         // Corrigido: Avaliando explicitamente a posição no eixo X
         let tunneled = result.iter().filter(|p| p.position[0] > 55.0).count();
         println!("[*] Experimento 3 concluído. Partículas que tunelaram a barreira: {} / 256", tunneled);
+       
+        use std::io::Write;
+        let mut file = std::fs::File::create("analytics/result_exp3_tunneling.csv").unwrap();
+        writeln!(file, "id,pos_x,velocity_x").unwrap();
+        for (i, p) in result.iter().enumerate() {
+            writeln!(file, "{},{},{}", i, p.position[0], p.velocity[0]).unwrap();
+        }
     }
 }
 

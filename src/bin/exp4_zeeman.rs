@@ -120,6 +120,12 @@ async fn run() {
         println!("[*] Experimento 4 concluído. Separação de Níveis de Energia (Zeeman):");
         println!("  -> Energia Média Prógrada (Spin +1): {:.2}", prograde_energy / 128.0);
         println!("  -> Energia Média Retrógrada (Spin -1): {:.2}", retrograde_energy / 128.0);
+        use std::io::Write;
+        let mut file = std::fs::File::create("analytics/result_exp4_zeeman.csv").unwrap();
+        writeln!(file, "id,helicity,orbital_energy").unwrap();
+        for (i, p) in result.iter().enumerate() {
+            writeln!(file, "{},{},{}", i, p.helicity, p.orbital_energy).unwrap();
+        }
     }
 }
 

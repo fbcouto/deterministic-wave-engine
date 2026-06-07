@@ -129,14 +129,17 @@ Connecting the DWE to the empirical literature of quantum analogs, this experime
 ### Experiment 3: Hydrodynamic Quantum Tunneling
 Particles collide inelastically against a restrictive potential "Energy Wall." Rather than penetrating magically, they experience a *Bouncing Phase*. Retroactive acoustic echoes accumulate in the adjacent vacuum mesh, injecting stochastic Magnus lift until horizontal drag catapults the surviving vortices over the barrier.
 * **Result:** Exponential transmission distribution reproducing Gamow's alpha-decay thresholds without statistical particle "ubiquity".
+![dwe_exp3_tunneling](analytics/dwe_exp3_tunneling.png)
 
 ### Experiment 4: Zeeman Effect & Energy Level Splitting
 Stationary orbital states (spin $\pm1$) are subjected to a global fluidic rotational matrix (macroscopic Coriolis force). Vector dot products dictate that photons spinning with the current (Prograde) achieve resonance and gain orbital energy, while counter-rotating photons (Retrograde) suffer severe shear stress.
 * **Result:** Mechanical bifurcation of formerly degenerate energy levels into distinct split frequencies via purely directional fluid friction.
+![dwe_exp4_zeeman](analytics/dwe_exp4_zeeman.png)
 
 ### Experiment 5: Strict Anderson Localization
 By replacing the pure vacuum with a "Disordered Target Background Topography", photons face continuous dielectric dispersion. Chaotic reflections and multidirectional friction forcefully drain the residual kinetic energy to zero, trapping the particles.
 * **Result:** Ballistic thermodynamic confinement, proving that conductivity inhibition is not merely "destructive wave interference", but the terminal drain of the drag's kinetic function.
+![dwe_exp5_anderson](analytics/dwe_exp5_anderson.png)
 
 ## 🛠️ Compilation and Execution
 

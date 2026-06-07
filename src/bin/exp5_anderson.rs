@@ -108,6 +108,12 @@ async fn run() {
         // Corrigida a comparação escalar de velocidade acessando o índice [0] do vetor
         let localized = result.iter().filter(|p| p.velocity[0] == 0.0 && p.velocity[1] == 0.0).count();
         println!("[*] Experimento 5 concluído. Partículas em estado localizado: {} / 256", localized);
+        use std::io::Write;
+        let mut file = std::fs::File::create("analytics/result_exp5_anderson.csv").unwrap();
+        writeln!(file, "id,pos_x,pos_y").unwrap();
+        for (i, p) in result.iter().enumerate() {
+            writeln!(file, "{},{},{}", i, p.position[0], p.position[1]).unwrap();
+        }
     }
 }
 
