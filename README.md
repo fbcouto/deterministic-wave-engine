@@ -20,7 +20,7 @@ The historical distancing that positioned quantum mechanics as an isolated proba
 The probabilistic entity is replaced by physical materiality (fluid mass density $\rho$ and real flow potential $S$). Dividing the imaginary parts yields the universal **Eulerian Continuity Equation**:
 $$\frac{\partial \rho}{\partial t} + \nabla \cdot (\rho \mathbf{v}) = 0$$
 
-Simultaneously, isolating the real portion generates an exact variant of the **Euler Momentum Equation**, revealing Bohm's Quantum Potential ($Q$):
+Simultaneously,isolating the real portion generates an exact variant of the **Euler Momentum Equation**, revealing Bohm's Quantum Potential($Q$):
 $$\frac{\partial \mathbf{v}}{\partial t} + (\mathbf{v} \cdot \nabla)\mathbf{v} = -\frac{1}{m}\nabla(V + Q) \quad \text{where} \quad Q = -\frac{\hbar^2}{2m}\frac{\nabla^2 \sqrt{\rho}}{\sqrt{\rho}}$$
 In the DWE framework, $Q$ is not "instantaneous spooky information," but the strict scalar description of the internal pressure within the deformed elastic vacuum mesh.
 
