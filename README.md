@@ -78,9 +78,9 @@ A critical distinction of the Deterministic Wave Engine (V4.0) is its strict adh
 
 To demonstrate this ontological shift and address the reality of "laboratory calibration," we present a comparative analysis of the simulation's output at two vastly different data densities.
 
-| 100,000 Photons (Granular Reality / Shot Noise) | 50,000,000 Photons (Emergent Statistics / Born Distribution) |
+| 800,000 Photons (Granular Reality / Shot Noise) | 50,000,000 Photons (Emergent Statistics / Born Distribution) |
 | :---: | :---: |
-| ![Low Density 100k](hqpu_low_density_100k.png) | ![High Density 50M](hqpu_quadrantes_fotometricos.png) |
+| ![Low Density 800k](hqpu_low_density_800k.png) | ![High Density 50M](hqpu_quadrantes_fotometricos.png) |
 
 ## 📊 Experimental Results: Emergence of Wave Patterns
 
@@ -89,15 +89,15 @@ The DWE demonstrates that wave-like interference patterns are not intrinsic to "
 ### The Scale of Emergence
 Our simulations show a stark difference in behavior based on particle density:
 
-* **Low-Density Regime (100,000 Particles):** At this scale, the corpuscular nature of the photon dominates. Impacts appear stochastic and noisy, masking the underlying deterministic structure.
+* **Low-Density Regime (800,000 Particles):** At this scale, the corpuscular nature of the photon dominates. Impacts appear stochastic and noisy, masking the underlying deterministic structure.
 * **Fluid Regime (50,000,000 Particles):** As the density increases, the "Law of Large Numbers" reveals the emergent wave pattern. The interference fringes (previously hidden by sparsity) stabilize into the smooth density distributions predicted by Born's Law.
 
 This observation validates our central hypothesis: the "probability wave" (Ψ) is a macro-statistical representation of the underlying viscoelastic vacuum fluid dynamics, not a fundamental property of the particle itself.
 
 ### The Physics of Granularity
-When executing the simulation with only 100,000 photons (left image), the resulting quadrants appear chaotic, "spikey," and filled with gaps. This is not a bug; it is a profound representation of standard laboratory observation when lasers are attenuated to single-photon emission.
+When executing the simulation with only 800,000 photons (left image), the resulting quadrants appear chaotic, "spikey," and filled with gaps. This is not a bug; it is a profound representation of standard laboratory observation when lasers are attenuated to single-photon emission.
 
-* **Ballistic Mortality:** Of the 100k photons fired, over 95% collide fatally with the central slit wall. Only a few thousand survive to reach the screen.
+* **Ballistic Mortality:** Of the 800k photons fired, over 95% collide fatally with the central slit wall. Only a few thousand survive to reach the screen.
 * **Shot Noise:** With too few events, there is no density to smooth the statistical curve. We observe individual, deterministic impacts. Even in Feynman's Matrix D, the deterministic kicks ($1/r$) are visible as sparse peaks, but they fail to form a cohesive pattern.
 
 ### Macro-Emergence via the Law of Large Numbers

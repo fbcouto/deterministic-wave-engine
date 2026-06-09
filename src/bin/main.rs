@@ -5,28 +5,7 @@ use std::time::Instant;
 use wgpu::util::DeviceExt;
 use wgpu::{BufferUsages, CommandEncoderDescriptor, ComputePassDescriptor, ComputePipelineDescriptor};
 
-// O MOTOR: Retornado para 50 Milhões para garantir resolução visual contínua
 const TOTAL_PHOTONS: u32 = 50_000_000;
-
-// Parâmetros CHSH clássicos
-const ANGLES_ALICE: [f32; 2] = [0.0, 45.0]; 
-const ANGLES_BOB: [f32; 2] = [22.5, 67.5];  
-
-#[repr(C)]
-pub struct BellParticle {
-    pub pos: [f32; 2],
-    pub vel: [f32; 2],
-    pub spin: f32,          
-    pub is_measured: u32,   
-}
-
-#[repr(C)]
-pub struct BellUniforms {
-    pub polarizer_angle_a: f32,
-    pub polarizer_angle_b: f32,
-    pub vacuum_mesh_tension: f32, 
-    pub time_step: f32,
-}
 
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Pod, Zeroable)]
@@ -40,8 +19,8 @@ struct Params {
     slits_distance: f32,
     slit_width: f32,
     base_tension: f32,
-    with_vortices: u32, // Substituiu pad1 para controlar a física de fluidos determinista
-    pad2: u32,
+    with_vortices: u32,   
+    with_pilot_wave: u32, 
     pad3: u32,
 }
 
@@ -59,42 +38,8 @@ struct QuadrantProfile {
     with_deflection: u32,
     with_turbulence: u32,
     with_vortices: u32,
+    with_pilot_wave: u32,
     measurement_sensor: u32,
-}
-
-use std::f32::consts::PI;
-
-#[repr(C)]
-pub struct Particle {
-    pub pos: [f32; 2],
-    pub vel: [f32; 2],
-    pub spin: f32,
-    pub mass: f32,
-}
-
-fn airy_distribution(x: f32) -> f32 {
-    if x < -2.0 {
-        return f32::exp(x); 
-    }
-    f32::sin(PI * x) / (PI * x + 0.0001) 
-}
-
-pub fn spawn_airy_packet(num_particles: usize, center: [f32; 2], width: f32) -> Vec<Particle> {
-    let mut packet = Vec::with_capacity(num_particles);
-    for i in 0..num_particles {
-        let normalized_x = (i as f32 / num_particles as f32) * width - (width / 2.0);
-        let probability_density = airy_distribution(normalized_x);
-        
-        if rand::random::<f32>() < probability_density.abs() {
-            packet.push(Particle {
-                pos: [center[0] + normalized_x, center[1]], 
-                vel: [1.0, 0.0], 
-                spin: 1.0,       
-                mass: 1.0, 
-            });
-        }
-    }
-    packet
 }
 
 fn main() {
@@ -116,11 +61,28 @@ async fn run() {
     });
 
     let quadrant_matrix = [
-        QuadrantProfile { name: "A: Newtonian World", filename: "result_A_newton_gpu.csv", with_deflection: 0, with_turbulence: 0, with_vortices: 0, measurement_sensor: 0 },
-        QuadrantProfile { name: "B: Thermodynamic Dispersion", filename: "result_B_sand_gpu.csv", with_deflection: 1, with_turbulence: 0, with_vortices: 0, measurement_sensor: 0 },
-        QuadrantProfile { name: "C: Rigid Interference", filename: "result_C_comb_gpu.csv", with_deflection: 0, with_turbulence: 1, with_vortices: 0, measurement_sensor: 0 },
-        QuadrantProfile { name: "D: Fluid Reality (Feynman)", filename: "result_D_feynman_gpu.csv", with_deflection: 1, with_turbulence: 0, with_vortices: 1, measurement_sensor: 0 },
-        QuadrantProfile { name: "E: Classical Collapse", filename: "result_E_colapso.csv", with_deflection: 1, with_turbulence: 0, with_vortices: 1, measurement_sensor: 1 },
+        QuadrantProfile { name: "A: Newtonian World", filename: "result_A_newton_gpu.csv", with_deflection: 0, with_turbulence: 0, with_vortices: 0, with_pilot_wave: 0, measurement_sensor: 0 },
+        QuadrantProfile { name: "B: Thermodynamic Dispersion", filename: "result_B_sand_gpu.csv", with_deflection: 0, with_turbulence: 1, with_vortices: 0, with_pilot_wave: 0, measurement_sensor: 0 },
+        QuadrantProfile { name: "C: Rigid Interference (Onda pura)", filename: "result_C_comb_gpu.csv", with_deflection: 1, with_turbulence: 0, with_vortices: 0, with_pilot_wave: 1, measurement_sensor: 0 },
+        QuadrantProfile {
+            name: "D: Fluid Reality (Full Feynman Pattern)",
+            filename: "result_D_feynman_gpu.csv",
+            with_deflection: 1,
+            with_turbulence: 1, 
+            measurement_sensor: 0,
+            with_vortices: 1,
+            with_pilot_wave: 1
+        },
+        // MODIFICAÇÃO CHAVE: with_turbulence ativado (1) para gerar a decoerência termodinâmica
+        QuadrantProfile { 
+            name: "E: Classical Collapse", 
+            filename: "result_E_colapso.csv", 
+            with_deflection: 1, 
+            with_turbulence: 1, 
+            with_vortices: 1, 
+            with_pilot_wave: 1, 
+            measurement_sensor: 1 
+        },
     ];
 
     for profile in quadrant_matrix.iter() {
@@ -132,13 +94,13 @@ async fn run() {
             with_turbulence: profile.with_turbulence,
             measurement_sensor: profile.measurement_sensor,
             total_photons: TOTAL_PHOTONS,
-            screen_width: 2000,
-            center_x: 1000.0,
-            slits_distance: 120.0,
+            screen_width: 2000,    
+            center_x: 1000.0,      
+            slits_distance: 100.0, 
             slit_width: 5.0,
-            base_tension: 15.0, // AJUSTE: Ampliado de 5.0 para 15.0 para dar mais força à onda guia
+            base_tension: 150.0,  
             with_vortices: profile.with_vortices,
-            pad2: 0,
+            with_pilot_wave: profile.with_pilot_wave,
             pad3: 0,
         };
 
