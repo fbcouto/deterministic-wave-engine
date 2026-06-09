@@ -1,68 +1,106 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 import os
 
-def plot_collapse_comparison():
-    cenarios = [
-        ("result_D_feynman_gpu.csv", "BEFORE MEASUREMENT \n Coherent Wave Field (Unobserved)"),
-        ("result_E_colapso.csv", "AFTER MEASUREMENT \n Classical Collapse (Right Slit Monitored)")
-    ]
+# Academic / Publication Style
+plt.rcParams.update({
+    'font.size': 12,
+    'font.family': 'serif',
+    'axes.facecolor': 'white',
+    'figure.facecolor': 'white',
+    'text.color': 'black',
+    'axes.labelcolor': 'black',
+    'xtick.color': 'black',
+    'ytick.color': 'black'
+})
 
-    fig, axes = plt.subplots(2, 1, figsize=(14, 10))
-    fig.suptitle('The Observer Effect - Hydrodynamic Phase Decoherence', fontsize=18, fontweight='bold', color='white')
+def plot_collapse_comparison():
+    # Caminhos corrigidos para a pasta raiz
+    file_d = "../result_D_feynman_gpu.csv"
+    file_e = "../result_E_colapso.csv"
+    
+    if not (os.path.exists(file_d) and os.path.exists(file_e)):
+        print(f"Error: Missing datasets. Looked for {file_d} and {file_e}.")
+        return
+
+    df_d = pd.read_csv(file_d)
+    df_e = pd.read_csv(file_e)
+
+    fig, axes = plt.subplots(1, 2, figsize=(16, 6))
+    fig.suptitle('Deterministic Decoherence: The Wave-Function Collapse', fontsize=16, fontweight='bold')
 
     weight_green = 1.0
-    weight_red = 0.35
-    weight_uv = 0.10
 
-    for ax, (arquivo, titulo) in zip(axes, cenarios):
-        if os.path.exists(arquivo):
-            print(f"Plotting collapse metrics from: {arquivo}")
-            df = pd.read_csv(arquivo)
-            x = df['X']
-            uv = df['UV'] * weight_uv
-            green = df['Green'] * weight_green
-            red = df['Red'] * weight_red
-
-            ax.fill_between(x, uv, color='purple', alpha=0.25)
-            ax.plot(x, uv, color='purple', alpha=0.7, linewidth=1.5, label='UV Spectrogram')
-            
-            ax.fill_between(x, red, color='red', alpha=0.25)
-            ax.plot(x, red, color='red', alpha=0.7, linewidth=1.5, label='Red Dispersion')
-            
-            ax.fill_between(x, green, color='green', alpha=0.35)
-            ax.plot(x, green, color='#00cc00', alpha=0.9, linewidth=2.0, label='Green Main Channel')
-            
-            ax.set_title(titulo, fontsize=14, fontweight='bold', color='white')
-            
-            ax.set_xlim(600, 1400)
-                       
-            ax.set_xlabel('Screen Coordinate X (px)', color='gray')
-            ax.set_ylabel('Relative Luminous Intensity', color='gray')
-            ax.grid(True, linestyle='--', alpha=0.15)
-            ax.tick_params(colors='gray')
-            
-            ax.spines['top'].set_visible(False)
-            ax.spines['right'].set_visible(False)
-            ax.spines['bottom'].set_color('#333333')
-            ax.spines['left'].set_color('#333333')
-        else:
-            ax.text(0.5, 0.5, f"Error: Dataset '{os.path.basename(arquivo)}' is missing.\nRun the Rust simulation first.", 
-                    ha='center', va='center', transform=ax.transAxes, color='#ff4444', fontsize=12, fontweight='bold')
-            ax.set_facecolor('#1a1a1a')
-
-    plt.style.use('dark_background')
-    fig.patch.set_facecolor('#121212')
-    for ax in axes:
-        ax.set_facecolor('#121212')
-
-    axes[0].legend(loc='upper right', facecolor='#121212', edgecolor='gray', labelcolor='white')
-    plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+    # =========================================================
+    # Left Panel: Matrix D (Coherent Wave Field / Interference Pattern)
+    # =========================================================
+    ax1 = axes[0]
+    x_d = df_d['X']
+    green_d = df_d['Green'] * weight_green
     
+    ax1.fill_between(x_d, df_d['UV']*0.1, color='purple', alpha=0.2)
+    ax1.fill_between(x_d, df_d['Red']*0.35, color='red', alpha=0.2)
+    ax1.fill_between(x_d, green_d, color='green', alpha=0.3)
+    ax1.plot(x_d, green_d, color='#2ca02c', alpha=0.9, linewidth=1.5, label='Simulated Data (Green)')
+
+    # --- ALINHAMENTO GEOMÉTRICO (IGUAL AO PLOT_QUADRANTS) ---
+    slit_width = 5.0
+    slits_distance = 100.0 
+    screen_dist = 450.0 # Reduzido de 1800.0 para 450.0 para ficar exatamente igual
+    wave_len = 11.0
+    
+    screen_center = 1000.0
+
+    delta_x = x_d - screen_center
+    sin_theta = delta_x / np.sqrt(delta_x**2 + screen_dist**2)
+    
+    # 1. Diffraction Envelope and Interference Fringes
+    difracao_envelope = np.sinc((slit_width * sin_theta) / wave_len)**2
+    fase_interferencia = (np.pi * slits_distance * sin_theta) / wave_len
+    interferencia_franjas = np.cos(fase_interferencia)**2
+    
+    # 2. Thermal/Ballistic Envelope calibrado
+    sigma_gauss = 800.0
+    envelope_termico = np.exp(-(delta_x**2) / (2 * sigma_gauss**2))
+    
+    # 3. Complete Gaussian-Modulated Fraunhofer Equation
+    intensidade_teorica = difracao_envelope * interferencia_franjas * envelope_termico
+    intensidade_escalada = intensidade_teorica * green_d.max()
+
+    # Adicionado zorder=5 e cor 'gray' exatamente como no plot_quadrants
+    ax1.plot(x_d, intensidade_escalada, color='gray', linestyle='--', linewidth=2, zorder=5, 
+             label=r'Gaussian-Mod. Fraunhofer')
+    
+    ax1.set_title("Matrix D: Fluid Reality (Coherent State)", fontweight='bold')
+    ax1.set_xlim(0, 2000)
+    ax1.set_ylabel('Relative Luminous Intensity')
+    ax1.set_xlabel('Screen Coordinate X (px)')
+    ax1.grid(True, linestyle='--', alpha=0.4)
+    ax1.legend(loc='upper right', frameon=True, edgecolor='black')
+
+    # =========================================================
+    # Right Panel: Matrix E (The Classical Collapse / Decoherence)
+    # =========================================================
+    ax2 = axes[1]
+    x_e = df_e['X']
+    green_e = df_e['Green'] * weight_green
+    
+    ax2.fill_between(x_e, green_e, color='#d62728', alpha=0.3)
+    ax2.plot(x_e, green_e, color='#d62728', alpha=0.9, linewidth=1.5, label='Measured Data (Sensor Active)')
+    ax2.scatter(x_e[::15], green_e[::15], color='#d62728', s=10, alpha=0.6)
+
+    ax2.set_title("Matrix E: Thermodynamic Collapse (Sensor Active)", fontweight='bold')
+    ax2.set_xlim(0, 2000)
+    ax2.set_ylabel('Relative Luminous Intensity')
+    ax2.set_xlabel('Screen Coordinate X (px)')
+    ax2.grid(True, linestyle='--', alpha=0.4)
+    ax2.legend(loc='upper right', frameon=True, edgecolor='black')
+
+    plt.tight_layout(rect=[0, 0.03, 1, 0.95])
     output_filename = '../hqpu_colapso.png'
-    plt.savefig(output_filename, dpi=300, facecolor='#121212', bbox_inches='tight')
+    plt.savefig(output_filename, dpi=300, bbox_inches='tight')
     print(f"Success! Collapse chart saved to: {output_filename}")
-    plt.show()
 
 if __name__ == "__main__":
     script_dir = os.path.dirname(os.path.abspath(__file__))

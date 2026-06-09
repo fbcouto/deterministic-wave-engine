@@ -2,13 +2,22 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 
+# Estilo Acadêmico / Publication-Style
+plt.rcParams.update({
+    'font.size': 12,
+    'font.family': 'serif',
+    'axes.facecolor': 'white',
+    'figure.facecolor': 'white',
+    'text.color': 'black',
+    'axes.labelcolor': 'black',
+    'xtick.color': 'black',
+    'ytick.color': 'black'
+})
+
 def plot_qnd_measurement():
     file_path = "../analytics/hqpu_readings.csv" 
 
-    plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(14, 7))
-    fig.patch.set_facecolor('#121212')
-    ax.set_facecolor('#121212')
 
     if os.path.exists(file_path):
         print(f"Reading analytical data from: {file_path}...")
@@ -16,41 +25,43 @@ def plot_qnd_measurement():
         
         y_time = df['Time_Y']
         
-        ax.plot(y_time, df['Left_Sensor'], color='#00aaff', alpha=0.8, linewidth=2.0, label='Left Sensor (Vacuum Barometer)')
-        ax.plot(y_time, df['Right_Sensor'], color='#ff0055', alpha=0.8, linewidth=2.0, label='Right Sensor (Vacuum Barometer)')
+        # Cores acadêmicas (Azul e Vermelho Clássicos)
+        ax.plot(y_time, df['Left_Sensor'], color='#1f77b4', alpha=0.8, linewidth=2.0, label='Left Sensor (Vacuum Barometer)')
+        ax.plot(y_time, df['Right_Sensor'], color='#d62728', alpha=0.8, linewidth=2.0, label='Right Sensor (Vacuum Barometer)')
         
-        ax.axvspan(100, 150, color='#ffffff', alpha=0.1, label='Logic Operation (HQPU Gate)')
+        # Fundo cinza para garantir contraste visual contra o fundo branco
+        ax.axvspan(100, 150, color='gray', alpha=0.15, label='Logic Operation (HQPU Gate)')
         
         ax.set_title('Quantum Non-Demolition (QND) Measurement:\nAnalytical Thermodynamic Wake Reading', 
-                     fontsize=16, fontweight='bold', color='white', pad=20)
-        ax.set_xlabel('Time / Advance on HQPU Chip (Y-Axis)', fontsize=12, color='gray')
-        ax.set_ylabel('Pressure Amplitude (Medium Tension γ)', fontsize=12, color='gray')
+                     fontsize=16, fontweight='bold', pad=20)
+        ax.set_xlabel('Time / Advance on HQPU Chip (Y-Axis)', fontsize=12)
+        ax.set_ylabel('Pressure Amplitude (Medium Tension γ)', fontsize=12)
         
         ax.set_xlim(0, 300)
-        ax.grid(True, linestyle='--', alpha=0.2)
-        ax.tick_params(colors='gray')
+        ax.grid(True, linestyle='--', alpha=0.4)
         
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
-        ax.spines['bottom'].set_color('#333333')
-        ax.spines['left'].set_color('#333333')
+        ax.spines['bottom'].set_color('black')
+        ax.spines['left'].set_color('black')
         
-        ax.legend(loc='upper right', facecolor='#121212', edgecolor='gray', labelcolor='white')
+        ax.legend(loc='upper right', frameon=True, edgecolor='black')
         
+        # Caixa de status em verde clássico com fundo branco
         ax.text(250, max(df['Left_Sensor']) * 0.75, 
                 "✓ Intact Frequency\n✓ No Collapse", 
-                color='#00ff00', fontsize=12, fontweight='bold', 
-                bbox=dict(facecolor='#1a1a1a', edgecolor='#00ff00', boxstyle='round,pad=0.5'))
+                color='#2ca02c', fontsize=12, fontweight='bold', 
+                bbox=dict(facecolor='white', edgecolor='#2ca02c', boxstyle='round,pad=0.5'))
 
     else:
         ax.text(0.5, 0.5, f"Error: File '{os.path.basename(file_path)}' not found.\nRun 'cargo run --release --bin hqpu' first.", 
-                ha='center', va='center', transform=ax.transAxes, color='#ff4444', fontsize=14, fontweight='bold')
-        ax.set_title("Non-Destructive Measurement (Waiting for Data...)", fontsize=16, fontweight='bold', color='gray')
+                ha='center', va='center', transform=ax.transAxes, color='#d62728', fontsize=14, fontweight='bold')
+        ax.set_title("Non-Destructive Measurement (Waiting for Data...)", fontsize=16, fontweight='bold')
 
     plt.tight_layout()
     
     output_filename = '../hqpu_leitura_qnd.png'
-    plt.savefig(output_filename, dpi=300, facecolor='#121212', bbox_inches='tight')
+    plt.savefig(output_filename, dpi=300, bbox_inches='tight')
     print(f"\nSuccess! QND chart rendered and saved to: {output_filename}")
     
     plt.show()
