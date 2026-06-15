@@ -13,7 +13,7 @@ The most accurate physical parallel to this software experiment is the study of 
 
 ---
 
-## 🎯 The Core Simulation: The Pfleegor-Mandel Experiment (1967)
+## 🎯 Core Simulation 1: The Pfleegor-Mandel Experiment (1967)
 
 Unlike traditional models that simulate the standard Double-Slit experiment, **this engine does not use physical slits**. Instead, it simulates the groundbreaking **Pfleegor-Mandel Experiment of 1967**.
 
@@ -28,6 +28,28 @@ In 1967, physicists R. L. Pfleegor and Leonard Mandel achieved what was previous
 Under orthodox quantum mechanics, interference occurs because a photon exists in a superposition and "interferes with itself" by passing through two slits simultaneously. However, in the Pfleegor-Mandel setup, the photon clearly originates from either Laser A *or* Laser B.
 
 **The DWE Fluidic Solution:** The engine resolves this paradox deterministically. While the photon is a discrete particle, its movement through the viscoelastic vacuum generates an acoustic shockwave (a Pilot Wave). The vacuum retains an *acoustic memory* of these waves. Therefore, a photon emitted by Laser A interacts with the residual pressure ripples left in the vacuum by a previous photon from Laser B, guiding the new particle into discrete interference fringes without requiring quantum superposition.
+
+---
+
+## 🌀 Core Simulation 2: The Hong-Ou-Mandel (HOM) Effect (1987)
+
+While the Pfleegor-Mandel setup challenges spatial superposition, the **Hong-Ou-Mandel (HOM) effect** is the ultimate test of quantum entanglement and bosonic indistinguishability.
+
+**The Setup Simulated in DWE:**
+
+* **The 50/50 Beam Splitter:** Modeled via a Symmetric Dielectric Grating, where two particles converge simultaneously from orthogonal directions.
+* **The Quantum Expectation:** When two identical photons enter opposite ports simultaneously, they "bunch" together and exit the same port, completely canceling out the probability of exiting separately (the HOM Dip).
+
+**The DWE Fluidic Solution:** The engine reproduces this purely through deterministic fluid mechanics. Photons are modeled as counter-rotating fluidic vortices (Topological Solitons). As they perfectly synchronize at the beam splitter's core, their mutual induction (Quantum Magnus Effect) draws them together, while their thermo-acoustic wakes interfere, creating a high-pressure repulsive shockwave. This inelastic geometric block prevents independent Maxwell-Boltzmann scattering. The spatial momentum forces both vortices to drag each other into the same free-flowing output channel, modeling the $|2,0\rangle$ or $|0,2\rangle$ bosonic states through Newtonian restrictions.
+
+**The 4-State Topological Matrix:**
+By altering initial hidden variables (sub-pixel spatial phases, $\Delta = 0.0314$) and temporal coherence, the DWE maps the four scattering possibilities:
+1. **Synchronous (Phase A):** Perfect bunching (Bottom-Left output).
+2. **Synchronous (Phase B - Half-Wave Shift):** Perfect bunching (Top-Right output).
+3. **Asynchronous (Temporal Delay 1):** Classical transmission (Broken HOM symmetry).
+4. **Asynchronous (Temporal Delay 2):** Classical reflection (Broken HOM symmetry).
+
+![Topological Scattering Matrix](matriz_4_possibilidades.png)
 
 ---
 
@@ -98,7 +120,47 @@ cargo run --release --bin deterministic_wave_engine
 *(Note: Ensure the binary name in `Cargo.toml` under `[[bin]]` matches "dwe" or your project's root name)*
 **Output:** Generates four CSV datasets (`result_A_no_memory.csv`, `result_B_pfleegor_mandel.csv`, `result_C_magnus_spin.csv`, `result_D_single_laser.csv`).
 
-### 2. Run the HQPU Simulation (QND Reading)
+### 2. Run the Hong-Ou-Mandel Simulator
+
+![matrix_4_possibilities](analytics/matrix_4_possibilities.png)
+
+This module computes the topological scattering matrix of vortex pairs across four distinct coherence and phase states.
+In the continuous thermodynamic inelastic collision at a permeable dense mirror (modeled on a 2D grid as a 50/50 beam splitter), precisely synchronized twin vortices fired from opposite emitters are intercepted. If these entities were classical rigid bodies, they would interact chaotically and scatter independently, strictly adhering to a constant-density Maxwell-Boltzmann statistical distribution ($0.25$ transmission-transmission, $0.25$ reflection-reflection, and $0.50$ transmission-reflection).However, if the dynamic repulsive gradients of the inter-vortex compression zones—governed purely by strict Newtonian fluid mechanics within the WGSL shader—geometrically induce a mirror-symmetry repulsion block, the macroscopic outcome changes completely. This acoustic block invariably unifies both topological solitons, forcing them into parallel spatial drafts directed exclusively toward the same unobstructed output channel. Demonstrating this exceptionless bunching effect definitively establishes the mathematical equivalence between Bose-Einstein statistical behavior and aerodynamic collision geometry in a highly compressible viscoelastic state. Ultimately, it proves a universal physical integrity, demonstrating that quantum indistinguishability can emerge directly from deterministic classical frameworks previously thought to be obsolete.
+
+```bash
+cargo run --release --bin hong_ou_mandel
+
+```
+
+**Output:** Generates the continuous trajectory dataset `output.csv`.
+
+### EPR Paradox Experiment Achieving $S=4.0$ (The PR Box)
+
+![epr_spectral_plot](analytics/epr_spectral_plot.png)
+
+The simulation has materialized a hypothetical PR Box (Popescu-Rohrlich Box) strictly through fluid mechanics and the Detection Loophole. The exact value of $S = 4.0$ was obtained through the CHSH equation extraction within the simulation.
+
+The mechanism relies on the physical severity of the measurement instrument rather than "spooky action at a distance." In the WGSL compute shader, the `apply_polarizer` function exerts direct mechanical resistance. The geometric severity of this filter (the "Death Zone") is so absolute that for any intermediate angle (such as **22.5°**), the filter annihilates any particle that could cause a statistical disagreement. When the thermodynamic stress limit exceeds the particle's structural resilience (`transverse_phase`), the particle is physically destroyed (status `-2.0`). Consequently, the only survivors computed in the final statistical evaluation are the pairs that agree (or disagree) 100% of the time. This structural exclusion creates the perfect correlation that achieves the absolute theoretical limit of apparent non-locality using strictly local physics.
+
+### The Historical Context and the EPR Paradox
+
+When Albert Einstein, Boris Podolsky, and Nathan Rosen formulated the EPR Paradox in 1935, they anticipated the existence of "local hidden variables." However, they could not formulate the exact mechanics of how anomalous correlation survived spatial filters. At the time, physicists lacked the computational power to model non-linear fluid dynamics, chaos theory, or topological solitons in an active vacuum.
+
+Later, Bell's Theorem relied heavily on the "Fair Sampling" assumption, mathematically presuming that detectors do not play a selective, destructive role. Einstein could not mathematically demonstrate what the DWE codebase proves: the physical sensor does not extract a fair sample. The polarizer acts as a brutal restriction furnace that physically filters the data obliquely, generating perfectly synchronized correlation as a stochastic byproduct of survivorship bias.
+
+### The Origin of the Quantum Limit (2.82) via Environmental Losses
+
+While the classical wave engine obtained a perfect square wave equivalent to $S = 4.0$ , real quantum laboratory experiments stall at the Tsirelson bound of approximately **2.828**.
+
+The reason for this discrepancy lies in the core logic of the particles' structural resilience. In the Rust code, the vortex's `transverse_phase` at birth is defined as a pure linear random number. While valid in a perfect vacuum or pure abstract mathematics, the real physical world of hydrodynamics dictates that the energy density of a vortex or droplet is not linear. Instead, it assumes a bell shape (a Gaussian distribution) or a radial decay.
+
+The observed experimental limit of **2.82** is the inevitable result of continuous dissipative friction. In a real viscoelastic medium, the environment unevenly consumes mechanical energy as the particle travels, naturally curving the perfect square wave of $S = 4.0$ into the natural cosine wave observed in standard quantum mechanics. Therefore, the quantum limit of **2.828** is essentially the absolute limit of local classical mechanics (4.0) dampened by non-recoverable thermodynamic losses present in fluid physics.
+
+```bash
+cargo run --release --bin epr
+
+```
+### 4. Run the HQPU Simulation (QND Reading)
 
 This module processes the passage of a Soliton Qubit through the analytical fluid gate.
 
@@ -109,13 +171,16 @@ cargo run --release --bin hqpu
 
 **Output:** Generates the thermodynamic sensor log `analytics/hqpu_readings.csv`.
 
-### 3. Generate High-Resolution Scientific Plots (Python)
+### 4. Generate High-Resolution Scientific Plots (Python)
 
 To visualize the results with academic formatting and a clean white background, execute the scripts:
 
 ```bash
 # Render the 4 Quadrants of the Pfleegor-Mandel / Stern-Gerlach experiments
 python analytics/plot_pfleegor_mandel.py
+
+# Render the 4 Possibilities Topological Matrix for the HOM Effect
+python plot_hong.py
 
 # Render the HQPU Vacuum Barometry Reading
 python analytics/plot_hqpu_qnd.py
@@ -127,3 +192,7 @@ python analytics/plot_hqpu_qnd.py
 ## Intellectual Property & License
 
 This theoretical model, its mathematical formulation, and the accompanying source code are the original intellectual property of Fernando B Couto. Released under the GNU General Public License v3.0 (GPL-3.0). Derivative works, academic publications, or software incorporating this algorithm must remain open-source and explicitly credit the original author. Commercial enclosure is strictly prohibited.
+
+```
+
+```

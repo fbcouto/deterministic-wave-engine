@@ -21,4 +21,11 @@ path = "src/bin/main.rs"
 name = "hqpu"
 path = "src/bin/hqpu.rs"
 
+[[bin]]
+name = "epr"
+path = "src/bin/epr.rs"
+
+[[bin]]
+name = "hong_ou_mandel"
+path = "src/bin/hong_ou_mandel.rs"
 
