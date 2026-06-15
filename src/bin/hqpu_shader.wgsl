@@ -3,10 +3,10 @@ struct VortexQubit {
     y: f32,
     vx: f32,
     vy: f32,
-    spin_omega: f32,     // Sentido/Fase da Helicidade do Spin Invariável
-    frequency: f32,      // NOVO: Compactação topológica do núcleo mapeada
-    wake_amplitude: f32, // Força da esteira termodinâmica
-    padding1: f32,       // Alinhamento estrito de 32-bytes (8 floats)
+    spin_omega: f32,     // Direction/Phase of the Invariable Spin Helicity
+    frequency: f32,      // NEW: Mapped topological compaction of the core
+    wake_amplitude: f32, // Thermodynamic wake force
+    padding1: f32,       // Strict 32-byte alignment (8 floats)
 };
 
 struct Params {
@@ -48,18 +48,18 @@ fn main(@builtin(global_invocation_id) id: vec3<u32>) {
 
     var q = qubits[idx];
 
-    // 1. Aplicação do Portão Lógico (Obstáculo Hidrodinâmico)
+    // 1. Application of the Logic Gate (Hydrodynamic Obstacle)
     if (q.y > 100.0 && q.y < 150.0) {
         let grad = calculate_vacuum_gradient(vec2<f32>(q.x, q.y));
         let gradient_pressure = sin(q.y * 0.2) * params.base_tension;
         
         q.spin_omega += gradient_pressure * 0.05;
         
-        // O desvio cinemático lateral passa a depender da força de compactação por frequência
+        // The lateral kinematic deviation now depends on the frequency compaction force
         q.vx += gradient_pressure * (q.frequency * 0.00066) * sign(q.spin_omega) + grad.x * 0.1;
     }
 
-    // 2. Evolução Temporal da Posição
+    // 2. Temporal Evolution of Position
     q.x += q.vx * 0.1;
     q.y += q.vy * 0.1;
     

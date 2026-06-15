@@ -2,7 +2,7 @@
 name = "deterministic_wave_engine"
 version = "0.1.0"
 edition = "2021"
-default-run = "deterministic_wave_engine"
+
 
 [dependencies]
 wgpu = "0.19"
@@ -21,14 +21,4 @@ path = "src/bin/main.rs"
 name = "hqpu"
 path = "src/bin/hqpu.rs"
 
-[[bin]]
-name = "exp3_tunneling"
-path = "src/bin/exp3_tunneling.rs"
 
-[[bin]]
-name = "exp4_zeeman"
-path = "src/bin/exp4_zeeman.rs"
-
-[[bin]]
-name = "exp5_anderson"
-path = "src/bin/exp5_anderson.rs"

@@ -6,21 +6,26 @@ use wgpu::util::DeviceExt;
 use wgpu::{BufferUsages, CommandEncoderDescriptor, ComputePassDescriptor, ComputePipelineDescriptor};
 
 const TOTAL_PHOTONS: u32 = 50_000_000;
+const CHUNK_SIZE: u32 = 50_000; // Sends 50k at a time to let the GPU breathe
 
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Pod, Zeroable)]
 struct Params {
-    with_deflection: u32,
     with_turbulence: u32,
     measurement_sensor: u32,
     total_photons: u32,
     screen_width: u32,
-    center_x: f32,
-    slits_distance: f32,
-    slit_width: f32,
+    laser_a_x: f32,
+    laser_b_x: f32,
+    lasers_y: f32,
+    screen_y: f32,
     base_tension: f32,
-    with_vortices: u32,   
-    with_pilot_wave: u32, 
+    decay_rate: f32,
+    wavelength: f32,
+    with_memory: u32,
+    use_spin: u32,
+    photon_offset: u32, // NEW: Batch control (replaced pad1)
+    pad2: u32,
     pad3: u32,
 }
 
@@ -35,11 +40,10 @@ struct ExtractedBucket {
 struct QuadrantProfile {
     name: &'static str,
     filename: &'static str,
-    with_deflection: u32,
     with_turbulence: u32,
-    with_vortices: u32,
-    with_pilot_wave: u32,
     measurement_sensor: u32,
+    with_memory: u32,
+    use_spin: u32,
 }
 
 fn main() {
@@ -54,34 +58,32 @@ async fn run() {
     let shader = device.create_shader_module(wgpu::include_wgsl!("fenda_shader.wgsl"));
 
     let compute_pipeline = device.create_compute_pipeline(&ComputePipelineDescriptor {
-        label: Some("Compute Pipeline"),
+        label: Some("Compute Pipeline Pfleegor-Mandel"),
         layout: None,
         module: &shader,
         entry_point: "main",
     });
 
     let quadrant_matrix = [
-        QuadrantProfile { name: "A: Newtonian World", filename: "result_A_newton_gpu.csv", with_deflection: 0, with_turbulence: 0, with_vortices: 0, with_pilot_wave: 0, measurement_sensor: 0 },
-        QuadrantProfile { name: "B: Thermodynamic Dispersion", filename: "result_B_sand_gpu.csv", with_deflection: 0, with_turbulence: 1, with_vortices: 0, with_pilot_wave: 0, measurement_sensor: 0 },
-        QuadrantProfile { name: "C: Rigid Interference (Onda pura)", filename: "result_C_comb_gpu.csv", with_deflection: 1, with_turbulence: 0, with_vortices: 0, with_pilot_wave: 1, measurement_sensor: 0 },
-        QuadrantProfile {
-            name: "D: Fluid Reality (Full Feynman Pattern)",
-            filename: "result_D_feynman_gpu.csv",
-            with_deflection: 1,
-            with_turbulence: 1, 
-            measurement_sensor: 0,
-            with_vortices: 1,
-            with_pilot_wave: 1
-        },
-        // MODIFICAÇÃO CHAVE: with_turbulence ativado (1) para gerar a decoerência termodinâmica
         QuadrantProfile { 
-            name: "E: Classical Collapse", 
-            filename: "result_E_colapso.csv", 
-            with_deflection: 1, 
-            with_turbulence: 1, 
-            with_vortices: 1, 
-            with_pilot_wave: 1, 
-            measurement_sensor: 1 
+            name: "A: Two Lasers (Classical Dispersion / No Memory)", 
+            filename: "result_A_no_memory.csv", 
+            with_turbulence: 0, measurement_sensor: 0, with_memory: 0, use_spin: 0 
+        },
+        QuadrantProfile { 
+            name: "B: Fluid Reality (Emergent Fraunhofer via Memory)", 
+            filename: "result_B_pfleegor_mandel.csv", 
+            with_turbulence: 1, measurement_sensor: 0, with_memory: 1, use_spin: 0 
+        },
+        QuadrantProfile {
+            name: "C: Quantum Magnus Effect (Fluid + Spin + Turbulence)",
+            filename: "result_C_magnus_spin.csv",
+            with_turbulence: 1, measurement_sensor: 0, with_memory: 1, use_spin: 1
+        },
+        QuadrantProfile {
+            name: "D: Stern-Gerlach (Only 1 Laser + Spin)", // NEW EXPERIMENT
+            filename: "result_D_single_laser.csv",
+            with_turbulence: 1, measurement_sensor: 1, with_memory: 1, use_spin: 1
         },
     ];
 
@@ -90,24 +92,28 @@ async fn run() {
         let start = Instant::now();
 
         let params = Params {
-            with_deflection: profile.with_deflection,
             with_turbulence: profile.with_turbulence,
             measurement_sensor: profile.measurement_sensor,
             total_photons: TOTAL_PHOTONS,
-            screen_width: 2000,    
-            center_x: 1000.0,      
-            slits_distance: 100.0, 
-            slit_width: 5.0,
-            base_tension: 150.0,  
-            with_vortices: profile.with_vortices,
-            with_pilot_wave: profile.with_pilot_wave,
+            screen_width: 2000,
+            laser_a_x: 900.0,       
+            laser_b_x: 1100.0,      
+            lasers_y: 100.0,        
+            screen_y: 900.0,        
+            base_tension: 150.0,    
+            decay_rate: 0.0001,     
+            wavelength: 18.0,       
+            with_memory: profile.with_memory,
+            use_spin: profile.use_spin,
+            photon_offset: 0, // Starts at zero, the loop will handle it
+            pad2: 0, 
             pad3: 0,
         };
 
         let params_buffer = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
             label: Some("Params Buffer"),
             contents: bytemuck::bytes_of(&params),
-            usage: BufferUsages::UNIFORM,
+            usage: BufferUsages::UNIFORM | BufferUsages::COPY_DST, // We need COPY_DST to update via batches
         });
 
         let screen_buffer_size = (2000 * std::mem::size_of::<ExtractedBucket>()) as u64;
@@ -115,6 +121,14 @@ async fn run() {
             label: Some("Screen Buffer"),
             size: screen_buffer_size,
             usage: BufferUsages::STORAGE | BufferUsages::COPY_SRC | BufferUsages::COPY_DST,
+            mapped_at_creation: false,
+        });
+
+        let wake_buffer_size = 16 + (256 * 16);
+        let wake_buffer = device.create_buffer(&wgpu::BufferDescriptor {
+            label: Some("Wake Memory Buffer"),
+            size: wake_buffer_size as u64,
+            usage: BufferUsages::STORAGE | BufferUsages::COPY_DST,
             mapped_at_creation: false,
         });
 
@@ -127,31 +141,51 @@ async fn run() {
 
         let bind_group_layout = compute_pipeline.get_bind_group_layout(0);
         let bind_group = device.create_bind_group(&wgpu::BindGroupDescriptor {
-            label: None,
+            label: Some("Main Bind Group"),
             layout: &bind_group_layout,
             entries: &[
                 wgpu::BindGroupEntry { binding: 0, resource: screen_buffer.as_entire_binding() },
                 wgpu::BindGroupEntry { binding: 1, resource: params_buffer.as_entire_binding() },
+                wgpu::BindGroupEntry { binding: 2, resource: wake_buffer.as_entire_binding() },
             ],
         });
 
-        let mut encoder = device.create_command_encoder(&CommandEncoderDescriptor { label: None });
-        {
-            let mut cpass = encoder.begin_compute_pass(&ComputePassDescriptor { label: None, timestamp_writes: None });
-            cpass.set_pipeline(&compute_pipeline);
-            cpass.set_bind_group(0, &bind_group, &[]);
-            
-            let max_groups_x = 65000;
-            let total_groups = (TOTAL_PHOTONS + 255) / 256;
-            
-            let dispatch_x = total_groups.min(max_groups_x);
-            let dispatch_y = (total_groups + max_groups_x - 1) / max_groups_x;
+        // ----------- BATCH SYSTEM (ANTI-TDR) -----------
+        let num_chunks = (TOTAL_PHOTONS + CHUNK_SIZE - 1) / CHUNK_SIZE;
 
-            cpass.dispatch_workgroups(dispatch_x, dispatch_y, 1);
+        for chunk in 0..num_chunks {
+            let offset = chunk * CHUNK_SIZE;
+            let current_chunk_size = if offset + CHUNK_SIZE > TOTAL_PHOTONS {
+                TOTAL_PHOTONS - offset
+            } else {
+                CHUNK_SIZE
+            };
+
+            // 1. Update the offset in the parameters buffer
+            let mut chunk_params = params;
+            chunk_params.photon_offset = offset;
+            queue.write_buffer(&params_buffer, 0, bytemuck::bytes_of(&chunk_params));
+
+            // 2. Dispatch the batch
+            let mut encoder = device.create_command_encoder(&CommandEncoderDescriptor { label: None });
+            {
+                let mut cpass = encoder.begin_compute_pass(&ComputePassDescriptor { label: None, timestamp_writes: None });
+                cpass.set_pipeline(&compute_pipeline);
+                cpass.set_bind_group(0, &bind_group, &[]);
+                
+                let dispatch_x = (current_chunk_size + 255) / 256;
+                cpass.dispatch_workgroups(dispatch_x, 1, 1);
+            }
+            queue.submit(Some(encoder.finish()));
+            
+            // 3. Wait for the GPU, preventing Windows timeout
+            device.poll(wgpu::Maintain::Wait); 
         }
-        
-        encoder.copy_buffer_to_buffer(&screen_buffer, 0, &staging_buffer, 0, screen_buffer_size);
-        queue.submit(Some(encoder.finish()));
+
+        // ----------- DOWNLOAD TO CPU -----------
+        let mut copy_encoder = device.create_command_encoder(&CommandEncoderDescriptor { label: None });
+        copy_encoder.copy_buffer_to_buffer(&screen_buffer, 0, &staging_buffer, 0, screen_buffer_size);
+        queue.submit(Some(copy_encoder.finish()));
 
         let (sender, receiver) = flume::bounded(1);
         staging_buffer.slice(..).map_async(wgpu::MapMode::Read, move |v| sender.send(v).unwrap());

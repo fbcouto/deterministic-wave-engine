@@ -9,16 +9,16 @@ struct HQPUVacuum {
     base_tension: f32,
 }
 
-// Alinhamento estrutural perfeito para emparelhamento com WGSL Compute Shaders
+// Perfect structural alignment for pairing with WGSL Compute Shaders
 struct VortexQubit {
     x: f32,
     y: f32,
     vx: f32,
     vy: f32,
-    spin_omega: f32,     // Helicidade/Orientação do vetor de spin invariável (±1.0)
-    frequency: f32,      // NOVO: Compactação topológica do núcleo do fuso
-    wake_amplitude: f32, // Força da esteira termodinâmica barométrica
-    padding1: f32,       // Garante alinhamento de 16/32 bytes
+    spin_omega: f32,     // Invariable spin vector helicity/orientation (±1.0)
+    frequency: f32,      // NEW: Topological compaction of the spindle core
+    wake_amplitude: f32, // Barometric thermodynamic wake force
+    padding1: f32,       // Guarantees 16/32 byte alignment
 }
 
 impl HQPUVacuum {
@@ -26,10 +26,10 @@ impl HQPUVacuum {
         if qubit.y > 100.0 && qubit.y < 150.0 {
             let gradient_pressure = (qubit.y * 0.2).sin() * vacuum_tension;
             
-            // Alteração da orientação do plano de rotação
+            // Change of the rotation plane orientation
             qubit.spin_omega += gradient_pressure * 0.05;
             
-            // O deslizamento lateral agora responde à compactação topológica (frequência)
+            // Lateral sliding now responds to topological compaction (frequency)
             qubit.vx += gradient_pressure * (qubit.frequency * 0.00066) * qubit.spin_omega.signum(); 
         }
     }
@@ -40,7 +40,7 @@ fn analytical_receiver(qubit: &VortexQubit, sensor_x: f32, sensor_y: f32) -> f32
     let dy = qubit.y - sensor_y;
     let distance = (dx * dx + dy * dy).sqrt().max(1.0);
     
-    // A esteira de pressão mecânica oscila com base no sinal da helicidade
+    // The mechanical pressure wake oscillates based on the helicity sign
     let pressure = (qubit.wake_amplitude / distance) * qubit.spin_omega.sin();
     pressure
 }
@@ -51,15 +51,16 @@ fn main() {
 
     let vacuum = HQPUVacuum { base_tension: 5.0 };
     
-    // Inicialização do Qubit seguindo o novo padrão estrutural
+    // Qubit initialization following the new structural pattern
     let mut qubit = VortexQubit { 
         x: 50.0, y: 0.0, vx: 0.0, vy: 2.0, 
-        spin_omega: 1.0,         // Magnitude unitária base para representação lógica
-        frequency: 30.0,        // Alta frequência = maior rigidez geométrica
+        spin_omega: 1.0,         // Base unitary magnitude for logical representation
+        frequency: 30.0,         // High frequency = greater geometric rigidity
         wake_amplitude: 25.0, 
         padding1: 0.0
     };
-    // Isso força o Rust a salvar o CSV dentro da subpasta analytics
+    
+    // This forces Rust to save the CSV inside the analytics subfolder
     let mut file = File::create("analytics/hqpu_readings.csv").expect("Failed to create CSV");
     writeln!(file, "Time_Y,Left_Sensor,Right_Sensor").unwrap();
 
