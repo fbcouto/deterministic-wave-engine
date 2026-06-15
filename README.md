@@ -44,6 +44,8 @@ Standard quantum mechanics relies on abstract probability waves ($\Psi$). The DW
 
 ## 📊 Experimental Matrix (The Four Quadrants)
 
+![pfleegor_mandel_raw_data_full10k](analytics/pfleegor_mandel_raw_data_full10k.png)
+
 The main simulation (`fenda_shader.wgsl`) executes four distinct operational states, toggling hydrodynamic parameters (turbulence, fluid memory, and spin) sent from the Rust host to the GPU kernel:
 
 | Quadrant / Dataset | Setup | Physical Interpretation (Parameters) | Emergent Visual Pattern |
@@ -69,6 +71,8 @@ This observation validates the core premise of the experiment: the probability w
 ---
 
 ## 💻 The Hydro-Quantum Processing Unit (HQPU)
+
+
 
 The second computational module of this repository (`hqpu.rs`) models the **HQPU** architecture, representing a paradigm shift from probabilistic computing to deterministic hydrodynamic logic. It encodes information in the topological stability of double-cone fluidic vortices.
 
