@@ -72,7 +72,7 @@ This observation validates the core premise of the experiment: the probability w
 
 ## 💻 The Hydro-Quantum Processing Unit (HQPU)
 
-
+![hqpu_leitura_qnd](analytics/hqpu_leitura_qnd.png)
 
 The second computational module of this repository (`hqpu.rs`) models the **HQPU** architecture, representing a paradigm shift from probabilistic computing to deterministic hydrodynamic logic. It encodes information in the topological stability of double-cone fluidic vortices.
 
