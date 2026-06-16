@@ -156,6 +156,8 @@ cargo run --release --bin hong_ou_mandel
 
 **Output:** Generates the continuous trajectory dataset `output.csv`.
 
+### 3: The EPR Paradox & The Tsirelson Bound
+
 ```bash
 cargo run --release --bin epr
 
@@ -171,7 +173,7 @@ cargo run --release --bin hqpu
 
 **Output:** Generates the thermodynamic sensor log `analytics/hqpu_readings.csv`.
 
-### 4. Generate High-Resolution Scientific Plots (Python)
+### Generate High-Resolution Scientific Plots (Python)
 
 To visualize the results with academic formatting and a clean white background, execute the scripts:
 
