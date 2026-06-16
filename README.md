@@ -15,6 +15,8 @@ The most accurate physical parallel to this software experiment is the study of 
 
 ## 🎯 Core Simulation 1: The Pfleegor-Mandel Experiment (1967)
 
+![pfleegor_mandel_raw_data_full10k](analytics/pfleegor_mandel_raw_data_full300k.png)
+
 Unlike traditional models that simulate the standard Double-Slit experiment, **this engine does not use physical slits**. Instead, it simulates the groundbreaking **Pfleegor-Mandel Experiment of 1967**.
 
 In 1967, physicists R. L. Pfleegor and Leonard Mandel achieved what was previously thought impossible: generating quantum interference using two completely independent sources of light.
@@ -33,6 +35,8 @@ Under orthodox quantum mechanics, interference occurs because a photon exists in
 
 ## 🌀 Core Simulation 2: The Hong-Ou-Mandel (HOM) Effect (1987)
 
+![Topological Scattering Matrix](analytics/matrix_4_possibilities.png)
+
 While the Pfleegor-Mandel setup challenges spatial superposition, the **Hong-Ou-Mandel (HOM) effect** is the ultimate test of quantum entanglement and bosonic indistinguishability.
 
 **The Setup Simulated in DWE:**
@@ -49,7 +53,40 @@ By altering initial hidden variables (sub-pixel spatial phases, $\Delta = 0.0314
 3. **Asynchronous (Temporal Delay 1):** Classical transmission (Broken HOM symmetry).
 4. **Asynchronous (Temporal Delay 2):** Classical reflection (Broken HOM symmetry).
 
-![Topological Scattering Matrix](matriz_4_possibilidades.png)
+---
+## 🌀 Core Simulation 3: The EPR Paradox & The Tsirelson Bound (2.82)
+
+![epr_spectral_plot](analytics/epr_spectral_plot.png)
+
+The DWE has successfully replicated the quantum mechanical violation of the Bell/CHSH inequality, achieving a stable correlation value of **$S = 2.8273$**. This is mathematically indistinguishable from the theoretical Tsirelson bound ($2\sqrt{2} \approx 2.8284$), which is the absolute maximum correlation allowed by quantum mechanics. Crucially, the engine achieves this strictly through classical fluid mechanics, local hidden variables (transverse phase), and the Fair Sampling (Detection) Loophole.
+
+**The Fluidic Mechanism:**
+The physical sensor (polarizer) is modeled as a geometric restriction grid. When a vortex-photon hits the grid, it undergoes an inelastic collision governed by the hydrodynamic projection of the Malus Law ($\cos^2(\Delta)$). 
+
+1. **Thermodynamic Friction:** The engine simulates a strict energy loss parameter (`perda_choque = 0.135`), meaning the particle loses exactly 13.5% of its kinetic energy upon geometric impact. 
+2. **Symmetric Survivorship:** If the remaining transmitted or reflected energy cannot overcome the vortex's internal structural resilience (its hidden variable), the vortex is physically absorbed and destroyed. Due to strict twin-coincidence logic, if one twin is absorbed, the pair is lost to the statistic.
+
+### The Super-Quantum Limit ($S=4.0$) vs. The Reality of Friction
+In frictionless theoretical tests, the engine can achieve $S = 4.0$ (materializing a hypothetical Popescu-Rohrlich Box) by applying an extreme structural restriction, leaving only the pairs that agree or disagree 100% of the time. 
+
+However, by computationally introducing the 13.5% thermodynamic shock dissipation and applying symmetric detection filtering, the perfect square wave of $S = 4.0$ naturally curves into the exact cosine wave predicted by quantum mechanics, stabilizing precisely at **2.8273**.
+
+### The Historical Context and the Origin of the Limit
+When Albert Einstein, Boris Podolsky, and Nathan Rosen formulated the EPR Paradox in 1935, they lacked the computational power to model non-linear fluid dynamics or topological solitons in an active vacuum. Later, Bell's Theorem relied on the "Fair Sampling" assumption, mathematically presuming that detectors do not play a selective, destructive role. 
+
+The DWE codebase computationally proves that the quantum limit of **2.828** is not a magical property of non-locality, but the inevitable thermodynamic consequence of continuous dissipative friction. The physical sensor does not extract a fair sample; it acts as a brutal structural filter. The Tsirelson bound is essentially the absolute limit of local classical mechanics dampened by the non-recoverable thermodynamic losses present in real-world fluid physics.
+
+---
+
+## 💻 Core Simulation 4 The Hydro-Quantum Processing Unit (HQPU)
+
+![hqpu_leitura_qnd](analytics/hqpu_leitura_qnd.png)
+
+The second computational module of this repository (`hqpu.rs`) models the **HQPU** architecture, representing a paradigm shift from probabilistic computing to deterministic hydrodynamic logic. It encodes information in the topological stability of double-cone fluidic vortices.
+
+* **The Vortex Qubit:** A stable vortex retaining structural integrity due to extreme equatorial kinetic energy. (A bit is represented by $\pm\omega$).
+* **Fluidic Logic Gates:** Processing occurs when Vortex Qubits traverse physical obstacles within the vacuum mesh, guided by fluid-boundary mechanics and the Quantum Magnus Effect.
+* **Quantum Non-Demolition (QND) Reading:** Instead of triggering a "wave-function collapse", we use high-precision analytical barometers positioned parallel to the trajectory. They measure the continuous barometric pressure of the thermodynamic wake generated by the vortex's spinning equator, reading the logical state without destroying the core's integrity.
 
 ---
 
@@ -65,8 +102,6 @@ Standard quantum mechanics relies on abstract probability waves ($\Psi$). The DW
 ---
 
 ## 📊 Experimental Matrix (The Four Quadrants)
-
-![pfleegor_mandel_raw_data_full10k](analytics/pfleegor_mandel_raw_data_full10k.png)
 
 The main simulation (`fenda_shader.wgsl`) executes four distinct operational states, toggling hydrodynamic parameters (turbulence, fluid memory, and spin) sent from the Rust host to the GPU kernel:
 
@@ -89,18 +124,6 @@ By running the simulation across different density scales, the engine visually p
 * **Fluid Regime (50,000,000 Photons):** As the computational limit scales, the chaotic individual events are subsumed into the smooth density distributions predicted by Born's Law. The interference fringes (Quadrants B and C) and the Stern-Gerlach split (Quadrant D) perfectly stabilize into harmonious statistical curves.
 
 This observation validates the core premise of the experiment: the probability wave is simply the final resting density of millions of deterministically guided corpuscles "surfing" a viscous medium.
-
----
-
-## 💻 The Hydro-Quantum Processing Unit (HQPU)
-
-![hqpu_leitura_qnd](analytics/hqpu_leitura_qnd.png)
-
-The second computational module of this repository (`hqpu.rs`) models the **HQPU** architecture, representing a paradigm shift from probabilistic computing to deterministic hydrodynamic logic. It encodes information in the topological stability of double-cone fluidic vortices.
-
-* **The Vortex Qubit:** A stable vortex retaining structural integrity due to extreme equatorial kinetic energy. (A bit is represented by $\pm\omega$).
-* **Fluidic Logic Gates:** Processing occurs when Vortex Qubits traverse physical obstacles within the vacuum mesh, guided by fluid-boundary mechanics and the Quantum Magnus Effect.
-* **Quantum Non-Demolition (QND) Reading:** Instead of triggering a "wave-function collapse", we use high-precision analytical barometers positioned parallel to the trajectory. They measure the continuous barometric pressure of the thermodynamic wake generated by the vortex's spinning equator, reading the logical state without destroying the core's integrity.
 
 ---
 
@@ -133,28 +156,6 @@ cargo run --release --bin hong_ou_mandel
 ```
 
 **Output:** Generates the continuous trajectory dataset `output.csv`.
-
-## 🌀 Core Simulation 3: The EPR Paradox & The Tsirelson Bound (2.82)
-
-![epr_spectral_plot](analytics/epr_spectral_plot.png)
-
-The DWE has successfully replicated the quantum mechanical violation of the Bell/CHSH inequality, achieving a stable correlation value of **$S = 2.8273$**. This is mathematically indistinguishable from the theoretical Tsirelson bound ($2\sqrt{2} \approx 2.8284$), which is the absolute maximum correlation allowed by quantum mechanics. Crucially, the engine achieves this strictly through classical fluid mechanics, local hidden variables (transverse phase), and the Fair Sampling (Detection) Loophole.
-
-**The Fluidic Mechanism:**
-The physical sensor (polarizer) is modeled as a geometric restriction grid. When a vortex-photon hits the grid, it undergoes an inelastic collision governed by the hydrodynamic projection of the Malus Law ($\cos^2(\Delta)$). 
-
-1. **Thermodynamic Friction:** The engine simulates a strict energy loss parameter (`perda_choque = 0.135`), meaning the particle loses exactly 13.5% of its kinetic energy upon geometric impact. 
-2. **Symmetric Survivorship:** If the remaining transmitted or reflected energy cannot overcome the vortex's internal structural resilience (its hidden variable), the vortex is physically absorbed and destroyed. Due to strict twin-coincidence logic, if one twin is absorbed, the pair is lost to the statistic.
-
-### The Super-Quantum Limit ($S=4.0$) vs. The Reality of Friction
-In frictionless theoretical tests, the engine can achieve $S = 4.0$ (materializing a hypothetical Popescu-Rohrlich Box) by applying an extreme structural restriction, leaving only the pairs that agree or disagree 100% of the time. 
-
-However, by computationally introducing the 13.5% thermodynamic shock dissipation and applying symmetric detection filtering, the perfect square wave of $S = 4.0$ naturally curves into the exact cosine wave predicted by quantum mechanics, stabilizing precisely at **2.8273**.
-
-### The Historical Context and the Origin of the Limit
-When Albert Einstein, Boris Podolsky, and Nathan Rosen formulated the EPR Paradox in 1935, they lacked the computational power to model non-linear fluid dynamics or topological solitons in an active vacuum. Later, Bell's Theorem relied on the "Fair Sampling" assumption, mathematically presuming that detectors do not play a selective, destructive role. 
-
-The DWE codebase computationally proves that the quantum limit of **2.828** is not a magical property of non-locality, but the inevitable thermodynamic consequence of continuous dissipative friction. The physical sensor does not extract a fair sample; it acts as a brutal structural filter. The Tsirelson bound is essentially the absolute limit of local classical mechanics dampened by the non-recoverable thermodynamic losses present in real-world fluid physics.
 
 ```bash
 cargo run --release --bin epr
