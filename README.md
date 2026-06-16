@@ -15,7 +15,7 @@ The most accurate physical parallel to this software experiment is the study of 
 
 ## 🎯 Core Simulation 1: The Pfleegor-Mandel Experiment (1967)
 
-![pfleegor_mandel_raw_data_full10k](analytics/pfleegor_mandel_raw_data_full300k.png)
+![pfleegor_mandel_raw_data_full300k](analytics/pfleegor_mandel_raw_data_full300k.png)
 
 Unlike traditional models that simulate the standard Double-Slit experiment, **this engine does not use physical slits**. Instead, it simulates the groundbreaking **Pfleegor-Mandel Experiment of 1967**.
 
@@ -132,6 +132,7 @@ This observation validates the core premise of the experiment: the probability w
 Ensure you have the Rust toolchain and Vulkan/DirectX (WebGPU) drivers installed. The Python scripts in the `analytics` folder require `pandas` and `matplotlib`.
 
 ### 1. Run the Photometric Simulator (4-Quadrant Matrix)
+![pfleegor_mandel_raw_data_full10k](analytics/pfleegor_mandel_raw_data_full10k.png)
 
 This module dispatches up to 50 million photons to the GPU in batches processed via Compute Shaders.
 
