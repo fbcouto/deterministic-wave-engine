@@ -20,20 +20,31 @@ struct Config {
 @group(0) @binding(1) var<uniform> config: Config;
 @group(0) @binding(2) var<storage, read_write> vacuum_grid: array<f32>;
 
-// Pure Geometric Polarizer (Structural Threshold Model)
+// Substitua a função apply_polarizer no seu arquivo WGSL
 fn apply_polarizer(p: Vortex, polarizer_angle: f32) -> f32 {
     let delta = p.pol_angle - polarizer_angle;
     
-    // Geometric stress function: cos(2 * delta) due to 180-degree Malus symmetry
-    let stress = cos(2.0 * delta); 
-
-    // Direct collision between external grating geometry and hidden internal resilience
-    if (stress >= p.transverse_phase) {
-        return 1.0;  // Channel +1 (Transmitted)
-    } else if (stress <= -p.transverse_phase) {
-        return -1.0; // Channel -1 (Deflected)
+    // 1. Projeção da Amplitude Hidrodinâmica
+    let amplitude_transmitida = cos(delta);
+    let amplitude_refletida = sin(delta);
+    
+    // 2. Pressão Dinâmica (Energia proporcional ao quadrado da amplitude)
+    // Isso revela a Lei de Malus de forma puramente estrutural/mecânica
+    let energia_transmitida = amplitude_transmitida * amplitude_transmitida; // cos^2(delta)
+    let energia_refletida = amplitude_refletida * amplitude_refletida;       // sin^2(delta)
+    
+    // 3. Dissipação Turbulenta (Energia perdida no impacto geométrico)
+    // Este valor atua como o "ruído" que força a amostragem injusta (Fair Sampling)
+    let perda_choque = 0.135; 
+    
+    // 4. Decisão de Colapso Topológico
+    // O vórtice é quantizado: ou ele sobrevive inteiro ou colapsa.
+    if (energia_transmitida >= (p.transverse_phase + perda_choque)) {
+        return 1.0;  // Flui pelas fendas do anteparo (Transmissão)
+    } else if (energia_refletida >= ((1.0 - p.transverse_phase) + perda_choque)) {
+        return -1.0; // Desliza pelo anteparo (Reflexão/Deflexão)
     } else {
-        return -2.0; // Channel -2 (Annihilated / Absorbed by the grid)
+        return -2.0; // Preso na geometria: o vórtice se desfaz e é absorvido
     }
 }
 

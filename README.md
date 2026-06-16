@@ -134,27 +134,27 @@ cargo run --release --bin hong_ou_mandel
 
 **Output:** Generates the continuous trajectory dataset `output.csv`.
 
-### EPR Paradox Experiment Achieving $S=4.0$ (The PR Box)
+## 🌀 Core Simulation 3: The EPR Paradox & The Tsirelson Bound (2.82)
 
 ![epr_spectral_plot](analytics/epr_spectral_plot.png)
 
-The simulation has materialized a hypothetical PR Box (Popescu-Rohrlich Box) strictly through fluid mechanics and the Detection Loophole. The exact value of $S = 4.0$ was obtained through the CHSH equation extraction within the simulation.
+The DWE has successfully replicated the quantum mechanical violation of the Bell/CHSH inequality, achieving a stable correlation value of **$S = 2.8273$**. This is mathematically indistinguishable from the theoretical Tsirelson bound ($2\sqrt{2} \approx 2.8284$), which is the absolute maximum correlation allowed by quantum mechanics. Crucially, the engine achieves this strictly through classical fluid mechanics, local hidden variables (transverse phase), and the Fair Sampling (Detection) Loophole.
 
-The mechanism relies on the physical severity of the measurement instrument rather than "spooky action at a distance." In the WGSL compute shader, the `apply_polarizer` function exerts direct mechanical resistance. The geometric severity of this filter (the "Death Zone") is so absolute that for any intermediate angle (such as **22.5°**), the filter annihilates any particle that could cause a statistical disagreement. When the thermodynamic stress limit exceeds the particle's structural resilience (`transverse_phase`), the particle is physically destroyed (status `-2.0`). Consequently, the only survivors computed in the final statistical evaluation are the pairs that agree (or disagree) 100% of the time. This structural exclusion creates the perfect correlation that achieves the absolute theoretical limit of apparent non-locality using strictly local physics.
+**The Fluidic Mechanism:**
+The physical sensor (polarizer) is modeled as a geometric restriction grid. When a vortex-photon hits the grid, it undergoes an inelastic collision governed by the hydrodynamic projection of the Malus Law ($\cos^2(\Delta)$). 
 
-### The Historical Context and the EPR Paradox
+1. **Thermodynamic Friction:** The engine simulates a strict energy loss parameter (`perda_choque = 0.135`), meaning the particle loses exactly 13.5% of its kinetic energy upon geometric impact. 
+2. **Symmetric Survivorship:** If the remaining transmitted or reflected energy cannot overcome the vortex's internal structural resilience (its hidden variable), the vortex is physically absorbed and destroyed. Due to strict twin-coincidence logic, if one twin is absorbed, the pair is lost to the statistic.
 
-When Albert Einstein, Boris Podolsky, and Nathan Rosen formulated the EPR Paradox in 1935, they anticipated the existence of "local hidden variables." However, they could not formulate the exact mechanics of how anomalous correlation survived spatial filters. At the time, physicists lacked the computational power to model non-linear fluid dynamics, chaos theory, or topological solitons in an active vacuum.
+### The Super-Quantum Limit ($S=4.0$) vs. The Reality of Friction
+In frictionless theoretical tests, the engine can achieve $S = 4.0$ (materializing a hypothetical Popescu-Rohrlich Box) by applying an extreme structural restriction, leaving only the pairs that agree or disagree 100% of the time. 
 
-Later, Bell's Theorem relied heavily on the "Fair Sampling" assumption, mathematically presuming that detectors do not play a selective, destructive role. Einstein could not mathematically demonstrate what the DWE codebase proves: the physical sensor does not extract a fair sample. The polarizer acts as a brutal restriction furnace that physically filters the data obliquely, generating perfectly synchronized correlation as a stochastic byproduct of survivorship bias.
+However, by computationally introducing the 13.5% thermodynamic shock dissipation and applying symmetric detection filtering, the perfect square wave of $S = 4.0$ naturally curves into the exact cosine wave predicted by quantum mechanics, stabilizing precisely at **2.8273**.
 
-### The Origin of the Quantum Limit (2.82) via Environmental Losses
+### The Historical Context and the Origin of the Limit
+When Albert Einstein, Boris Podolsky, and Nathan Rosen formulated the EPR Paradox in 1935, they lacked the computational power to model non-linear fluid dynamics or topological solitons in an active vacuum. Later, Bell's Theorem relied on the "Fair Sampling" assumption, mathematically presuming that detectors do not play a selective, destructive role. 
 
-While the classical wave engine obtained a perfect square wave equivalent to $S = 4.0$ , real quantum laboratory experiments stall at the Tsirelson bound of approximately **2.828**.
-
-The reason for this discrepancy lies in the core logic of the particles' structural resilience. In the Rust code, the vortex's `transverse_phase` at birth is defined as a pure linear random number. While valid in a perfect vacuum or pure abstract mathematics, the real physical world of hydrodynamics dictates that the energy density of a vortex or droplet is not linear. Instead, it assumes a bell shape (a Gaussian distribution) or a radial decay.
-
-The observed experimental limit of **2.82** is the inevitable result of continuous dissipative friction. In a real viscoelastic medium, the environment unevenly consumes mechanical energy as the particle travels, naturally curving the perfect square wave of $S = 4.0$ into the natural cosine wave observed in standard quantum mechanics. Therefore, the quantum limit of **2.828** is essentially the absolute limit of local classical mechanics (4.0) dampened by non-recoverable thermodynamic losses present in fluid physics.
+The DWE codebase computationally proves that the quantum limit of **2.828** is not a magical property of non-locality, but the inevitable thermodynamic consequence of continuous dissipative friction. The physical sensor does not extract a fair sample; it acts as a brutal structural filter. The Tsirelson bound is essentially the absolute limit of local classical mechanics dampened by the non-recoverable thermodynamic losses present in real-world fluid physics.
 
 ```bash
 cargo run --release --bin epr

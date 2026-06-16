@@ -52,10 +52,19 @@ async fn run() {
 
     let bind_group_layout = compute_pipeline.get_bind_group_layout(0);
 
-    let num_pairs = 10_000; 
+    let num_pairs = 100_000; 
     
-    // FULL MATRIX: 0°, 22.5°, 45°, 67.5°, and 90°
-    let angles = [0.0, PI / 8.0, PI / 4.0, 3.0 * PI / 8.0, PI / 2.0];
+    // --- NOVO GERADOR CONTÍNUO DE ÂNGULOS ---
+    let step_degrees = 7.5; // Resolução de 2.5 graus (atinge 22.5, 45 e 67.5 perfeitamente)
+    let max_degrees = 90.0;
+    
+    let mut angles = Vec::new();
+    let mut current_deg = 0.0;
+    while current_deg <= max_degrees {
+        angles.push(current_deg * (PI / 180.0));
+        current_deg += step_degrees;
+    }
+    
     let viscosities = [0.5];
     let grid_size = 1024 * 1024;
 
@@ -155,7 +164,8 @@ async fn run() {
                         let alice = result[p * 2]; let bob = result[p * 2 + 1];
                         
                         if alice.status == 0.0 || bob.status == 0.0 { continue; }
-                        if alice.status == -2.0 || bob.status == -2.0 {
+                       // if alice.status == -2.0 || bob.status == -2.0 {
+                        if alice.status == -2.0 || bob.status == -2.0{
                             absorbed += 1;
                             continue;
                         }

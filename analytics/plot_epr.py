@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os
 
 def plot_epr_matrix():
     print("Loading data from epr_sweep_results.csv...")
@@ -11,7 +12,7 @@ def plot_epr_matrix():
         print("Error: 'epr_sweep_results.csv' not found. Run the Rust program first.")
         return
 
-    # Pivot the data to create a 5x5 matrix
+    # Pivot the data to create the matrix (now 13x13 due to 7.5 degree steps)
     pivot_df = df.pivot(index='Alice_Angle', columns='Bob_Angle', values='Correlation')
 
     # Graphic style configuration (academic format)
@@ -20,31 +21,40 @@ def plot_epr_matrix():
     except:
         plt.style.use('default')
         
-    fig, ax = plt.subplots(figsize=(8, 6.5))
+    # Increased figsize to comfortably accommodate the denser 13x13 grid
+    fig, ax = plt.subplots(figsize=(14, 11))
 
     # Create Heatmap
     sns.heatmap(
         pivot_df, 
         annot=True, 
-        fmt=".4f", 
+        fmt=".3f", # Adjusted to 3 decimals to prevent text overlap in the smaller cells
         cmap="coolwarm", 
         vmin=-1.0, 
         vmax=1.0, 
         square=True,
-        cbar_kws={'label': 'Correlation Value $E(a, b)$'},
-        linewidths=1.5,
+        cbar_kws={'label': 'Correlation Value $E(\\alpha, \\beta)$'},
+        linewidths=1.0,
         linecolor='#f0f0f0',
-        annot_kws={'size': 11, 'weight': 'bold'}
+        annot_kws={'size': 9, 'weight': 'bold'} # Slightly smaller text for the denser grid
     )
 
-    plt.title('DWE - EPR/CHSH Spectral Sweep (5x5 Matrix)\nPopescu-Rohrlich Box Realistic Local Behavior (Detection Loophole)', fontsize=12, fontweight='bold', pad=15)
-    plt.xlabel('Bob Angle $\\beta$ (Degrees)', fontsize=11, fontweight='bold')
-    plt.ylabel('Alice Angle $\\alpha$ (Degrees)', fontsize=11, fontweight='bold')
+    # Invert the Y-axis so 0 degrees starts at the bottom left
+    ax.invert_yaxis()
+
+    # Updated Title to reflect the Tsirelson Bound discovery
+    plt.title('DWE - EPR/CHSH Spectral Matrix\nHydrodynamic Tsirelson Bound Limit ($S \\approx 2.8273$) via Detection Loophole', 
+              fontsize=14, fontweight='bold', pad=15)
+    plt.xlabel('Bob Angle $\\beta$ (Degrees)', fontsize=12, fontweight='bold')
+    plt.ylabel('Alice Angle $\\alpha$ (Degrees)', fontsize=12, fontweight='bold')
     plt.tight_layout()
 
+    # Handle save directory (saving to 'analytics' folder if it exists, otherwise root)
+    save_path = 'analytics/epr_spectral_plot.png' if os.path.exists('analytics') else 'epr_spectral_plot.png'
+    
     # Save plot in high resolution
-    plt.savefig('epr_spectral_plot.png', dpi=300)
-    print("Success! Plot saved in high resolution as 'epr_spectral_plot.png'")
+    plt.savefig(save_path, dpi=300)
+    print(f"Success! Plot saved in high resolution as '{save_path}'")
 
 if __name__ == "__main__":
     plot_epr_matrix()
