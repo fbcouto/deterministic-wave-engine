@@ -30,6 +30,27 @@ In 1967, physicists R. L. Pfleegor and Leonard Mandel achieved what was previous
 Under orthodox quantum mechanics, interference occurs because a photon exists in a superposition and "interferes with itself" by passing through two slits simultaneously. However, in the Pfleegor-Mandel setup, the photon clearly originates from either Laser A *or* Laser B.
 
 **The DWE Fluidic Solution:** The engine resolves this paradox deterministically. While the photon is a discrete particle, its movement through the viscoelastic vacuum generates an acoustic shockwave (a Pilot Wave). The vacuum retains an *acoustic memory* of these waves. Therefore, a photon emitted by Laser A interacts with the residual pressure ripples left in the vacuum by a previous photon from Laser B, guiding the new particle into discrete interference fringes without requiring quantum superposition.
+## 📊 Experimental Matrix (The Four Quadrants)
+
+The main simulation (`fenda_shader.wgsl`) executes four distinct operational states, toggling hydrodynamic parameters (turbulence, fluid memory, and spin) sent from the Rust host to the GPU kernel:
+
+| Quadrant / Dataset | Setup | Physical Interpretation (Parameters) | Emergent Visual Pattern |
+| --- | --- | --- | --- |
+| **A: Two Lasers** | 2 Lasers | **Classical Dispersion / No Memory:** Inert particles in a sterile vacuum. Acoustic memory and spin are disabled. | Purely ballistic/Gaussian smooth dispersion envelope overlapping at the center. |
+| **B: Fluid Reality** | 2 Lasers | **Turbulence + Memory:** Active vacuum reacting to acoustic pilot waves. | Rudimentary diffraction peaks begin to emerge due to the fluid path memory steering the particles. |
+| **C: Quantum Magnus Effect** | 2 Lasers | **Memory + Spin + Turbulence:** Full DWE model. Deterministic spin-friction coupled with the vacuum's structural tension gradient. | Hyper-sharp, defined interference grid (Fraunhofer lines) emerging from completely independent sources. |
+| **D: Stern-Gerlach** | **ONLY 1 LASER** | **Spin + Transverse Magnetic Field:** Employs a simulated magnetic field gradient to attract/deflect photons based on their intrinsic spin (clockwise vs. counter-clockwise). | Macro-separation of the single beam into two distinct peaks, demonstrating spatial splitting driven purely by rotational helicity. |
+
+## 📈 Statistical Buildup and the Emergence of $|\Psi|^2$
+
+A critical distinction of this experiment is its strict adherence to individual particle trajectory simulation. The "wave-function" ($\Psi$) is treated as an emergent macroscopic phenomenon, not a fundamental entity.
+
+By running the simulation across different density scales, the engine visually proves the **Law of Large Numbers**:
+
+* **Low-Density Regime (10,000 Photons):** The corpuscular nature dominates. Individual deterministic impacts appear stochastic and noisy ("Shot Noise"). In Experiment D, the distinct separation of the two spin states is visibly granular.
+* **Fluid Regime (50,000,000 Photons):** As the computational limit scales, the chaotic individual events are subsumed into the smooth density distributions predicted by Born's Law. The interference fringes (Quadrants B and C) and the Stern-Gerlach split (Quadrant D) perfectly stabilize into harmonious statistical curves.
+
+This observation validates the core premise of the experiment: the probability wave is simply the final resting density of millions of deterministically guided corpuscles "surfing" a viscous medium.
 
 ---
 
@@ -98,32 +119,6 @@ Standard quantum mechanics relies on abstract probability waves ($\Psi$). The DW
 2. **Conical Laser Emission (Box-Muller Transformation):** Real-world lasers do not emit rectangular blocks of light. DWE implements a true point-source conical beam using the *Box-Muller Transform*, delivering a perfect Gaussian intensity envelope.
 3. **Vacuum Memory & Acoustic Friction:** As the rotating vortex-photons travel through the vacuum, they leave thermodynamic energy ripples. Subsequent particles interact with this active fluidic gradient, steering them deterministically into macroscopic patterns.
 4. **Topological Compression & Emergent Frequency:** Higher-energy particles are ultra-compacted, rigid vortex cores. As this bubble travels, it creates a rhythmic trailing wave-train of pressure ripples. The **frequency ($\nu$)** is simply the spatial periodicity of this acoustic shockwave wake.
-
----
-
-## 📊 Experimental Matrix (The Four Quadrants)
-
-The main simulation (`fenda_shader.wgsl`) executes four distinct operational states, toggling hydrodynamic parameters (turbulence, fluid memory, and spin) sent from the Rust host to the GPU kernel:
-
-| Quadrant / Dataset | Setup | Physical Interpretation (Parameters) | Emergent Visual Pattern |
-| --- | --- | --- | --- |
-| **A: Two Lasers** | 2 Lasers | **Classical Dispersion / No Memory:** Inert particles in a sterile vacuum. Acoustic memory and spin are disabled. | Purely ballistic/Gaussian smooth dispersion envelope overlapping at the center. |
-| **B: Fluid Reality** | 2 Lasers | **Turbulence + Memory:** Active vacuum reacting to acoustic pilot waves. | Rudimentary diffraction peaks begin to emerge due to the fluid path memory steering the particles. |
-| **C: Quantum Magnus Effect** | 2 Lasers | **Memory + Spin + Turbulence:** Full DWE model. Deterministic spin-friction coupled with the vacuum's structural tension gradient. | Hyper-sharp, defined interference grid (Fraunhofer lines) emerging from completely independent sources. |
-| **D: Stern-Gerlach** | **ONLY 1 LASER** | **Spin + Transverse Magnetic Field:** Employs a simulated magnetic field gradient to attract/deflect photons based on their intrinsic spin (clockwise vs. counter-clockwise). | Macro-separation of the single beam into two distinct peaks, demonstrating spatial splitting driven purely by rotational helicity. |
-
----
-
-## 📈 Statistical Buildup and the Emergence of $|\Psi|^2$
-
-A critical distinction of this experiment is its strict adherence to individual particle trajectory simulation. The "wave-function" ($\Psi$) is treated as an emergent macroscopic phenomenon, not a fundamental entity.
-
-By running the simulation across different density scales, the engine visually proves the **Law of Large Numbers**:
-
-* **Low-Density Regime (10,000 Photons):** The corpuscular nature dominates. Individual deterministic impacts appear stochastic and noisy ("Shot Noise"). In Experiment D, the distinct separation of the two spin states is visibly granular.
-* **Fluid Regime (50,000,000 Photons):** As the computational limit scales, the chaotic individual events are subsumed into the smooth density distributions predicted by Born's Law. The interference fringes (Quadrants B and C) and the Stern-Gerlach split (Quadrant D) perfectly stabilize into harmonious statistical curves.
-
-This observation validates the core premise of the experiment: the probability wave is simply the final resting density of millions of deterministically guided corpuscles "surfing" a viscous medium.
 
 ---
 
