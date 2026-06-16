@@ -79,10 +79,10 @@ By altering initial hidden variables (sub-pixel spatial phases, $\Delta = 0.0314
 
 ![epr_spectral_plot](analytics/epr_spectral_plot.png)
 
-The DWE has successfully replicated the quantum mechanical violation of the Bell/CHSH inequality, achieving a stable correlation value of **$S = 2.8273$**. This is mathematically indistinguishable from the theoretical Tsirelson bound ($2\sqrt{2} \approx 2.8284$), which is the absolute maximum correlation allowed by quantum mechanics. Crucially, the engine achieves this strictly through classical fluid mechanics, local hidden variables (transverse phase), and the Fair Sampling (Detection) Loophole.
+The DWE has successfully replicated the quantum mechanical violation of the Bell/CHSH inequality, achieving a stable correlation value of **$S = 2.8273$**. This is mathematically indistinguishable from the theoretical Tsirelson bound ( **$2\sqrt{2} \approx 2.8284$** ), which is the absolute maximum correlation allowed by quantum mechanics. Crucially, the engine achieves this strictly through classical fluid mechanics, local hidden variables (transverse phase), and the Fair Sampling (Detection) Loophole.
 
 **The Fluidic Mechanism:**
-The physical sensor (polarizer) is modeled as a geometric restriction grid. When a vortex-photon hits the grid, it undergoes an inelastic collision governed by the hydrodynamic projection of the Malus Law ($\cos^2(\Delta)$). 
+The physical sensor (polarizer) is modeled as a geometric restriction grid. When a vortex-photon hits the grid, it undergoes an inelastic collision governed by the hydrodynamic projection of the Malus Law (**$\cos^2(\Delta)$**). 
 
 1. **Thermodynamic Friction:** The engine simulates a strict energy loss parameter (`perda_choque = 0.135`), meaning the particle loses exactly 13.5% of its kinetic energy upon geometric impact. 
 2. **Symmetric Survivorship:** If the remaining transmitted or reflected energy cannot overcome the vortex's internal structural resilience (its hidden variable), the vortex is physically absorbed and destroyed. Due to strict twin-coincidence logic, if one twin is absorbed, the pair is lost to the statistic.
