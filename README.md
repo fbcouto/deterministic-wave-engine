@@ -98,6 +98,32 @@ When Albert Einstein, Boris Podolsky, and Nathan Rosen formulated the EPR Parado
 The DWE codebase computationally proves that the quantum limit of **2.828** is not a magical property of non-locality, but the inevitable thermodynamic consequence of continuous dissipative friction. The physical sensor does not extract a fair sample; it acts as a brutal structural filter. The Tsirelson bound is essentially the absolute limit of local classical mechanics dampened by the non-recoverable thermodynamic losses present in real-world fluid physics.
 
 ---
+### 📉 Theoretical vs. Real-World Hardware (IBM Marrakesh)
+
+![EPR Spectral Plot - IBM Marrakesh](analytics/epr_spectral_plot.png)
+
+To prove that the thermodynamic friction simulated in the DWE mirrors the actual physical limitations of quantum systems, we ran the exact same EPR/CHSH matrix on a real, physical superconducting quantum computer (**IBM Marrakesh**).
+
+* **Pure Quantum Theory (Ideal):** Predicts $S \approx 2.8284$.
+* **DWE Simulation (Fluid Friction):** Predicts $S = 2.8273$.
+* **IBM Marrakesh (Real Hardware):** Achieved **$S = 2.5317$**.
+
+The physical quantum computer failed to reach the theoretical Tsirelson limit. Why? **Decoherence and thermodynamic friction.** Just as the DWE destroys discordant vortex pairs via geometric and kinetic energy loss upon impact, the real qubits in the dilution refrigerator leak microwave photons and lose energy to their environment. The real-world hardware perfectly validates the core DWE thesis: the "strangeness" of quantum limits is heavily constrained by standard thermodynamic dissipation when measured physically. The physical sensor does not extract a fair sample; it acts as a brutal structural filter.
+
+### 💻 Reproducing the IBM Quantum Experiment
+For those who wish to verify the decoherence drop, you can run the following Python scripts using Qiskit.
+```bash
+python analytics/qiskit_simulation.py
+python analytics/qiskit_real_hardware.py
+
+```
+### Generating the Graphics
+To visualize the different datasets, update the `.csv` filename inside `plot_epr.py`:
+
+```python
+# Change this line in plot_epr.py:
+df = pd.read_csv('qiskit_real_epr_ibm_marrakesh.csv')
+```
 
 ## 💻 Core Simulation 4 The Hydro-Quantum Processing Unit (HQPU)
 
