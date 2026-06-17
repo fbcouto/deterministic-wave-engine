@@ -79,7 +79,7 @@ By altering initial hidden variables (sub-pixel spatial phases, $\Delta = 0.0314
 
 ![epr_spectral_plot](analytics/epr_spectral_plot.png)
 
-The DWE has successfully replicated the quantum mechanical violation of the Bell/CHSH inequality, achieving a stable correlation value of **$S = 2.8273$**. This is mathematically indistinguishable from the theoretical Tsirelson bound ( **$2\sqrt{2} \approx 2.8284$** ), which is the absolute maximum correlation allowed by quantum mechanics. Crucially, the engine achieves this strictly through classical fluid mechanics, local hidden variables (transverse phase), and the Fair Sampling (Detection) Loophole.
+The DWE has successfully replicated the quantum mechanical violation of the Bell/CHSH inequality, achieving a stable correlation value of **$S = 2.8272$**. This is mathematically indistinguishable from the theoretical Tsirelson bound ( **$2\sqrt{2} \approx 2.8284$** ), which is the absolute maximum correlation allowed by quantum mechanics. Crucially, the engine achieves this strictly through classical fluid mechanics, local hidden variables (transverse phase), and the Fair Sampling (Detection) Loophole.
 
 **The Fluidic Mechanism:**
 The physical sensor (polarizer) is modeled as a geometric restriction grid. When a vortex-photon hits the grid, it undergoes an inelastic collision governed by the hydrodynamic projection of the Malus Law (**$\cos^2(\Delta)$**). 
@@ -90,7 +90,7 @@ The physical sensor (polarizer) is modeled as a geometric restriction grid. When
 ### The Super-Quantum Limit ($S=4.0$) vs. The Reality of Friction
 In frictionless theoretical tests, the engine can achieve $S = 4.0$ (materializing a hypothetical Popescu-Rohrlich Box) by applying an extreme structural restriction, leaving only the pairs that agree or disagree 100% of the time. 
 
-However, by computationally introducing the 13.5% thermodynamic shock dissipation and applying symmetric detection filtering, the perfect square wave of $S = 4.0$ naturally curves into the exact cosine wave predicted by quantum mechanics, stabilizing precisely at **2.8273**.
+However, by computationally introducing the 13.5% thermodynamic shock dissipation and applying symmetric detection filtering, the perfect square wave of $S = 4.0$ naturally curves into the exact cosine wave predicted by quantum mechanics, stabilizing precisely at **2.8272**.
 
 ### The Historical Context and the Origin of the Limit
 When Albert Einstein, Boris Podolsky, and Nathan Rosen formulated the EPR Paradox in 1935, they lacked the computational power to model non-linear fluid dynamics or topological solitons in an active vacuum. Later, Bell's Theorem relied on the "Fair Sampling" assumption, mathematically presuming that detectors do not play a selective, destructive role. 
@@ -100,12 +100,12 @@ The DWE codebase computationally proves that the quantum limit of **2.828** is n
 ---
 ### 📉 Theoretical vs. Real-World Hardware (IBM Marrakesh)
 
-![EPR Spectral Plot - IBM Marrakesh](analytics/epr_spectral_plot.png)
+![EPR Spectral Plot - IBM Marrakesh](analytics/epr_spectral_plot_quantum.png)
 
 To prove that the thermodynamic friction simulated in the DWE mirrors the actual physical limitations of quantum systems, we ran the exact same EPR/CHSH matrix on a real, physical superconducting quantum computer (**IBM Marrakesh**).
 
 * **Pure Quantum Theory (Ideal):** Predicts $S \approx 2.8284$.
-* **DWE Simulation (Fluid Friction):** Predicts $S = 2.8273$.
+* **DWE Simulation (Fluid Friction):** Predicts $S = 2.8272$.
 * **IBM Marrakesh (Real Hardware):** Achieved **$S = 2.5317$**.
 
 The physical quantum computer failed to reach the theoretical Tsirelson limit. Why? **Decoherence and thermodynamic friction.** Just as the DWE destroys discordant vortex pairs via geometric and kinetic energy loss upon impact, the real qubits in the dilution refrigerator leak microwave photons and lose energy to their environment. The real-world hardware perfectly validates the core DWE thesis: the "strangeness" of quantum limits is heavily constrained by standard thermodynamic dissipation when measured physically. The physical sensor does not extract a fair sample; it acts as a brutal structural filter.

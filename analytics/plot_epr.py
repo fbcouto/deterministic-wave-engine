@@ -7,7 +7,7 @@ def plot_epr_matrix():
     print("Carregando dados...")
     try:
         # Carrega os dados gerados pelo simulador (DWE ou Qiskit)
-        df = pd.read_csv('qiskit_real_epr_ibm_marrakesh.csv')
+        df = pd.read_csv('epr_sweep_results.csv')
     except FileNotFoundError:
         print("Erro: Arquivo CSV não encontrado. Rode o simulador primeiro.")
         return
