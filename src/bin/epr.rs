@@ -55,7 +55,7 @@ async fn run() {
     let num_pairs = 100_000; 
     
     // --- NOVO GERADOR CONTÍNUO DE ÂNGULOS ---
-    let step_degrees = 7.5; // Resolução de 2.5 graus (atinge 22.5, 45 e 67.5 perfeitamente)
+    let step_degrees = 22.5; // Resolução de 2.5 graus (atinge 22.5, 45 e 67.5 perfeitamente)
     let max_degrees = 90.0;
     
     let mut angles = Vec::new();
@@ -164,7 +164,6 @@ async fn run() {
                         let alice = result[p * 2]; let bob = result[p * 2 + 1];
                         
                         if alice.status == 0.0 || bob.status == 0.0 { continue; }
-                       // if alice.status == -2.0 || bob.status == -2.0 {
                         if alice.status == -2.0 || bob.status == -2.0{
                             absorbed += 1;
                             continue;

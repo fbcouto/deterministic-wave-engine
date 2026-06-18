@@ -15,7 +15,12 @@ The most accurate physical parallel to this software experiment is the study of 
 
 ## 🎯 Core Simulation 1: The Pfleegor-Mandel Experiment (1967)
 
-![pfleegor_mandel_raw_data_full300k](analytics/pfleegor_mandel_raw_data_full300k.png)
+![Classical Dispersion 300k photons](analytics/300k/pfleegor_mandel_panel_A.svg)
+![Turbulence + Memory 300k photons](analytics/300k/pfleegor_mandel_panel_B.svg)
+![Quantum Magnus Effect = Memory + Spin + Turbulence 300k photons](analytics/300k/pfleegor_mandel_panel_C.svg)
+![Stern-Gerlach ONLY 1 LASER Spin + Transverse Magnetic Field 300k photons](analytics/300k/pfleegor_mandel_panel_D.svg)
+![Stern-Gerlach ONLY 1 LASER Spin + Transverse Magnetic Field 10k photons](analytics/10k/pfleegor_mandel_panel_D.svg)
+
 
 Unlike traditional models that simulate the standard Double-Slit experiment, **this engine does not use physical slits**. Instead, it simulates the groundbreaking **Pfleegor-Mandel Experiment of 1967**.
 
@@ -56,7 +61,10 @@ This observation validates the core premise of the experiment: the probability w
 
 ## 🌀 Core Simulation 2: The Hong-Ou-Mandel (HOM) Effect (1987)
 
-![Topological Scattering Matrix](analytics/matrix_4_possibilities.png)
+![Topological Scattering Matrix Quadrant 1](analytics/hom_scattering_scenario_1.svg)
+![Topological Scattering Matrix Quadrant 2](analytics/hom_scattering_scenario_2.svg)
+![Topological Scattering Matrix Quadrant 3](analytics/hom_scattering_scenario_3.svg)
+![Topological Scattering Matrix Quadrant 4](analytics/hom_scattering_scenario_4.svg)
 
 While the Pfleegor-Mandel setup challenges spatial superposition, the **Hong-Ou-Mandel (HOM) effect** is the ultimate test of quantum entanglement and bosonic indistinguishability.
 
@@ -77,7 +85,7 @@ By altering initial hidden variables (sub-pixel spatial phases, $\Delta = 0.0314
 ---
 ## 🌀 Core Simulation 3: The EPR Paradox & The Tsirelson Bound (2.82)
 
-![epr_spectral_plot](analytics/epr_spectral_plot.png)
+![epr_spectral_plot_DWE](analytics/epr_spectral_plot_DWE.svg)
 
 The DWE has successfully replicated the quantum mechanical violation of the Bell/CHSH inequality, achieving a stable correlation value of **$S = 2.8272$**. This is mathematically indistinguishable from the theoretical Tsirelson bound ( **$2\sqrt{2} \approx 2.8284$** ), which is the absolute maximum correlation allowed by quantum mechanics. Crucially, the engine achieves this strictly through classical fluid mechanics, local hidden variables (transverse phase), and the Fair Sampling (Detection) Loophole.
 
@@ -100,7 +108,7 @@ The DWE codebase computationally proves that the quantum limit of **2.828** is n
 ---
 ### 📉 Theoretical vs. Real-World Hardware (IBM Marrakesh)
 
-![EPR Spectral Plot - IBM Marrakesh](analytics/epr_spectral_plot_quantum.png)
+![EPR Spectral Plot - IBM Marrakesh](analytics/epr_spectral_plot_quantum.svg)
 
 To prove that the thermodynamic friction simulated in the DWE mirrors the actual physical limitations of quantum systems, we ran the exact same EPR/CHSH matrix on a real, physical superconducting quantum computer (**IBM Marrakesh**).
 
@@ -127,7 +135,7 @@ df = pd.read_csv('qiskit_real_epr_ibm_marrakesh.csv')
 
 ## 💻 Core Simulation 4 The Hydro-Quantum Processing Unit (HQPU)
 
-![hqpu_leitura_qnd](analytics/hqpu_leitura_qnd.png)
+![hqpu_qnd_reading](analytics/hqpu_qnd_reading.svg)
 
 The second computational module of this repository (`hqpu.rs`) models the **HQPU** architecture, representing a paradigm shift from probabilistic computing to deterministic hydrodynamic logic. It encodes information in the topological stability of double-cone fluidic vortices.
 
@@ -153,7 +161,6 @@ Standard quantum mechanics relies on abstract probability waves ($\Psi$). The DW
 Ensure you have the Rust toolchain and Vulkan/DirectX (WebGPU) drivers installed. The Python scripts in the `analytics` folder require `pandas` and `matplotlib`.
 
 ### 1. Run the Photometric Simulator (4-Quadrant Matrix)
-![pfleegor_mandel_raw_data_full10k](analytics/pfleegor_mandel_raw_data_full10k.png)
 
 This module dispatches up to 50 million photons to the GPU in batches processed via Compute Shaders.
 

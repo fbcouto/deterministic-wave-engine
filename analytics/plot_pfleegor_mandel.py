@@ -3,68 +3,65 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import os
 
-# Academic / Publication Style
 mpl.rcParams.update({
-    'font.size': 12,
+    'font.size': 14,
     'font.family': 'serif',
+    'font.serif': ['Computer Modern Roman', 'Times New Roman', 'serif'],
+    'mathtext.fontset': 'cm',
     'axes.facecolor': 'white',
     'figure.facecolor': 'white',
     'text.color': 'black',
     'axes.labelcolor': 'black',
     'xtick.color': 'black',
-    'ytick.color': 'black'
+    'ytick.color': 'black',
+    'axes.linewidth': 1.5
 })
 
-# Creates the FOUR subplots
-fig, axes = plt.subplots(4, 1, figsize=(14, 16), sharex=True)
-
 base_file = 'result_A_no_memory.csv'
-total_photons = 0
+global_total_photons = 0
+
 if os.path.exists(base_file):
     df_base = pd.read_csv(base_file)
-    total_photons = int(df_base['Green'].sum())
+    global_total_photons = int(df_base['Green'].sum())
 
-# English title and comma as thousand separator
-fig.suptitle(
-    'DWE V4.0 - Evolution of Classical Wave Mechanics\n'
-    'Angled Lasers Converging to the Center (RAW DATA)\n'
-    f'Total Photons Detected: {total_photons:,}', 
-    fontsize=16, fontweight='bold', y=0.96
-)
-
-# Colors adjusted to be readable on a white background
 data_files = [
-    ('result_A_no_memory.csv', 'A: Two Lasers (Classical Dispersion / No Memory)', '#d95f02'), # Dark Orange
-    ('result_B_pfleegor_mandel.csv', 'B: Fluid Reality (Turbulence + Memory)', '#1b9e77'), # Forest Green
-    ('result_C_magnus_spin.csv', 'C: Quantum Magnus Effect (Emergent Fraunhofer = Memory + Spin + Turbulence)', '#e7298a'), # Crimson/Pink
-    ('result_D_single_laser.csv', 'D: Stern-Gerlach Experiment (ONLY 1 LASER + Spin)', '#0072b2') # Teal/Blue
+    ('result_A_no_memory.csv', 'A: Two Lasers (Classical Dispersion / No Memory)', '#d95f02', 'panel_A'),
+    ('result_B_pfleegor_mandel.csv', 'B: Fluid Reality (Turbulence + Memory)', '#1b9e77', 'panel_B'),
+    ('result_C_magnus_spin.csv', 'C: Quantum Magnus Effect (Memory + Spin + Turbulence)', '#e7298a', 'panel_C'),
+    ('result_D_single_laser.csv', 'D: Stern-Gerlach Experiment (ONLY 1 LASER + Spin + Transverse Magnetic Field)', '#0072b2', 'panel_D')
 ]
 
-for ax, (filename, title, color) in zip(axes, data_files):
+for filename, title, color, suffix in data_files:
+    fig, ax = plt.subplots(figsize=(8, 5))
+    
     if os.path.exists(filename):
         df = pd.read_csv(filename)
         x = df['X']
         y = df['Green'] 
         
-        ax.set_title(title, fontsize=12, pad=10)
-        ax.bar(x, y, color=color, width=1.0, alpha=0.9)
+        dynamic_title = f"{title}\nTotal Photons: {global_total_photons:,}"
+        
+        ax.bar(x, y, color=color, width=1.0)
         
         current_peak = y.max()
-        ax.set_ylabel('Raw Photons')
-        ax.grid(True, alpha=0.15, linestyle='--', color='black') # Subtle grid
-        ax.set_xlim(0, 2000)
+        ax.set_ylabel('Raw Photons', fontweight='bold')
+        ax.set_xlabel('CCD Sensor Pixel (X-Axis)', fontweight='bold')
+        
+        ax.grid(True, linestyle='--', color='#d3d3d3')
+        
+        ax.set_xlim(0, 2000) 
         
         if current_peak > 0:
             ax.set_ylim(0, current_peak * 1.15)
+            
+        ax.set_title(dynamic_title, fontsize=14, pad=15)
+        
+        output_filename_base = f'pfleegor_mandel_{suffix}'
+        plt.tight_layout()
+        plt.savefig(f'{output_filename_base}.svg', format='svg', dpi=600, bbox_inches='tight')
+        plt.savefig(f'{output_filename_base}.eps', format='eps', dpi=600, bbox_inches='tight')
+        print(f"Generated: {output_filename_base} (SVG and EPS)")
     else:
-        ax.text(0.5, 0.5, f'File not found:\n{filename}', 
-                horizontalalignment='center', verticalalignment='center', 
-                transform=ax.transAxes, color='#ff4444', fontsize=12)
-
-axes[-1].set_xlabel('CCD Sensor Pixel (X-Axis)', fontsize=12)
-plt.subplots_adjust(hspace=0.4)
-
-output_filename = 'pfleegor_mandel_raw_data_full.png'
-plt.savefig(output_filename, dpi=300, bbox_inches='tight')
-print(f"Plot successfully generated and saved as: {output_filename}")
-plt.close()
+        print(f"Warning: File {filename} not found.")
+        
+    plt.close(fig)

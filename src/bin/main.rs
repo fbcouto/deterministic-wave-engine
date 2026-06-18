@@ -5,7 +5,7 @@ use std::time::Instant;
 use wgpu::util::DeviceExt;
 use wgpu::{BufferUsages, CommandEncoderDescriptor, ComputePassDescriptor, ComputePipelineDescriptor};
 
-const TOTAL_PHOTONS: u32 = 50_000_000;
+const TOTAL_PHOTONS: u32 = 10_000;
 const CHUNK_SIZE: u32 = 50_000; // Sends 50k at a time to let the GPU breathe
 
 #[repr(C)]

@@ -35,7 +35,7 @@ fn apply_polarizer(p: Vortex, polarizer_angle: f32) -> f32 {
     
     // 3. Dissipação Turbulenta (Energia perdida no impacto geométrico)
     // Este valor atua como o "ruído" que força a amostragem injusta (Fair Sampling)
-    let perda_choque = 0.135; 
+    let perda_choque = 0.1342; 
     
     // 4. Decisão de Colapso Topológico
     // O vórtice é quantizado: ou ele sobrevive inteiro ou colapsa.

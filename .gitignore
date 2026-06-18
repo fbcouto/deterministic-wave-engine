@@ -1,4 +1,7 @@
 /target
 
 # Ignorar Datasets Massivos da GPU
-datasets/
+*.eps
+*.csv
+*.odt
+
