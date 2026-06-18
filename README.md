@@ -1,4 +1,4 @@
-# Deterministic Wave Engine (DWE) - Version 5.0
+# Deterministic Wave Engine (DWE) - Version 6.0
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Built with Rust](https://img.shields.io/badge/Built%20with-Rust-orange.svg)](https://www.rust-lang.org/)
 [![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.20417434-blue.svg)](https://doi.org/10.5281/zenodo.20417434)
