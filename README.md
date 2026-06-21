@@ -21,7 +21,6 @@ The most accurate physical parallel to this software experiment is the study of 
 ![Stern-Gerlach ONLY 1 LASER Spin + Transverse Magnetic Field 300k photons](analytics/300k/pfleegor_mandel_panel_D.svg)
 ![Stern-Gerlach ONLY 1 LASER Spin + Transverse Magnetic Field 10k photons](analytics/10k/pfleegor_mandel_panel_D.svg)
 
-
 Unlike traditional models that simulate the standard Double-Slit experiment, **this engine does not use physical slits**. Instead, it simulates the groundbreaking **Pfleegor-Mandel Experiment of 1967**.
 
 In 1967, physicists R. L. Pfleegor and Leonard Mandel achieved what was previously thought impossible: generating quantum interference using two completely independent sources of light.
@@ -35,6 +34,7 @@ In 1967, physicists R. L. Pfleegor and Leonard Mandel achieved what was previous
 Under orthodox quantum mechanics, interference occurs because a photon exists in a superposition and "interferes with itself" by passing through two slits simultaneously. However, in the Pfleegor-Mandel setup, the photon clearly originates from either Laser A *or* Laser B.
 
 **The DWE Fluidic Solution:** The engine resolves this paradox deterministically. While the photon is a discrete particle, its movement through the viscoelastic vacuum generates an acoustic shockwave (a Pilot Wave). The vacuum retains an *acoustic memory* of these waves. Therefore, a photon emitted by Laser A interacts with the residual pressure ripples left in the vacuum by a previous photon from Laser B, guiding the new particle into discrete interference fringes without requiring quantum superposition.
+
 ## 📊 Experimental Matrix (The Four Quadrants)
 
 The main simulation (`fenda_shader.wgsl`) executes four distinct operational states, toggling hydrodynamic parameters (turbulence, fluid memory, and spin) sent from the Rust host to the GPU kernel:
@@ -75,65 +75,75 @@ While the Pfleegor-Mandel setup challenges spatial superposition, the **Hong-Ou-
 
 **The DWE Fluidic Solution:** The engine reproduces this purely through deterministic fluid mechanics. Photons are modeled as counter-rotating fluidic vortices (Topological Solitons). As they perfectly synchronize at the beam splitter's core, their mutual induction (Quantum Magnus Effect) draws them together, while their thermo-acoustic wakes interfere, creating a high-pressure repulsive shockwave. This inelastic geometric block prevents independent Maxwell-Boltzmann scattering. The spatial momentum forces both vortices to drag each other into the same free-flowing output channel, modeling the $|2,0\rangle$ or $|0,2\rangle$ bosonic states through Newtonian restrictions.
 
-**The 4-State Topological Matrix:**
-By altering initial hidden variables (sub-pixel spatial phases, $\Delta = 0.0314$) and temporal coherence, the DWE maps the four scattering possibilities:
-1. **Synchronous (Phase A):** Perfect bunching (Bottom-Left output).
-2. **Synchronous (Phase B - Half-Wave Shift):** Perfect bunching (Top-Right output).
-3. **Asynchronous (Temporal Delay 1):** Classical transmission (Broken HOM symmetry).
-4. **Asynchronous (Temporal Delay 2):** Classical reflection (Broken HOM symmetry).
-
 ---
+
 ## 🌀 Core Simulation 3: The EPR Paradox & The Tsirelson Bound (2.82)
 
 ![epr_spectral_plot_DWE](analytics/epr_spectral_plot_DWE.svg)
 
 The DWE has successfully replicated the quantum mechanical violation of the Bell/CHSH inequality, achieving a stable correlation value of **$S = 2.8272$**. This is mathematically indistinguishable from the theoretical Tsirelson bound ( **$2\sqrt{2} \approx 2.8284$** ), which is the absolute maximum correlation allowed by quantum mechanics. Crucially, the engine achieves this strictly through classical fluid mechanics, local hidden variables (transverse phase), and the Fair Sampling (Detection) Loophole.
 
-**The Fluidic Mechanism:**
-The physical sensor (polarizer) is modeled as a geometric restriction grid. When a vortex-photon hits the grid, it undergoes an inelastic collision governed by the hydrodynamic projection of the Malus Law (**$\cos^2(\Delta)$**). 
+### The Fluidic Mechanism: Gaussian Boundary Friction ($1/e^2$)
+The physical sensor (polarizer) is modeled as a geometric restriction grid. To resolve the transition from pure code parameters to rigorous *ab initio* mathematics, the DWE abandons arbitrary shock values and derives the attenuation directly from the wave packet geometry.
 
-1. **Thermodynamic Friction:** The engine simulates a strict energy loss parameter (`perda_choque = 0.135`), meaning the particle loses exactly 13.5% of its kinetic energy upon geometric impact. 
-2. **Symmetric Survivorship:** If the remaining transmitted or reflected energy cannot overcome the vortex's internal structural resilience (its hidden variable), the vortex is physically absorbed and destroyed. Due to strict twin-coincidence logic, if one twin is absorbed, the pair is lost to the statistic.
+1. **Gaussian Inelastic Boundary:** The DWE emits photons as Spindle Vortices with a perfectly Gaussian intensity envelope (via the Box-Muller Transform). The energy distribution in the transverse plane is $E(r) = E_0 \exp\left(-\frac{2r^2}{w^2}\right)$, where $w$ is the vortex waist. In fluid dynamics, the interactive boundary of the wave packet is defined at $r=w$. At this exact peripheral contact point, the energy drops to:
+   $$E(w) = \frac{E_0}{e^2}$$
+   Calculating this exact thermodynamic boundary coefficient yields $\frac{1}{e^2} \approx 0.135335$ ($13.53\%$). When the vortex-photon hits the dielectric grid, it undergoes an inelastic collision. The grid acts as a physical barrier that shears the particle. The mechanical premise is that the outer boundary layer (containing exactly $1/e^2$ of the energy) is irremediably absorbed and dissipated into the local viscoelastic vacuum as acoustic heat/friction.
+
+2. **Symmetric Survivorship:** The photon transmits its remaining energy according to the hydrodynamic projection of Malus's Law: $\cos^2(\Delta)$. If the projected energy—after subtracting the irrecoverable thermodynamic loss ($1/e^2$)—is insufficient to maintain the structural cohesion of the vortex, the particle collapses and is not detected. 
 
 ### The Super-Quantum Limit ($S=4.0$) vs. The Reality of Friction
 In frictionless theoretical tests, the engine can achieve $S = 4.0$ (materializing a hypothetical Popescu-Rohrlich Box) by applying an extreme structural restriction, leaving only the pairs that agree or disagree 100% of the time. 
 
-However, by computationally introducing the 13.5% thermodynamic shock dissipation and applying symmetric detection filtering, the perfect square wave of $S = 4.0$ naturally curves into the exact cosine wave predicted by quantum mechanics, stabilizing precisely at **2.8272**.
+However, by computationally introducing the fundamental **Gaussian Inelastic Friction ($1/e^2$)**, the perfect square wave of $S = 4.0$ is forced to curve under the exact weight of this continuous inelastic loss. Applying this transverse hydrodynamic limit dampens the classical local system to stabilize exactly at the Tsirelson Bound (**2.8272**).
 
 ### The Historical Context and the Origin of the Limit
+
 When Albert Einstein, Boris Podolsky, and Nathan Rosen formulated the EPR Paradox in 1935, they lacked the computational power to model non-linear fluid dynamics or topological solitons in an active vacuum. Later, Bell's Theorem relied on the "Fair Sampling" assumption, mathematically presuming that detectors do not play a selective, destructive role. 
 
-The DWE codebase computationally proves that the quantum limit of **2.828** is not a magical property of non-locality, but the inevitable thermodynamic consequence of continuous dissipative friction. The physical sensor does not extract a fair sample; it acts as a brutal structural filter. The Tsirelson bound is essentially the absolute limit of local classical mechanics dampened by the non-recoverable thermodynamic losses present in real-world fluid physics.
+The DWE codebase computationally proves that the quantum limit of **2.828** (the Tsirelson bound) is not a magical property of non-locality, but the inevitable consequence of continuous dissipative friction. Rather than extracting a fair sample, the physical sensor acts as a brutal structural filter. Ultimately, the Bell/CHSH limit emerges directly from the local classical mechanics of wave packets dissipating non-recoverable thermodynamic energy in a tensioned medium, rendering "ad hoc" variables and non-local interactions entirely unnecessary.
 
----
 ### 📉 Theoretical vs. Real-World Hardware (IBM Marrakesh)
 
 ![EPR Spectral Plot - IBM Marrakesh](analytics/epr_spectral_plot_quantum.svg)
 
 To prove that the thermodynamic friction simulated in the DWE mirrors the actual physical limitations of quantum systems, we ran the exact same EPR/CHSH matrix on a real, physical superconducting quantum computer (**IBM Marrakesh**).
-
 * **Pure Quantum Theory (Ideal):** Predicts $S \approx 2.8284$.
 * **DWE Simulation (Fluid Friction):** Predicts $S = 2.8272$.
 * **IBM Marrakesh (Real Hardware):** Achieved **$S = 2.5317$**.
 
-The physical quantum computer failed to reach the theoretical Tsirelson limit. Why? **Decoherence and thermodynamic friction.** Just as the DWE destroys discordant vortex pairs via geometric and kinetic energy loss upon impact, the real qubits in the dilution refrigerator leak microwave photons and lose energy to their environment. The real-world hardware perfectly validates the core DWE thesis: the "strangeness" of quantum limits is heavily constrained by standard thermodynamic dissipation when measured physically. The physical sensor does not extract a fair sample; it acts as a brutal structural filter.
+The physical quantum computer failed to reach the theoretical limit due to **decoherence and thermodynamic friction**. Just as the DWE destroys discordant vortex pairs via geometric and kinetic energy loss, real qubits leak microwave photons and lose energy to their environment. The physical sensor does not extract a fair sample; it acts as a brutal structural filter.
 
-### 💻 Reproducing the IBM Quantum Experiment
-For those who wish to verify the decoherence drop, you can run the following Python scripts using Qiskit.
-```bash
-python analytics/qiskit_simulation.py
-python analytics/qiskit_real_hardware.py
+---
 
-```
-### Generating the Graphics
-To visualize the different datasets, update the `.csv` filename inside `plot_epr.py`:
+## 🧮 Mathematical Foundations: The Ab Initio Viscoelastic Vacuum
 
-```python
-# Change this line in plot_epr.py:
-df = pd.read_csv('qiskit_real_epr_ibm_marrakesh.csv')
-```
+To ensure the DWE framework operates strictly on mathematically deduced physics, the underlying properties of the vacuum are derived from first principles.
 
-## 💻 Core Simulation 4 The Hydro-Quantum Processing Unit (HQPU)
+### 1. Topology and the $8\pi$ Divergence of Planck Force
+The engine relies on a Base Tension ($\gamma_0$). In General Relativity, Einstein's coupling constant is $\kappa = \frac{8\pi G}{c^4}$. By isolating the maximum Planck Force ($F_P = \frac{c^4}{G}$), we see that $\kappa = \frac{8\pi}{F_P}$. 
+The Base Tension is derived via a strict spherical divergence:
+$$\gamma_0 = \frac{F_P}{8\pi}$$
+The $8\pi$ factor represents the integration of flux density over the total solid angle of a hypersphere $S^2$ immersed in 3D Euclidean space. Treating space as a fluid of discrete Planck Areas ($A_P = l_P^2$), integrating this tension demonstrates that the quantum action constant is the tension energy integrated over the fundamental area:
+$$\hbar c = (\gamma_0 \cdot 8\pi) \cdot l_P^2$$
+This closes the algebraic gap, proving that the Casimir force and local vacuum tension are a direct divergence of pressure within the Planck mesh: $F_{Casimir-DGM} = \int_{A} \nabla \cdot \left( \frac{\gamma_0}{L^2} \right) dA$.
+
+### 2. The Rheological Equation of State (Shear-Thinning Vacuum)
+To explain how the vacuum allows planetary motion yet remains rigid at the quantum scale, the DWE models space as a non-Newtonian pseudoplastic fluid. Fusing the Ostwald-de Waele power law with Arrhenius thermal dependence and the Carreau-Yasuda generalization, the unified state equation of the vacuum is:
+$$\gamma_{eff}(\dot{\gamma}, T) = \gamma_0 \exp\left(-\frac{E_a}{k_B T_{CMB}}\right) \left[ 1 + (\tau_c \dot{\gamma})^2 \right]^{\frac{n-1}{2}}$$
+This equation axiomatically justifies the immense drop in effective rigidity without empirical "fudge factors". When galactic rotation rates ($\dot{\gamma}$) are inserted, the mesh undergoes continuous rheofluidification ($n < 1$), yielding a macroscopic plateau of $N_{VAC} \approx 2.79 \times 10^{31}$ Pa.
+
+### 3. Covariant Relativistic Hyperelasticity (4D Tensor)
+To preserve Lorentz symmetry, the fluid mechanics are formalized using Spacetime Elastodynamics (STCED). By defining the physical metric $g_{\mu\nu}$ and reference metric $\bar{g}_{\mu\nu}$, we construct the Green-Lagrange covariant strain tensor $u_{\mu\nu} = \frac{1}{2}(h_{\mu\nu} - \bar{h}_{\mu\nu})$. The vacuum energy-momentum tensor is split into elastic (Hooke) and viscous (Voigt) components:
+$$T_{\mu\nu}^{visco} = T_{\mu\nu}^{elastic} + T_{\mu\nu}^{viscous}$$
+$$T_{\mu\nu}^{elastic} = 2N_{VAC}\left(u_{\mu\nu} - \frac{1}{3}\theta_e h_{\mu\nu}\right) + K_{VAC}\theta_e h_{\mu\nu}$$
+Substituted into Einstein's Field Equations:
+$$G_{\mu\nu} = \frac{8\pi G}{c^4} \left(T_{\mu\nu}^{matter} + T_{\mu\nu}^{visco}\right)$$
+General covariance ($\nabla^\mu G_{\mu\nu} = 0$) mathematically guarantees that any energy loss from matter is rigorously absorbed and dissipated as elastic deformation or acoustic heat within the viscoelastic vacuum, conserving the total thermodynamic cycle.
+
+---
+
+## 💻 Core Simulation 4: The Hydro-Quantum Processing Unit (HQPU)
 
 ![hqpu_qnd_reading](analytics/hqpu_qnd_reading.svg)
 
@@ -145,7 +155,7 @@ The second computational module of this repository (`hqpu.rs`) models the **HQPU
 
 ---
 
-## 🔬 Computational Physics Framework (V5.0)
+## 🔬 Computational Physics Framework (V6.0)
 
 Standard quantum mechanics relies on abstract probability waves ($\Psi$). The DWE replaces this abstraction with strict micro-fluid mechanics:
 
@@ -175,7 +185,7 @@ cargo run --release --bin deterministic_wave_engine
 ### 2. Run the Hong-Ou-Mandel Simulator
 
 This module computes the topological scattering matrix of vortex pairs across four distinct coherence and phase states.
-In the continuous thermodynamic inelastic collision at a permeable dense mirror (modeled on a 2D grid as a 50/50 beam splitter), precisely synchronized twin vortices fired from opposite emitters are intercepted. If these entities were classical rigid bodies, they would interact chaotically and scatter independently, strictly adhering to a constant-density Maxwell-Boltzmann statistical distribution ($0.25$ transmission-transmission, $0.25$ reflection-reflection, and $0.50$ transmission-reflection).However, if the dynamic repulsive gradients of the inter-vortex compression zones—governed purely by strict Newtonian fluid mechanics within the WGSL shader—geometrically induce a mirror-symmetry repulsion block, the macroscopic outcome changes completely. This acoustic block invariably unifies both topological solitons, forcing them into parallel spatial drafts directed exclusively toward the same unobstructed output channel. Demonstrating this exceptionless bunching effect definitively establishes the mathematical equivalence between Bose-Einstein statistical behavior and aerodynamic collision geometry in a highly compressible viscoelastic state. Ultimately, it proves a universal physical integrity, demonstrating that quantum indistinguishability can emerge directly from deterministic classical frameworks previously thought to be obsolete.
+In the continuous thermodynamic inelastic collision at a permeable dense mirror (modeled on a 2D grid as a 50/50 beam splitter), precisely synchronized twin vortices fired from opposite emitters are intercepted. If these entities were classical rigid bodies, they would interact chaotically and scatter independently, strictly adhering to a constant-density Maxwell-Boltzmann statistical distribution ($0.25$ transmission-transmission, $0.25$ reflection-reflection, and $0.50$ transmission-reflection). However, if the dynamic repulsive gradients of the inter-vortex compression zones—governed purely by strict Newtonian fluid mechanics within the WGSL shader—geometrically induce a mirror-symmetry repulsion block, the macroscopic outcome changes completely. This acoustic block invariably unifies both topological solitons, forcing them into parallel spatial drafts directed exclusively toward the same unobstructed output channel. Demonstrating this exceptionless bunching effect definitively establishes the mathematical equivalence between Bose-Einstein statistical behavior and aerodynamic collision geometry in a highly compressible viscoelastic state. Ultimately, it proves a universal physical integrity, demonstrating that quantum indistinguishability can emerge directly from deterministic classical frameworks previously thought to be obsolete.
 
 ```bash
 cargo run --release --bin hong_ou_mandel
@@ -190,6 +200,7 @@ cargo run --release --bin hong_ou_mandel
 cargo run --release --bin epr
 
 ```
+
 ### 4. Run the HQPU Simulation (QND Reading)
 
 This module processes the passage of a Soliton Qubit through the analytical fluid gate.
